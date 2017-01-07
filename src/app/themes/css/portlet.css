@@ -1,0 +1,183 @@
+.portlet-display {
+
+}
+.portlet-display>div {
+    border:1px solid #cecece;
+    border-top: none;
+    padding: 0 0 5px 0 !important;
+}
+.portlet-header {
+    color: #ffffff;
+    margin: 0;
+    padding: 15px 0 10px 20px;
+    position: relative;
+    background-color: #656867;
+    height: 25px;
+    font-size: 20px;
+    vertical-align: middle;
+    min-width: 824px;
+}
+
+.portlet-header ul {
+    /*position: absolute;*/
+    /*right: 0;*/
+    position: relative;
+    top: -15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.portlet-header ul.portletConfigButton {
+}
+
+.portlet-header ul li {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    min-width: 60px;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.portlet-header ul.mainButtons li {
+    margin-top: 13px;
+    padding: 0 20px 0 20px;
+    line-height: 25px;
+}
+
+.portlet-header ul.portletConfigButtons li {
+}
+
+.portlet-header ul.portletConfigButtons li span {
+    background-color: #959494;
+    margin: 0;
+    padding: 17px 20px 0 20px;
+    height: 33px;
+    display: block;
+    min-width: 60px;
+}
+
+.portlet-header ul.mainButtons li:not(:last-child) {
+    border-right: 1px solid #ababab;
+}
+
+.portlet-header ul.mainButtons li a, .portlet-header ul.mainButtons li span {
+    color: #ababab;
+}
+.portlet-header ul.mainButtons li:last-child>span {
+    margin-right: 20px;
+}
+.portlet-header ul.mainButtons li.selected,
+.portlet-header ul.mainButtons li span:hover,
+.portlet-header ul.mainButtons li span:hover span
+{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+.portlet-header ul.mainButtons li.selected a, .portlet-header ul li.selected span {
+    color: #FFFFFF;
+    line-height: 25px;
+}
+
+.portlet-header ul.portletConfigButtons li a, .portlet-header ul.portletConfigButtons li span {
+    color: #FFFFFF;
+}
+.portlet-header ul.portletConfigButtons li span
+{
+    background-color: #959494;
+}
+.portlet-header ul.portletConfigButtons li span:hover
+{
+    background-color: #ababab;
+}
+
+
+.portlet-header ul li a {
+    text-transform: capitalize;
+    font-weight: normal;
+}
+
+ul.tabs {
+    width: 100%;
+    height: 33px;
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tabs li {
+    float: left;
+    padding: 8px;
+    line-height: 16px;
+    color: #414141;
+    background-color: #FFF;
+    cursor: pointer;
+    border-right: 1px solid #ccc;
+}
+.tabs .selected {
+    position: relative;
+    top: 1px;
+    font-weight: 700;
+    color: #222;
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+
+.portlet-header ul.moreMenu {
+    list-style: none;
+    display: none;
+}
+.portlet-button-more-arrow {
+    display: inline-block !important;
+    background-image: url('../layouts/truchart/images/ui-other-icons_ffffff.png') !important;
+    float: right;
+}
+
+.fg-menu-container li.portlettab {
+    text-transform: capitalize;
+    padding-left: 20px;
+    list-style: none;
+    cursor: pointer;
+    line-height: 40px;
+    font-size: 15px
+}
+
+.portlet-subheader {
+    display: none;
+}
+
+@media print {
+    .portlet-display .mainButtons li {
+        display: none;
+    }
+    .portlet-header {
+        background: none;
+    }
+    .portlet-title {
+        color: #000000;
+    }
+    .portlet-content {
+        background-color: #CCCCEE;
+    }
+    .portlet-header h4:last-of-type {
+        display: none;
+    }
+    .portlet-subheader {
+        display: block;
+        background-color: #CCCCEE;
+        color: #000000;
+        margin-top: 4px;
+        margin-bottom: 8px;
+        margin-left: 4px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+@media only screen {
+    .patient-content {
+        -webkit-overflow-scrolling: touch;
+        overflow: auto;
+    }
+}

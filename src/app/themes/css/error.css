@@ -1,0 +1,37 @@
+.error {
+    color: red;
+}
+
+.error_message {
+    color: black;
+}
+
+/* Note: No JSPs are currently using the error_tooltip class, that I could find. */
+span.error_tooltip {
+    position: relative;
+    z-index: 24;
+    color: red;
+}
+
+span.error_tooltip div {
+    display: none;
+}
+
+span.error_tooltip:hover div {
+    display: block;
+    z-index: 99999;
+    font-size: xx-small;
+    overflow: auto;
+    position: absolute;
+    top: -2em;
+    left: -5em;
+    background-color: white;
+    border-style: dashed;
+    border-width: 2px;
+    border-color: black;
+    min-width: 10em;
+    max-width: 40em;
+    text-indent: 0em;
+    margin: 0em;
+    padding: 0.5em;
+}

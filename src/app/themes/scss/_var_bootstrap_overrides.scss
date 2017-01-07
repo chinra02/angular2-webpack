@@ -1,0 +1,188 @@
+$icon-font-path: "../scss/bootstrap/fonts/";
+//############## BASE COLORS #####################//
+// Blacks, grays, whites
+$true-black:                  #000000;
+$color-black:                 #222222   ;
+$gray-base:                   #474647;
+$gray-darker:                 #565656;
+$gray-dark:                   #656766;
+$gray-med-dark:               #7d797a;
+$gray:                        #949494;
+$gray-light:                  #ababab;
+$gray-light-73:               #bababb;
+$gray-light-69:               #b0b0b1;
+$gray-lighter:                #cecece;
+$gray-extra-light:            #dfdfdf;
+$gray-extra-extra-light:      #efefef;
+$gray-eggshell:               #f6f6f7;
+$color-white:                 #ffffff;
+
+// BluePlus Theme Colors
+$blue-dark:                   #274c5a;
+$blue-medium:                 #5690a6;
+$blue-light:                  #72aeb3; // Unused
+$blue-extra-light:            #cde1e8;
+
+// Other
+$red-light:                   #FFCCCC;
+$green-light:                 #DDFFDD;
+$green-mint:                  #BDFCC9;
+$text-color:                  $color-black;
+
+//############## THEME COLORS #####################//
+
+// Brand Colors
+$brand-primary:               $blue-dark;
+$brand-lighter:               $blue-medium;
+$brand-extra-light:           $blue-extra-light;
+
+//############## INHERITED COLORS #####################//
+
+// Link Colors
+$link-color:                  $brand-primary;
+$link-dark-color:             $brand-primary;
+$link-light-color:            $brand-extra-light;
+
+// Buttons
+$btn-default-color:           $color-white;
+$btn-default-bg:              $brand-primary;
+$btn-default-border:          $brand-primary;
+$btn-primary-color:           $color-white;
+$btn-primary-bg:              $brand-primary;
+$btn-primary-border:          $brand-primary;
+$btn-secondary-color:         $color-white;
+$btn-secondary-bg:            $brand-lighter;
+$btn-secondary-border:        $brand-lighter;
+$btn-warning-color:           $color-white;
+$btn-warning-bg:              $brand-lighter;
+$btn-warning-border:          $brand-lighter;
+
+// Modals
+$modal-backdrop-bg:                     $gray-eggshell;
+$modal-content-border-color:            $brand-primary;
+$modal-footer-border-color:             $brand-extra-light;
+$modal-content-border-color:            $brand-lighter;
+$modal-header-border-color:             $brand-extra-light;
+$modal-header-text-color:               $color-black;
+$modal-header-background-color:         $gray-lighter;
+$modal-content-bg-color:                $color-white;
+$modal-content-border-color:            $brand-lighter;
+
+// Pagination
+$pagination-color:                     $color-white !important;
+$pagination-bg:                        $brand-lighter !default;
+$pagination-border:                    $color-white !default;
+
+$pagination-hover-color:               $color-white !default;
+$pagination-hover-bg:                  $brand-primary !default;
+$pagination-hover-border:              $color-white !default;
+
+$pagination-active-color:              $color-white !default;
+$pagination-active-bg:                 $brand-primary !default;
+$pagination-active-border:             $color-white !default;
+
+$pagination-disabled-color:            $color-white !default;
+$pagination-disabled-bg:               $brand-extra-light !default;
+$pagination-disabled-border:           $color-white !default;
+
+// Tables
+
+//** Default background color used for all tables.
+$table-bg:                             $color-white !default;
+//** Background color used for `.table-striped`.
+$table-bg-accent:                       $gray-extra-extra-light !default;
+
+
+$smart-table-text:                      $brand-primary;
+$smart-table-header-footer-bg-color:    $gray-eggshell;
+$smart-table-header-footer-text-color:  $color-black;
+$smart-table-td-th-left-border:         $gray-light;
+$smart-table-last-row-bottom-border:    $gray-dark;
+$st-search-box-shadow-color:            $brand-primary;
+
+// tc-bs-fix-select colors
+$fieldset-legend-text-color:                  $gray-base;
+$fieldset-legend-border-bottom-color:         $brand-lighter;
+$fieldset-legend-fieldset-border-color:       $brand-lighter;
+$fieldset-legend-fieldset-legend-text-color:  $gray-base;
+
+$select-border-color:                         $gray-lighter;
+$select-text-color:                           $gray-base;
+$select-bg-color:                             $gray-extra-extra-light;
+
+// Claims Table Summary
+$claims-table-summary-detail-text-color:          $color-black;
+$claims-table-summary-detail-bg-color:            $color-white;
+$claims-table-summary-header-text-color:          $color-white;
+$claims-table-summary-header-bg-color:            $brand-primary;
+$claims-table-summary-header-border-color:        $brand-primary;
+$claims-table-summary-header-border-bottom-color: $brand-primary;
+$claims-table-summary-header-link-color:          $color-white;
+$claims-table-summary-detail-outline-color:       $brand-primary;
+$claims-table-summary-detail-box-shadow-color:    $brand-primary;
+$claims-table-summary-popover-text-color:         $color-black;
+// Panel Heading
+$panel-default-panel-heading-text-color:        $color-black;
+$panel-default-panel-heading-bg-color:          $gray-lighter;
+$panel-default-panel-heading-border-color:      $brand-extra-light;
+
+// Setting Slider
+$setting-slider-hover-bg-color:       $gray-lighter;
+$setting-slider-open-bg-color:        $gray-light;
+
+$section-toggle-bg-color:             $brand-lighter;
+
+// Apply G/L Codes panel
+$gl-coding-error-bg-color: $red-light;
+$gl-coding-no-error-bg-color: $green-light;
+$basic-panel-border-color:            $gray-light;
+
+// Compressed table options
+$compressed-panel-border-color:         $brand-extra-light;
+$compressed-panel-heading-bg-color:     $color-white;
+$compressed-panel-title-text-color:     $color-black;
+$compressed-panel-title-bg-color:       $gray-eggshell;
+$compressed-box-border-color:           $brand-extra-light;
+$compressed-input-bg-color:             $gray-extra-light;
+$compressed-input-disabled-bg-color:    $gray-light;
+$compressed-input-hover-outline-color:  $gray-lighter;
+$compressed-td-border-color:            $gray-lighter;
+$compressed-mobile-th-bg-color:         $gray;
+$compressed-mobile-th-text-color:       $color-white;
+
+// Misc
+$input-border-focus:            $brand-primary;
+$component-active-bg:           $brand-lighter;
+$dropdown-link-hover-bg:        $brand-extra-light;
+$dictionary-background-color:   $brand-extra-light;
+$box-shadow-recommended-color:  $brand-lighter;
+$icon-shadow-color:             $brand-primary;
+$form-control-text:             $color-black;
+$div-dimmer-bg-color:           $true-black;
+$input-zoom-bg-color:           $color-white;
+
+$border-radius-base:          0px !default;
+$border-radius-small:         2px !default;
+$border-radius-large:         3px !default;
+
+$modal-backdrop-opacity:      0.3;
+$modal-title-padding:         10px 20px;
+$modal-title-line-height:     20px;
+$modal-inner-padding:         1em;
+$panel-heading-padding:       .8em 1em;
+
+// Sidebar
+$module-views-border-top-color: $brand-lighter;
+$module-view-bg-color:          $gray-extra-extra-light;
+$module-view-patient-module-bg-color:    $color-white;
+$tool-group-border-top-color: $gray-med-dark;
+
+$sub-group-display-bg-color: $gray-lighter;
+$sub-group-display-border-bottom-color: $gray-dark;
+
+$module-tools-text-color: $color-white;
+$module-tools-border-bottom-color: $color-white;
+
+$dropdown-link-color:               $color-black !important;
+$dropdown-link-disabled-color:      $gray-light !important;
+$dropdown-link-weight:              normal !important;

@@ -1,0 +1,1267 @@
+/*
+DEFAULTS
+*/
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0; margin: 0;
+}
+body {
+    background-color: #FFF;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+.inpro, .inpro * {
+    cursor:progress !important;
+}
+/*
+TEXT
+*/
+
+html, body {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #414141;
+    background-color: #FFFFFF;
+}
+/*
+HTML STRUCTURE
+*/
+body>.header {
+    width: 100%;
+    height: 45px;
+    min-width: 980px;
+    position: relative;
+}
+
+.QA .module-views {
+    border-top: 5px solid #68ff7b !important;
+}
+
+.PREPRO .module-views {
+    border-top: 5px solid #fffe66 !important;
+}
+
+body>.header .deploymentBanner {
+    position: fixed;
+    top: 45px;
+    width: 100%;
+    height: 45px;
+    min-width: 1000px;
+}
+
+/******** HEADER LOGO *********/
+.header .ui-state-default {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+.header .logo {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    width: 36px;
+    height: 30px;
+    background: transparent url('../layouts/truchart/images/TruChart%20Logo.png') no-repeat 0 center;
+    background-size: 148px 30px;
+}
+
+.header .logo2 {
+    position: absolute;
+    top: 8px;
+    left: 44px;
+    width: 77px;
+    height: 20px;
+    background: transparent url('../layouts/truchart/images/TruChart%20Logo.png') no-repeat -24px center;
+    background-size: 102px 20px;
+}
+
+.header .program {
+    position: absolute;
+    top: 0;
+    left: 44px;
+    margin-top: 28px;
+    font-size: 10px;
+    color: #ffffff;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 12px;
+    white-space: nowrap;
+}
+
+
+/******** NAVIGATION LIST *********/
+.main-navigation, .user-tools-menu-ul {
+    list-style: none;
+    width: 100%;
+}
+
+.main-navigation li, .user-tools-menu-ul li {
+    font-size: 15px;
+    text-align: left;
+    color:#414141;
+    height: 38px;
+    letter-spacing: 1px;
+    width: 350px;
+    margin: 0 !important;
+}
+
+.main-navigation li:empty, .user-tools-menu-ul li:empty {
+    height: 0;
+}
+
+.main-navigation.spacer li, .user-tools-menu-ul.spacer li {
+    height: 2px;
+}
+
+.main-navigation .patient-module {
+    display: none;
+}
+.main-navigation li a, .user-tools-menu-ul li a {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    color: #414141;
+    padding: 5px 5px 5px 15px;
+}
+.main-navigation li.INBOX {
+    display: none;
+}
+.main-navigation li:hover .ui-module-icon {
+    background-image: url('../layouts/truchart/images/ui-module-icons_fffff.png');
+}
+.main-navigation li a span.main-navigation-desc {
+    line-height: 25px;
+    padding-left: 10px;
+    vertical-align: top;
+}
+.main-navigation li:hover a span.main-navigation-desc {
+    color: #fff;
+}
+.main-navigation li:hover,
+.main-navigation li.selected,
+.user-tools-menu-ul li:hover {
+    background-color: #5a5775;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.blueplus .main-navigation :hover,
+.blueplus .main-navigation .selected,
+.blueplus .user-tools-menu-ul :hover {
+    background-color: #274c5a;
+}
+
+/******** SEARCH AND USER MENU *********/
+.header .header-user-tools a>.ui-icon,
+.header .header-user-tools>.ui-icon {
+    display: inline-block;
+    vertical-align: text-top;
+}
+.header form {
+    display: inline-block;
+}
+.header .search {
+    height: 35px;
+    line-height: 35px;
+    width: 333px;
+    border: none;
+    background-color: #fff;
+    color : #ababab;
+    font-size: 13px;
+    display: inline-block;
+}
+.header .search:focus {
+    background-color: #fff;
+    outline: 0;
+    color: #414141;
+}
+
+.header .advanced-search .ui-other-icon, .header .single-search .ui-other-icon {
+    background-image: url('../layouts/truchart/images/ui-other-icons_ffffff.png');
+}
+.header .search:focus .ui-other-icon {
+    background-image: url('../layouts/truchart/images/ui-other-icons_656766.png');
+}
+.header .advanced-search {
+    display: inline-block;
+}
+.header .advanced-search, .header .single-search {
+    padding: 0;
+    margin: 0 !important;
+    height: 45px;
+    width: 45px;
+    min-width: 45px;
+
+}
+.header .single-search {
+    left: 856px;
+    position: absolute;
+    top: 0;
+    border-left: 1px solid #5690a9;
+    border-right: 1px solid #5690a9;
+    border-bottom: none;
+    border-top: none;
+}
+
+.header .hover:hover {
+    background: #5690a9;
+}
+
+.header .patient-search {
+    display: none;
+    position: absolute;
+    border-bottom: 3px solid #656766;
+    border-left: 1px solid #656766;
+    border-right: 1px solid #656766;
+    top: 45px;
+    left: calc(856px - 348px);
+    z-index: 11;
+    background-color: #fff;
+}
+
+.header .advanced-search:hover {
+    background-color: #5a5775;
+}
+
+.header .view-high-priority {
+    padding: 0;
+    height: 22px;
+    line-height: 22px;
+    position: absolute;
+    top: 12px;
+    right: calc(100% - 322px);
+    min-width: 20px;
+    border: none;
+    text-align: center;
+    margin: 0 !important;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.header .view-high-priority .ui-button-text {
+    padding: .4em .5em;
+}
+
+.header .view-high-priority-alert {
+    background-color: #D44242;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.header .search::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #949494;
+}
+.header .search:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #949494;
+}
+.header .search::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #949494;
+}
+.header .search:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #949494;
+}
+
+.header .system-user-name {
+    position: absolute;
+    top: 5px;
+    right: 105px;
+    padding: 10px 5px;
+    color: #fff;
+    max-width: 100px;
+    overflow: hidden;
+    height: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.header .collaboration-link {
+    font-size: 13px;
+    height: 48px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    background: transparent;
+    box-shadow: none;
+    min-width: 45px;
+    position: absolute;
+    top: -2px;
+    right: 89px;
+    margin: 0 !important;
+}
+.header .user-tools {
+    font-size: 13px;
+    height: 45px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    min-width: 45px;
+    position: absolute;
+    top: 0;
+    right: 45px;
+    margin: 0 !important;
+}
+.header .user-menu {
+    border-left: 1px solid #5690a9;
+    border-right: 1px solid #5690a9;
+}
+
+.header .user-menu {
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+}
+
+.header .user-tools .ui-button-text {
+    padding: .4em 1.1em;
+    display: inline-block;
+    min-width: 100px;
+    text-align: right;
+
+}
+.header .user-tools .ui-button-icon-secondary {
+    vertical-align: middle;
+}
+
+.header .usertools li {
+    display: inline-block;
+    padding-left: 22px;
+    padding-right: 22px;
+    line-height: 20px;
+    height: 100%;
+    list-style: none;
+    text-align: right;
+}
+
+.header .user-tools-menu {
+    display: none;
+}
+
+.user-tools-menu-ul li .ui-icon {
+    display: inline-block;
+    position: absolute;
+    left: 4px;
+}
+.user-tools-menu-ul li a {
+    position: relative;
+    text-indent: 16px;
+}
+
+#user-lock-external {
+    right: 0;
+    border: none;
+}
+
+.user-high-priority-menu {
+    position: absolute;
+    z-index: -1;
+}
+
+/******** WORKLIST, RECORD, AND MODULE TABS *********/
+.main-tabs {
+    position: absolute;
+    top: 0;
+    left: 200px;
+}
+
+.tab-navigation {
+    float : left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.tab-navigation:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.tab-navigation>li {
+    border-left: 1px solid #ffffff;
+    color : #fff;
+    position: relative;
+    padding: 0;
+    line-height: normal;
+    cursor: pointer;
+    overflow: visible; /* removes extra width in IE */
+    display: table;
+    height: 45px;
+    text-align: center;
+}
+
+.tab-navigation>li:hover {
+    background-color: #5690a9;
+    color: #fff;
+}
+
+.tab-navigation li .module-name {
+    padding: 8px 40px;
+    width: 90px;
+    text-align: left;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12px;
+}
+
+.tab-navigation li.patient-tab .module-name {
+    width: auto;
+}
+
+.tab-navigation li .ui-module-icon {
+    background-image: url('../layouts/truchart/images/ui-module-icons_fffff.png');
+    position: absolute;
+    top: calc(50% - 13px);
+    left: .7em;
+}
+.tab-navigation li.disabled  {
+    cursor : default;
+    color: #ababab;
+}
+
+.tab-navigation li div.module-menu {
+    position: absolute;
+    top: 40%;
+    margin-top: -8px;
+    right: .5em;
+}
+.tab-navigation li div.module-menu .ui-other-icon {
+    background-image: url('../layouts/truchart/images/ui-other-icons_ffffff.png');
+}
+.tab-navigation li.selected div.module-menu .ui-other-icon {
+    background-image: url('../layouts/truchart/images/ui-other-icons_5a5775.png');
+}
+
+.blueplus .tab-navigation .selected .module-menu .ui-other-icon{
+    background-image: url('../layouts/truchart/images/ui-other-icons_ffffff.png');
+}
+
+.tab-navigation li.worklist .module-name {
+    width: 50px;
+}
+
+.blueplus .tab-navigation .worklist .module-name {
+    width: auto;
+    padding-right: 50px;
+}
+
+
+.tab-navigation li.patient-tab {
+    width: 350px;
+    text-align: left;
+    position: relative;
+}
+
+.blueplus .tab-navigation .patient-tab {
+    min-width: 325px;
+}
+
+.tab-navigation li.selected {
+    color: #274c59;
+    border-bottom: none;
+    background-color: #dfdcee;
+}
+
+.blueplus .tab-navigation .selected {
+    color: #ffffff;
+    background-color: #274c5a; /* slate */
+}
+
+.blueplus .tab-navigation > :hover {
+    background-color: #274c5a;
+}
+
+.tab-navigation li.selected.patient-tab {
+}
+.tab-navigation li:hover .ui-module-icon {
+    background-image: url('../layouts/truchart/images/ui-module-icons_fffff.png');
+}
+.tab-navigation li.selected .ui-module-icon {
+    background-image: url('../layouts/truchart/images/ui-module-icons_5a5775.png');
+}
+
+.blueplus .tab-navigation .selected .ui-module-icon,
+.blueplus .tab-navigation :hover .ui-module-icon{
+    background-image: url('../layouts/truchart/images/ui-module-icons_fffff.png');
+}
+
+
+li.tab-navigation-item .patient-last-name, li.tab-navigation-item .patient-first-name {
+    position: absolute;
+    top: 8px;
+    left: 55px;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 14px;
+    color: #ffffff;
+}
+
+li.tab-navigation-item .patient-first-name {
+    top: 24px;
+}
+
+li.tab-navigation-item.selected .patient-first-name, li.tab-navigation-item.selected .patient-last-name {
+    color : #474647;
+    font-weight: bold;
+    opacity: 1;
+}
+
+.blueplus li.tab-navigation-item.selected .patient-first-name,
+.blueplus li.tab-navigation-item.selected .patient-last-name {
+    color: #ffffff;
+}
+
+li.tab-navigation-item .acct-num {
+    font-weight: normal;
+    color: #5690a9;
+}
+
+.blueplus .tab-navigation-item .acct-num {
+    color: #ffffff;
+}
+
+/******** MODULES CONTAINER *********/
+/* in sidebar.css */
+
+.tool-content {
+    position: absolute;
+    left : 151px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background-color: #FFF;
+}
+.tool-content.navigation-collapsed {
+    left: 61px;
+}
+
+.patient-module-view .iframe-scroll-wrapper {
+    -webkit-overflow-scrolling: touch;
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.tool-content iframe,
+.patient-module-view iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.patient-module-view div.patient-load-tips {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    color: #999;
+}
+.patient-module-view div.patient-load-tips .ui-icon{
+    opacity: .5
+}
+.patient-module-view div.patient-load-tips .tip-container{
+    position:relative;
+}
+.patient-module-view div.patient-load-tips .tip-container>span {
+    display: inline-block;
+}
+.tip-container.quickViewTip {
+    left: calc(50%)
+}
+.patient-module-view div.patient-load-tips .tip-container:not(.quickViewTip)>span.tip-text{
+    position: relative;
+    top: -3px;
+}
+
+
+/****** PATIENT MODULE **********/
+.patient-module {
+    /*height: 100%;*/
+    /*border-top: 5px solid #274c59;*/
+}
+
+.patient-module-header button {
+    line-height: 30px;
+    width: 100%;
+}
+.patient-module-header button .ui-button-text {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.patient-module-header h1 {
+    color: #333;
+    margin: 0 0 0 85px;
+    font-size: 18px;
+    /*font-weight: 400;*/
+    line-height: 40px;
+}
+.patient-module-header span.riskScore {
+    font-size: 14px;
+}
+
+.patient-photo {
+    float: left;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    position: relative;
+    margin-right: 10px;
+}
+
+.patient-photo45 {
+    float: left;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    position: relative;
+    margin-right: 10px;
+    max-height: 45px;
+    max-width: 45px;
+    vertical-align: middle;
+}
+
+.patient-photo75 {
+    float: left;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    position: relative;
+    margin-right: 10px;
+    max-height: 75px;
+    max-width: 75px;
+    vertical-align: middle;
+}
+
+li.tab-navigation-item:not(.selected) .patient-photo {
+    opacity: 0.3;
+}
+
+.patient-high-priority {
+    text-align: right;
+    width: 200px;
+    float: right;
+    display: none;
+    margin-right: 5px;
+}
+
+li.tab-navigation-item.selected .patient-high-priority {
+    display: inline-block;
+}
+.patient-print-collate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    color: #414141;
+    text-align: center;
+    cursor: pointer;
+    border-left: 1px solid #e0e0e0;
+    border-top-right-radius: 4px;
+}
+.patient-print-collate:hover {
+    background-color: #fff;
+}
+.patient-print-collate>span {
+    padding: 5px 5px 0 5px;
+    margin-right: 3px;
+}
+
+.patient-print-collate button {
+    margin-top: 8px;
+}
+
+
+.patient-module-tools-sidebar {
+    position: absolute;
+    top: 0;
+    width: 290px;
+    bottom: 0;
+    background-color: #5690a9;
+    border-right: 1px solid #5690a9;
+    overflow-y: auto;
+}
+
+.blueplus .patient-module-tools-sidebar {
+    background-color: #5690a6;
+    border-right: 1px solid #5690a6;
+}
+
+.patient-module-tools-sidebar.hidden-sidebar {
+    display : none;
+}
+.patient-module-tools {
+    list-style: none;
+    margin: 5px 0 0 5px;
+    padding: 0;
+ }
+
+.patient-module-quick-tools {
+    width: 230px;
+    list-style: none;
+    margin: 0;
+    padding: 0 5px;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    background-color: #fcfcfc;
+}
+.patient-contact-portlet {
+    margin: 0 0 0 5px;
+}
+.encounter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.encounter-details {
+    position: relative;
+    border-left: 2px solid #949494;
+    background-color: #f1f1f0;
+    height: 60px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.encounter-details .details {
+    height: 40px;
+}
+.encounter-details.active {
+    min-height: 90px;
+    height: auto;
+    border-left: 2px solid #274c59;
+}
+.encounter-details .edit-contact {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+.encounter-details span.encounter-time {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    color: #332c2e;
+}
+
+.encounter-details span.encounter-type {
+    position: absolute;
+    left: 20px;
+    top: 58px;
+    font-size: 12px;
+    color: #474647;
+}
+
+.encounter-details  span.encounter-reason {
+    /*display: none;*/
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    text-overflow: ellipsis;
+    height: 16px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.encounter-details  span.encounter-notes {
+    position: absolute;
+    left: 6px;
+    top: 18px;
+}
+.encounter-details span.encounter-owner {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    color: #474647;
+    text-transform: capitalize;
+}
+
+.encounter-details .form-module-tools, .encounter-details .encounter-type {
+    display: none;
+}
+.encounter-details.active .form-module-tools, .encounter-details.active .encounter-type {
+    display: block;
+}
+
+ul.form-module-tools {
+    list-style: none;
+    margin: 0;
+    padding: 35px 0 0 5px;
+}
+ul.form-module-tools li {
+    padding: 10px;
+    margin: 0 10px 0 0;
+    font-size: 12px;
+    line-height: 12px;
+    color: #274c59;
+    border-bottom: 1px solid #ababab;
+    width: calc(100% - 20px);
+}
+ul.form-module-tools li:last-child {
+    border-bottom: none;
+    /*padding: 0px;*/
+}
+ul.form-module-tools li:hover {
+    background-color: #5a5775;
+    color: #fff;
+}
+
+/***** QUICK TOOLS FRAME *********/
+@media only screen {
+    .patient-module-quick-tool-view {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+.patient-module-quick-tool-view {
+    width: 100%;
+    height: 100%;
+}
+.patient-module-quick-tool-view iframe {
+    width: 100%;
+    height: 100%;
+    border : none;
+}
+
+/****** NEW CONTACT FORM *******/
+h4.new-form-list,
+h4.new-contacts-list,
+h4.new-contacts-care-team-list,
+h4.encounter-options {
+    color: #414141;
+    margin: 0;
+    padding: 4px;
+    clear: both;
+}
+ul.new-form-list, ul.new-resource-list, ul.new-member-list {
+    list-style: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.new-form-list li, ul.new-resource-list li, ul.new-member-list li {
+    color : #414141;
+    font-size: 12px;
+    background-color: #FAFAFB;
+    clear: right;
+    line-height: 14px;
+    padding: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/**** GENERAL CONTAINER FOR ALL PATIENT TOOLS/FORMS ******/
+.patient-module-view {
+    position: absolute;
+    top: 0;
+    left: 291px;
+    bottom: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 0;
+    margin: 40px 0 50px 0;
+}
+.patient-module-view.hidden-sidebar {
+    left : 70px;
+}
+/***** UTILITY HELPERS ******/
+.displayPrintOnly {
+    display : none;
+}
+.loading_animation {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../basicTheme/images/loading_animation.gif');
+    padding-top: 260px !important;
+    text-align: left;
+}
+.patient-module-encounter>.ui-state-default {
+    border: none;
+    background: #FFFFE0;
+    font-weight: normal;
+    /* color: #ffffff; */
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.key {
+    background: #f0f0f0;
+    background: -moz-linear-gradient(top,#f0f0f0,#fcfcfc);
+    background: -webkit-gradient(linear,center top,center bottom,from(#f0f0f0),to(#fcfcfc));
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    color: #303030;
+    border: 1px solid #e0e0e0;
+    border-bottom-width: 2px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+.inbox-button {
+    /*font-weight: 700;*/
+}
+.inbox-button .ui-button-text {
+    padding: .7em 1em .7em 2.1em;
+}
+
+
+
+
+.show-extras {
+    z-index: 99999;
+}
+.show-extras .patient-module-quick-tool{
+    display: list-item;
+}
+/**
+ * QUICK TOOL formatting
+ * min-height for patient file is 436+10+80 = 526
+**/
+.patient-info {
+
+}
+.patient-info img {
+    display: inline-block;
+    vertical-align: top;
+    top: 0;
+    left: -5px;
+}
+.patient-info h3 {
+    margin: 5px;
+    padding: 0;
+    display: inline-block;
+    overflow: hidden;
+    max-width: 150px;
+}
+.patient-info h3 .acct-num {
+    color: #ababab;
+}
+.demo-toggle {
+    background: none;
+    border: none;
+    width: 100%;
+}
+.demo-toggle .ui-button-text {
+    color: #949494;
+}
+
+.blueplus .demo-toggle .ui-button-text {
+    color: #ffffff;
+}
+
+.quickInfo ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.quickInfo ul li {
+    color: #656766;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    width: 49.7%;
+    border: none;
+    display: inline-block;
+    min-height: 60px;
+    text-align: center;
+    position: relative;
+}
+.quickInfo ul li:hover .quick-tool-icon .ui-other-patient-icon {
+    background-image: url('../layouts/truchart/images/ui-other-patient-icons_5a5775.png');
+}
+.quickInfo ul li:hover .quick-tool-desc {
+
+}
+.quickInfo ul li .quick-tool-icon {
+    width: 25px;
+    height: 25px;
+    margin: 10px auto 0 auto;
+}
+.quick-tool-icon {
+    display: none;
+}
+.quickInfo ul li .quick-tool-icon {
+    display: block;
+}
+.quickInfo ul li .quick-tool-desc {
+    margin-top: 35px;
+}
+.quickInfo ul li:first-child {
+    border-right: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+}
+.quickInfo ul li:nth-child(2) {
+    border-bottom: 1px solid #cecece;
+}
+.quickInfo ul li:nth-child(3) {
+    border-right: 1px solid #cecece;
+}
+
+.new-contact {
+    width: 100%;
+}
+
+.encounters {
+    min-height: 300px;
+}
+
+div.action-bar {
+    background-color: #FFF;
+    border-top: 1px solid #CCC;
+    position: fixed;
+    left: 291px;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    padding: 5px 10px;
+    min-width: 550px;
+}
+
+.blueplus .action-bar {
+    background-color: #e5e5e6;
+}
+
+div.inbox-form-view .action-bar {
+    left: 402px;
+}
+/* Move the action-bar left property when the sidebar navigation panel is closed. */
+.tool-content.navigation-collapsed .action-bar {
+    left: 311px;
+}
+div.action-bar .right-half {
+    float: right;
+    text-align: right;
+    min-width: 140px;
+}
+div.action-bar .ui-button-icon-only {
+    width: 3em;
+}
+div.action-bar .inbox-button {
+    padding: 12px 0 0 0;
+    height: 25px !important;
+    margin: 0 10px 0 0 !important;
+}
+div.action-bar .more-menu {
+    display: none;
+}
+
+.demographics-info {
+    display: none;
+}
+.demographics-info label {
+    float: left;
+    line-height: 30px;
+    width: 40%;
+    text-align: right;
+    color: #ababab;
+}
+.demographics-info .input {
+    float: right;
+    line-height: 30px;
+    width: 53%;
+}
+.demographics-info .row:after,
+.demographics-info:after,
+.status-bar-alerts:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.demographics .ui-state-disabled {
+    opacity: 1;
+    cursor: pointer !important;
+}
+.demographics button:focus {
+    outline : 0;
+}
+.status-bar-alerts {
+    margin: 10px 0 0 0;
+    padding: 0;
+    list-style: none;
+    max-height: 120px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width:100%;
+}
+
+.status-bar-alerts .status-alert {
+    margin: 0 0 5px 0;
+    min-height: 40px;
+    position: relative;
+    border-bottom: 1px solid #f6f6f7;
+}
+.status-bar-alerts .status-alert .status-alert-date {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.status-bar-alerts .status-alert .status-alert-user {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.status-bar-alerts .status-alert .status-alert-detail {
+    padding: 25px 5px 5px 5px;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+}
+.status-bar-alerts .status-alert .status-alert-detail.high {
+    color: #D44242;
+}
+
+.grey-box {
+    border: 1px solid #949494;
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #f6f6f7;
+}
+
+.grey-box-header {
+    margin: 10px 0;
+}
+.bottom-margin {
+    margin-bottom: 10px;
+}
+.top-flush {
+    border-top: none;
+    margin-top: 0;
+}
+.bottom-flush {
+    margin-bottom: 0;
+}
+.padding-flush {
+    padding: 0;
+}
+
+.monospace-table tr th, .monospace-table tr td {
+    font-family: 'Courier New', 'Courier', monospace !important;
+}
+
+
+/**** PLAN OF CARE CSS TO MOVE ONCE BUILD TOOLS ARE READY *****/
+.ang-dropzone {
+    background-color: #eee;
+    padding: 20px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.ng-fg-menu {
+    display: none;
+}
+
+.list-inline {
+    list-style: none;
+}
+.list-inline li {
+    float: left;
+}
+.filters {
+    clear: both;
+}
+.filter {
+    float : left;
+}
+
+.blueplus .encounter-details.active {
+    border-left-color: #5690a6;
+}
+
+.blueplus .form-module-tools li {
+    color: #274c5a;
+}
+
+.blueplus .form-module-tools .selected {
+    background-color: #5690a6;
+    color: #ffffff;
+}
+.blueplus .form-module-tools li:hover {
+    background-color: #274c5a;
+}
+
+.blueplus .action-bar .right-half {
+    padding-top: 5px;
+}
+
+.blueplus .module-views {
+    border-top: 5px solid #659db2;
+}
+
+.blueplus .header .tab-navigation-item .module-name {
+    color: #ffffff;
+}
+
+
+.blueplus .header .search {
+    width: 311px;
+}
+
+.blueplus .header .single-search {
+    left: auto;
+    right: 0;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+}
+
+.blueplus .header .single-search,
+.blueplus .header .advanced-search {
+    background: #5690a6;
+}
+
+.blueplus .smallnotes {
+    color: #254b59;
+}
+
+.blueplus .header .hover:hover {
+    background-color: #264c5a;
+}
+
+.blueplus .main-tabs {
+    position: static;
+    margin-left: 200px;
+}
+
+.blueplus .header .search-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+}
+
+.blueplus .header .patient-search {
+    z-index: 99;
+    border-color: #5690a6;
+    border-bottom-width: 1px;
+    left: auto;
+    right: 0;
+    width: 370px;
+}
+
+.blueplus .header .advanced-search {
+    border-width: 2px 2px 2px 1px;
+    border-color: #ffffff;
+}
+
+.blueplus .header .advanced-search:hover {
+    background-color: #264c5a;
+}

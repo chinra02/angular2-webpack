@@ -1,0 +1,11 @@
+<div [ngSwitch]="type">
+    <div *ngSwitchCase="'numeric-search'">
+        <div class="flex-container">
+            <div class="flex1">
+                <input placeholder="Equals" [(ngModel)]="search" type="text" (ngModelChange)="onSearch($event)" class="form-control">
+            </div>
+        </div>
+    </div>
+    <search-description-template [value]="value" *ngSwitchCase="'numeric-search-description'"> </search-description-template>
+    <span *ngSwitchDefault >{{ value }}</span>
+</div>

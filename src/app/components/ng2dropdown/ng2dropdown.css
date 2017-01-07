@@ -1,0 +1,23 @@
+.dropdown-menu li a {
+     text-align: left;
+     background-color: white;
+     border: 1px solid transparent;
+     border-radius: 0px;
+     padding: 3px 20px;
+    clear: both;
+    font-weight: normal !important;
+    line-height: 1.42857;
+    color: #222222 !important;
+    white-space: nowrap;
+}
+
+
+.dropdown-menu li a:hover{
+   background-color: #cde1e8;
+   display: inherit;
+}
+.dropdown-menu li {
+    display: inherit !important;
+}
+
+ 

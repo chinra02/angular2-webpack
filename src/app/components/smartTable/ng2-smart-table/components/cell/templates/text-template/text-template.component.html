@@ -1,0 +1,7 @@
+<div #template [ngSwitch]="type">
+    <input *ngSwitchCase="'text-edit'">
+    <input *ngSwitchCase="'text-search'" id="{{id + '_text'}}" [ngModel]="search" (ngModelChange)="onSearch($event)" placeholder="search for {{title}}"
+        class="input-sm form-control" type="search" />
+    <search-description-template [value]="value" *ngSwitchCase="'text-search-description'"> </search-description-template>
+    <span *ngSwitchDefault ><text-view [value]="value"> </text-view></span>
+</div>

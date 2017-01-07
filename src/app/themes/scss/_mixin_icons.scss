@@ -1,0 +1,7 @@
+@mixin icon-shadow {
+  & {
+    text-shadow:
+    0 0 3px $icon-shadow-color,
+    0 0 6px $icon-shadow-color;
+  }
+}

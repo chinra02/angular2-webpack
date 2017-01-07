@@ -1,0 +1,21 @@
+<div [(ngSwitch)]="cellType" class="st-cell-view">
+        <div *ngSwitchCase="'text'"><text-view [value]="value"> </text-view></div>
+        <cell-template *ngSwitchCase="'customType'" [cellData]="value" [(type)]="type"></cell-template>
+        <span *ngSwitchCase="'popOver'"> 
+            <popover-content #cellPopover
+                             [title]="title"
+                             placement="left"
+                             [animation]="false">
+                <messages-view-template *ngIf="cell.isPopover" [messages]="cell.getData()"></messages-view-template>
+            </popover-content>
+            <span [popover]="cellPopover" class="message_link" [popoverOnHover]="true">{{ value }}</span>
+
+        </span>
+        <DynamicComponent *ngSwitchCase="'viewTemplate'"
+                          [componentTemplate]="templateHtml"
+                          (dynamicComponentReady)="dynamicTemplateCallback($event)"
+                          [componentContext]="context">
+        </DynamicComponent>
+       
+
+</div>

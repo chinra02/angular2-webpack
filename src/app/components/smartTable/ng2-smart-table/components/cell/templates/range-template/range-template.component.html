@@ -1,0 +1,29 @@
+<div #template [ngSwitch]="type">
+    <div *ngSwitchCase="'range-search'" st-custom-search-type="range">
+        <div class="flex-container">
+            <div class="flex1" style="width: 230px;">
+                <input id="search_greater_than" placeholder="Greater than" [(ngModel)]="range.low" type="text"
+                   (ngModelChange)="onSearch($event)"    class="form-control"> //TODO: st-custom-search-prop="low"
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <div class="flex1">
+                <input id="search_less_than" placeholder="Less than" [(ngModel)]="range.high" type="text" (ngModelChange)="onSearch($event)"
+                       class="form-control"> //TODO st-custom-search-prop="high"
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchCase="'range-search-description'">
+        <div *ngIf="isHighAndLowAvailable(value)">
+            {{value.low}} - {{value.high}}
+        </div>
+        <div *ngIf="isHighAlone(value)">
+            &gt; {{value.low}}
+        </div>
+        <div *ngIf="isLowAlone(value)">
+            &lt; {{value.high}}
+        </div>
+    </div>
+    <span *ngSwitchDefault>{{ value }}</span>
+</div>

@@ -1,0 +1,12 @@
+<div class="predicate flex-line" [(ngSwitch)]="descriptType" *ngIf="value!=null && value!=undefined">
+    <cell-template *ngSwitchCase="'customType'"
+                   [(cellData)]="value"
+                   [(type)]="type">
+    </cell-template>
+    <DynamicComponent *ngSwitchCase="'searchDescriptionTemplate'"
+                      [componentTemplate]="templateHtml"
+                      (dynamicComponentReady)="dynamicTemplateCallback($event)"
+                      [componentContext]="context">
+    </DynamicComponent>
+    <div id="{{uniqueId + '_clear_search'}}" (click)="clearComponent($event)" class="st-icon st-clear-search"></div>
+</div>

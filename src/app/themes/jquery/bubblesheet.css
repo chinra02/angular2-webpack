@@ -1,0 +1,128 @@
+/* tables */
+table.bubblesheet {
+    font-family: arial, helvetica, sans-serif;
+    background-color: #CDCDCD;
+    /*margin:10px 0pt 15px;*/
+    font-size: 8pt;
+    /*width: 100%;*/
+    text-align: left;
+}
+table.bubblesheet thead tr th, table.bubblesheet tfoot tr th {
+    background-color: #CCCCEE;
+    border: 1px solid #FFF;
+    font-size: 8pt;
+    padding: 2px;
+}
+
+@media pdf {
+    table.bubblesheet tr th {
+        background-color: #CCCCEE;
+        border: 1px solid #FFF;
+        font-size: 8pt;
+        padding: 2px;
+    }
+}
+
+table.bubblesheet thead tr .spotlight {
+    background-image: url(../basicTheme/images/spotlight.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 21px;
+    cursor: pointer;
+}
+
+table.bubblesheet thead tr .header_no_bg {
+    padding-right: 21px;
+}
+
+table.bubblesheet thead tr .header_spotlight_no_bg {
+    padding-right: 33px;
+}
+
+table.bubblesheet thead tr .header {
+    background-image: url(../basicTheme/images/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 21px;
+    cursor: pointer;
+}
+table.bubblesheet thead tr .header.spotlight {
+    background-image: url(../basicTheme/images/spotlight_bg.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 33px;
+    cursor: pointer;
+}
+table.bubblesheet thead tr th:last-child .header {
+    padding-right: 37px;
+}
+table.bubblesheet tbody td {
+    color: #3D3D3D;
+    padding: 2px;
+    vertical-align: top;
+}
+
+table.bubblesheet tbody tr.default td {
+    background-color: #FFF;
+}
+
+table.bubblesheet tbody tr.error td {
+    background-color: #FCC;
+}
+
+table.bubblesheet tbody tr.odd td {
+    background-color:#F0F0F6;
+}
+
+@media pdf {
+    table.bubblesheet td {
+        color: #3D3D3D;
+        padding: 2px;
+        vertical-align: top;
+    }
+
+    table.bubblesheet tr.default td {
+        background-color: #FFF;
+    }
+
+    table.bubblesheet tr.error td {
+        background-color: #FCC;
+    }
+
+    table.bubblesheet tr.odd td {
+        background-color:#F0F0F6;
+    }
+}
+table.bubblesheet thead tr .headerSortUp {
+    background-image: url(../basicTheme/images/asc.gif);
+}
+table.bubblesheet thead tr .headerSortUp.spotlight {
+    background-image: url(../basicTheme/images/spotlight_asc.png);
+}
+table.bubblesheet thead tr .headerSortDown {
+    background-image: url(../basicTheme/images/desc.gif);
+}
+table.bubblesheet thead tr .headerSortDown.spotlight {
+    background-image: url(../basicTheme/images/spotlight_desc.png);
+}
+table.bubblesheet thead tr .headerSortDown, table.bubblesheet thead tr .headerSortUp {
+    background-color: #9999CC;
+}
+
+table.bubblesheet tbody td .sortDataOnly {
+    display: none;
+}
+
+.bubblesheet td {
+    padding: 4px 4px 4px 4px !important;
+}
+
+table.bubblesheet tr.eventRow {
+    background-color: #DDDDDD;
+}
+table.bubblesheet tr.anyday {
+    background-color: #B7CEEC;
+}
+table.bubblesheet tr.monthly {
+    background-color: #FFB393;
+}

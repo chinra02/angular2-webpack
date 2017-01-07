@@ -1,0 +1,16 @@
+<div class="stSearchDropdown ani-med">
+    <div class="stSearchBox">
+        <div class="ctrls">
+            <!-- add click-to-sort toggle, which also adds st-sort-ascend/descend class -->
+            <div class="sort-ctrls flex-grow">
+                <div class="st-icon st-multi-sort"></div>
+                <div class="flex-grow ng-binding"> {{title}}</div>
+            </div>
+
+            <a id="entry_eclaim_claim_number_search_close" (click)="triggerCloseModal($event)">close</a>
+
+        </div>
+        <cell-template [type]="columnType" class="st-cell-search" [(column)]="column" [title]="title"
+                       (searched)="onColumnSearch($event)"></cell-template>
+    </div>
+</div>

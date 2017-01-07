@@ -1,0 +1,40 @@
+<span class="dropdown" dropdown *ngIf="data.length>0">
+    <button class="btn btn-std btn-secondary " dropdown-open (click)="onBtnClick($event,data[0])"
+            tooltip="{{getToolTip()}}"
+            [tooltipDisabled]="false"
+            [tooltipAnimation]="true"
+            tooltipPlacement="top">
+        <span *ngIf="data.length>1">
+            {{label}} {{displayValue}}
+        </span>
+        <span *ngIf="data.length==1">
+            {{data[0][optionsDisplayProperty]}}
+        </span>
+        <span>
+            <span *ngIf="displayLength===true && data && data.length>0">({{data.length}}) </span>
+            <span class="caret icon-right" *ngIf="data.length>1"></span>
+        </span>
+    </button>
+    <ul class="dropdown-menu" *ngIf="dropdownNotCloseZone!=null && data.length>1" dropdown-not-closable-zone>
+        <li *ngFor="let option of data">
+            <a (click)="onSelect($event,option)" class="btn" [ngClass]="{disabled: option.isEnabled === false}">
+                <span *ngIf="isSmartSelectorEnabled">
+                    <smart-selector [selectedValue]="option.isVisible"
+                                    (edited)="onChange($event,option)"></smart-selector>
+                </span>
+                {{option[optionsDisplayProperty]}}
+            </a>
+        </li>
+    </ul>
+    <ul class="dropdown-menu" *ngIf="dropdownNotCloseZone==null && data.length>1">
+        <li *ngFor="let option of data">
+            <a (click)="onSelect($event,option)" class="btn" [ngClass]="{disabled: option.isEnabled === false}">
+                <span *ngIf="isSmartSelectorEnabled">
+                    <smart-selector [selectedValue]="option.isVisible"
+                                    (edited)="onChange($event,option)"></smart-selector>
+                </span>
+                {{option[optionsDisplayProperty]}}
+            </a>
+        </li>
+    </ul>
+</span>

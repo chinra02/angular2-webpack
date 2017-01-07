@@ -1,0 +1,19 @@
+<modal  title="Are you sure?" modalClass="modal-sm"
+        [hideCloseButton]="false"
+        [closeOnEscape]="true"
+        [closeOnOutsideClick]="false">
+ 
+    <modal-header>
+        {{title}}
+    </modal-header>
+ 
+    <modal-content>
+       {{message}}
+    </modal-content>
+ 
+    <modal-footer>
+            <button class="btn btn-primary" (click)="yes()">Yes</button>
+            <button class="btn btn-warning"  (click)="hideConfirm()">No</button>
+     </modal-footer>
+        
+</modal>

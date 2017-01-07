@@ -1,0 +1,44 @@
+<div class="settings-slider flex flex-align-center"
+     [ngClass]="sliderOpen ? 'settings-slider-open' : 'settings-slider-closed'">
+    <div class="toggle" (click)="sliderOpen = !sliderOpen" id="slider">
+        <i class="fa fa-gear fa-lg"></i>
+        <i class="fa fa-caret-right"></i>
+    </div>
+    <div class="btns" *ngIf="sliderOpen">
+
+        <ng2-dropdown-comp label="Columns" [data]="grid.getAllColumns()" toolTip="Show/Hide columns"
+                           optionsDisplayProperty="title"
+                           dropdownNotCloseZone="dropdownNotCloseZone" (edited)="onColumnFilterChange($event)">
+        </ng2-dropdown-comp>
+
+        <ng2-dropdown-comp label="Records per page ({{selectedPage}})" toolTip="Claims per page" [displayLength]="false"
+                           (selected)="selectedPageSize($event,'label')"
+                           optionsDisplayProperty="label" [isSmartSelectorEnabled]="false"
+                           [data]="grid.getSetting('pageRows')" (edited)="onColumnFilterChange($event)">
+        </ng2-dropdown-comp>
+
+        <span class="dropdown" dropdown>
+            <button class="btn btn-std btn-secondary dropdown-toggle" dropdown-open id="save_load_view">
+                Save/Load View <span class="caret icon-right"></span>
+            </button>
+
+            <ul class="dropdown-menu">
+                <li role="presentation" class="dropdown-header">Saved Views</li>
+                <li *ngFor="let filter of  listFilters()">
+                    <a (click)="applyView({ filter: filter })" id="filter_description_{{$index}}">
+                        <i class="fa {{ filter.name == ctrl.selectedFilter.name ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
+                        {{ filter.name }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a (click)="saveFilterDialog()" id="save_filter_dialog"><i class="fa fa-save"></i> Save Current View</a>
+                </li>
+                <li>
+                    <a (click)="manageFiltersDialog()" id="manage_filters_dialog"><i class="fa fa-gear"></i> Manage
+                        Views</a>
+                </li>
+            </ul>
+        </span>
+    </div>
+</div>

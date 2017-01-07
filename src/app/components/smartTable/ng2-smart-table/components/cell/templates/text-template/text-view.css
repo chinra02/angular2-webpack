@@ -1,0 +1,13 @@
+.st-cell-view {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block!important;
+    max-width: 20em !important;
+}
+
+.st-cell-view :hover {
+    overflow: auto !important;
+    text-overflow: initial !important;
+    display: block!important;
+
+}

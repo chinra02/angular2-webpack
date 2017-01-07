@@ -1,0 +1,22 @@
+/** TO BE USE IN CONJUCTION WITH MEDIAQUERIES **/
+.header .logo {
+    width: 148px;
+}
+.main-tabs {
+    left: 160px;
+}
+.header .program,.header .logo2 {
+    display: none;
+}
+.header .view-high-priority {
+    right: calc(100% - 282px);
+}
+.header .system-user-name {
+    display: none;
+}
+.header .user-tools {
+    min-width: 30px;
+}
+.header .single-search {
+    left: 816px;
+}

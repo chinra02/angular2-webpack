@@ -1,0 +1,105 @@
+/* Override bootstrap modal to look like Truchart's modal */
+
+/* Kill body scroll on MSIE 10-11 */
+.modal-open {
+  -ms-scroll-limit: 0 0 0 0;
+}
+
+.modal-active {
+  display: block;
+}
+
+/* Tweak modal-backdrop */
+.modal-backdrop {
+  bottom: 0;
+  position: fixed;
+}
+
+.modal {
+  .modal-content {
+    border: 1px solid $modal-content-border-color;
+  }
+
+  /* Style header like Medituyre JQueryUI modal */
+  .modal-header {
+    margin: .2em;
+    padding: .8em 1em;
+    color: $modal-header-text-color;
+    background-color: $modal-header-background-color;
+    border: 1px solid $modal-header-border-color;
+  }
+
+  .modal-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .modal-footer {
+    padding: .5em 1em;
+    margin-top: 0.5em;
+  }
+}
+
+// IE10 and IE11 fail to implement flexbox.
+// Fall back to scrolling entire modal up and down the screen.
+.IE10, .IE11UP {
+  .modal {
+    height: initial !important;
+    overflow: auto !important;
+  }
+  .modal-dialog {
+//    height: initial !important;
+  }
+  .modal-content {
+    max-height: 999999px !important;
+    display: block !important;
+  }
+  .modal-body {
+//    overflow: initial !important;
+  }
+}
+
+.modal-auto {
+  .modal {
+    overflow: hidden;
+  }
+  .modal-dialog {
+    margin: 2em auto;
+    height: 100%;
+  }
+
+  .modal-content {
+    max-height: calc(100% - 4em);
+//    height: 90%;
+    @include flex();
+    @include flex-v();
+    overflow: hidden;
+  }
+
+  .modal-body {
+    overflow: auto;
+  }
+
+  .modal-header, .modal-footer {
+    flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+  }
+}
+
+/* Add additional .modal-lg larger modal widths */
+$modal-xlg:  1100px !default;
+$modal-small: 768px !default;
+
+@media (min-width: $screen-lg-min) {
+  .modal-lg { width: $modal-xlg; }
+}
+
+@media (min-width: ($screen-lg-min * 1.15)) {
+  .modal-lg { width: 95%; }
+}
+
+.modal-small {
+  width: $modal-small;
+}
+
+/* End Bootstrap modal override */

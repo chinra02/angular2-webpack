@@ -1,0 +1,21 @@
+<form class="column-header">
+    <!-- (closeOutSide)="isFormVisible=false"  -->
+    <template-modal *ngIf="columnType!=null && isFormVisible"
+                    (closeModal)="isFormVisible=false"
+                    [title]="column.title"
+                    [type]="columnType"
+                    [column]="column">
+    </template-modal>
+    <div>
+        <div class="ctrls">
+            <div *ngIf="column.isSortable" class="sort-ctrls" (click)="sort($event, column)"
+                 [(ngClass)]="currentDirection">
+                <div ng-if="column.sortAttr" class="st-icon st-multi-sort ng-scope"></div>
+                <div *ngIf="column.isVisible" class="flex-grow"> {{ column.title }}</div>
+            </div>
+            <div *ngIf="columnType!=null" (click)="showModal($event)" class="st-icon st-search"></div>
+        </div>
+        <search-description [column]="column"></search-description>
+    </div>
+
+</form>

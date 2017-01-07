@@ -1,0 +1,34 @@
+<ng2-smart-table
+        (paginated)="onPaginate($event)"
+        (pagsChanged)="onPageSizeChanged($event)"
+        (rowSelectionChange)="onRowSelectionChange($event)"
+        (columnSelectionChange)="onColumnSelectionChange($event)"
+        (sorted)="onColumnSort($event)"
+        (onSelectedRowAction)="onRowAction($event)"
+        (rowClicked)="onRowClick($event)"
+        (storeDispatch)="onStoreDispatch($event)"
+        (onPreviousEvent)="onPrevious($event)"
+        (onNextEvent)="onPrevious($event)"
+        [selectedSort]="sortSelections$ | async"
+        [selectedPager]="pagerSelections$ | async"
+        [selectedColumns]="columnSelections$ | async"
+        [selectedRows]="rowSelections$ | async"
+        [rowActionModel]="actionModel | objectFilter: 'rowActionModel'"
+        [settings]="settings$ | async"
+        [source]="dataSource$ | async">
+    <header-actions>
+
+        <ui-bulk-action-component optionsDisplayProperty="name" (selected)="onBulkAction($event)" [bulkActionModel]="actionModel | objectFilter: 'bulkActionModel' ">
+        </ui-bulk-action-component>
+
+        <header-action-component  (selected)="onHeaderAction($event)" [headerActionModel]="actionModel | objectFilter: 'headerActionModel' ">
+        </header-action-component>
+      
+    </header-actions>
+</ng2-smart-table>
+
+<confirm-modal> </confirm-modal>
+
+
+
+

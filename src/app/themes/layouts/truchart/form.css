@@ -1,0 +1,885 @@
+/*
+ Style forms in a common manner.
+
+     Sample:
+     <fieldset>
+        <legend>Overall Fieldset Title</legend>
+
+        <label for="fieldID1">Input 1</label>
+        <div class="inputcontent">
+            <input id="fieldID1">
+        </div>
+        <br>
+
+        <label for="fieldID2">Input 2</label>
+        <div class="inputcontent">
+            <input id="fieldID1">
+        </div>
+
+        <fieldset>
+            <legend>Subsection Fieldset Title</legend>
+            <div class="legenddecoration"></div>
+
+            <label for="fieldID3">Input 3-5</label>
+            <div class="inputcontent">
+                <input id="fieldID3">
+                <input id="fieldID4">
+                <input id="fieldID5">
+            </div>
+            <br>
+
+            <label for="fieldID6">Input 6</label>
+            <div class="inputcontent">
+                <input id="fieldID6">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Subsection 2 Fieldset Title</legend>
+            <div class="legenddecoration"></div>
+
+            <label for="fieldID7">Input 7</label>
+            <div class="inputcontent">
+                <input id="fieldID7">
+                <input id="fieldID8">
+                <input id="fieldID9">
+            </div>
+            <br>
+
+            <label for="fieldID10">
+            <div class="inputcontent">
+                <input id="fieldID10">
+            </div>
+        </fieldset>
+    </fieldset>
+
+ */
+
+/* When creating a form, wrap each logical section (grouping of input fields) in a <fieldset> */
+fieldset {
+    position: relative;
+    padding-top: 41px;
+}
+
+div.signedFieldset {
+    border: 1px solid #5690a6;
+    margin-bottom: 20px;
+    padding: 2px 5px;
+    margin-top: 25px;
+}
+
+/* Inside the <fieldset>, create a <legend>.  This will appear as the fieldset's title. */
+fieldset legend {
+    line-height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 0 0 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 10px);
+    border-bottom: 1px solid #e9e9e7;
+    background: #cde1e8;
+    color: #254b59;
+}
+
+div.signedFieldset h1.signedLegend {
+    border: lightgray 1px dotted;
+    font-size: medium;
+    margin-left: 20px;
+    padding: 0 20px 0 20px;
+    color: black;
+    background-color: #EEE;
+    position: relative;
+    top: -25px;
+    width: auto;
+    float: left;
+}
+
+fieldset fieldset {
+    display: block;
+    clear:left;
+}
+
+div.signedFieldset div.signedFieldset {
+    display: block;
+    clear:left;
+    border: 0;
+    padding: 0 0 0 1px;
+    margin: 0.5em 0 0 0;
+    border-top: lightgray solid 1px;
+}
+
+fieldset fieldset legend {
+    font-size: small;
+    color: #414141;
+}
+
+div.signedFieldset div.signedFieldset h1.signedLegend {
+    font-size: small;
+    border: 0;
+    margin: 0;
+    padding: 0 20px 0 20px;
+    margin-left: 100px;
+    background-color: inherit;
+    color: #000;
+}
+
+/* Each input field should have a <label>. */
+fieldset label {
+    float: left;
+    clear: left;
+    text-align: right;
+    color: #474647;
+    font-weight: bold;
+    width: 150px; /* reasonably large default; override as desired */
+    margin-right: 1em;
+    vertical-align: bottom;
+    font-family: "Arial", sans-serif;
+}
+
+fieldset label.disabled {
+    float: left;
+    clear: left;
+    text-align: right;
+    color: #d3d3d3;
+    font-weight: bold;
+    width: 150px; /* reasonably large default; override as desired */
+    margin-right: 1em;
+    vertical-align: bottom;
+    font-family: "Arial", sans-serif;
+}
+
+fieldset label.buttonListLabel {
+    float: none;
+    text-align: left;
+    color: #000000;
+    font-weight: normal;
+    width: auto; /* reasonably large default; override as desired */
+    margin-right: 0;
+    vertical-align: bottom;
+    padding-top: 0;
+    font-family: "Arial", sans-serif;
+    display: inline-block;
+}
+
+div.signedFieldset span.signedLabel {
+    float: left;
+    clear: left;
+    text-align: right;
+    color: #5690a6;
+    font-weight: bold;
+    width: 150px; /* reasonably large default; override as desired */
+    margin-right: 1em;
+    vertical-align: bottom;
+    padding-top: 0.5em;
+}
+
+fieldset label.inline {
+    float: none;
+    clear: none;
+    text-align: left;
+    width: auto;
+    margin-left: 0.5em;
+    margin-right: 0.25em;
+    vertical-align: baseline;
+}
+
+div.signedFieldset span.signedLabel.inline {
+    float: none;
+    clear: none;
+    text-align: left;
+    width: auto;
+    margin-left: 0.5em;
+    margin-right: 0.25em;
+    vertical-align: baseline;
+}
+
+/* You may optionally place your input field inside a div of class fieldentry. */
+fieldset div.inputcontent {
+    margin-top: .5em;
+    float: left;
+    max-width:420px;
+}
+
+/* You may optionally place your input field inside a div of class fieldentry. */
+fieldset fieldset div.inputcontent {
+    margin-top: .5em;
+    float: left;
+    max-width:390px;
+}
+
+fieldset label:first-of-type + div.inputcontent { /* inputcontent div following the first label inside the fieldset */
+    margin-top: .25em;
+    /* First inputcontent div needs less top margin */
+}
+
+div.signedFieldset span.signedLabel:first-of-type + div.inputcontent { /* inputcontent div following the first label inside the fieldset */
+    margin-top: .25em;
+    /* First inputcontent div needs less top margin */
+}
+
+fieldset label:first-of-type { /* inputcontent div following the first label inside the fieldset */
+    padding-top: .25em;
+    /* First inputcontent div needs less top margin */
+}
+
+div.signedFieldset span.signedLabel:first-of-type { /* inputcontent div following the first label inside the fieldset */
+    padding-top: .25em;
+    /* First inputcontent div needs less top margin */
+}
+
+/* Place a <br> to clear floated elements */
+br {
+    clear:both;
+}
+/* Place a <hr> to visually separate */
+hr {
+    clear:left;
+}
+
+/* Apply the requiredfield class to a label to give visual indication to the user */
+fieldset div label.requiredfield {
+    font-weight: bold;
+}
+
+fieldset div label.requiredfield:before {
+    content: "* ";
+    color: red;
+}
+
+input.requiredfield {
+    background-color: #FFDDDD;
+}
+
+/* Mark a field during validation as validationerror to give visual indication */
+.validationerror {
+    color: red;
+}
+
+
+/* What is this I don't even */
+fieldset small {
+    margin: 3px 0 3px 170px;
+    clear: left;
+    width: auto;
+    color: black;
+    display: block;
+}
+
+div.errorsbox {
+    border: red 2px solid;
+    background-color: #FFEEEE;
+    padding: 1em;
+    margin: 1em;
+}
+
+div.selectHover {
+    height: 40px;
+    /*display: inline;*/
+    /*position: relative;*/
+}
+
+div.selectHover select {
+    position: absolute;
+}
+
+select.selectHover {
+    width: 65px;
+}
+
+div.selectHover.small {
+    width: 65px;
+}
+
+div.selectHover select.small {
+    width: 65px;
+}
+
+div.selectHover select.large {
+    width: auto;
+}
+
+div.quickFill {
+    width: 105px;
+    margin-right: 10px !important;
+}
+
+select.quickFill {
+    width: 105px;
+}
+
+div.reviewAdd {
+    width: 85px;
+}
+
+select.reviewAdd {
+    width: 85px;
+}
+
+div.templateLibraryHover {
+    width: 120px;
+}
+
+select.templateLibraryHover {
+    width: 120px;
+}
+
+div.homecareActivityHover {
+    width: 120px;
+}
+
+select.homecareActivityHover {
+    width: 120px;
+}
+
+div.wideHover {
+    width: 120px;
+}
+
+select.wideHover {
+    width: 120px;
+}
+
+div.cloudItem {
+    height: 18px;
+    padding: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-align: center;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    background-color: #EEE;
+    float: left;
+    width: 31%;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    overflow-y: hidden;
+    line-height: 18px;
+}
+
+div.cloudItemHover, div.cloudItem:hover {
+    height: auto;
+    cursor: pointer;
+    background-color: #DDD;
+}
+
+div.cloudItemSelect {
+    background-color: #CFC;
+}
+
+.textareaCounterHidden {
+    display: none;
+}
+
+.textareaCounterDefault {
+    color: #333333;
+    font-size: 13px;
+    text-align: right;
+}
+
+.textareaCounterWarning {
+    display: block;
+    color: #96201A;
+    font-size: 13px;
+    text-align: right;
+}
+
+input[type='text'], input[type='password'], select {
+    border-width: 1px;
+}
+
+/* Apply the requiredfield class to a label to give visual indication to the user */
+input.vf-required, select.vf-required, textarea.vf-required{
+    /*background-color: #fdd;*/
+    border-left-width: 5px;
+}
+
+/* Apply the requiredfield class to a label to give visual indication to the user */
+input.vf-invalid, select.vf-invalid, textarea.vf-invalid {
+    border-color: #D44242;
+    /*background-color: #fdd;*/
+    border-left-width: 5px;
+}
+
+input.vf-recommended, select.vf-recommended, textarea.vf-recommended {
+    border-color: #28f;
+    /*background-color: #E0F7FF;*/
+    border-left-width: 5px;
+}
+
+input.vf-validated, select.vf-validated, textarea.vf-validated {
+    border-color: #ababab;
+    /*background-color: #fff;*/
+}
+
+.ui-state-hidden {
+    display: none;
+}
+
+div.vf-alert  {
+    position: relative;
+    display: inline-block;
+    padding: 1px;
+    margin: 1px;
+    border: 0;
+    vertical-align: bottom;
+    background: none !important;
+    left: -5px;
+}
+
+div.selectHover div.vf-alert  {
+    position: absolute;
+    margin-left: 65px;
+}
+
+div.wideHover div.vf-alert  {
+    position: absolute;
+    margin-left: 120px;
+}
+#LifePlanView > iframe {
+    overflow: hidden;
+}
+form .form-tab-container {
+    width: 100%;
+    margin: 10px 0;
+}
+
+form div.form-header ul li.form-tab-selected>div {
+    color: #414141;
+}
+
+form section:not(.type_active), fieldset {
+    background-color: #fdfcfa;
+    margin: 0 auto 10px auto;
+    border: 1px solid #5690a5;
+}
+
+/*form section.type_active {
+    display: none;
+}*/
+
+form section:not(.type_active)>div {
+    padding: 5px 5px 5px 30px;
+    border-top: none;
+}
+
+h3.form-section-header {
+    line-height: 35px;
+    font-size: 16px;
+    color: #474647;
+    font-weight: bold;
+    margin: 0;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #cde1e8;
+    color: #254b59;
+}
+
+form section section h3.form-section-header {
+    font-size: 16px;
+}
+
+h3.form-section-header:not(.collapsed-section) {
+    border-bottom: 1px solid #d4d7d6;
+}
+
+form section h3>.ui-icon {
+    display: inline-block;
+    vertical-align: text-top;
+    margin: 0 9px 0 9px;
+}
+
+div.form-header {
+    display: none;
+}
+
+div.form-header h3 {
+    padding: 5px;
+    margin: 0;
+    height: 35px;
+    line-height: 35px;
+    color: #FFF;
+}
+
+div.form-header.inbox-only {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    line-height: 35px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    background-color: #274c59;
+    color: #FFF;
+    width: 100%;
+    display: block;
+}
+
+div.form-header.inbox-only h3 {
+    padding: 0 0 0 5px;
+}
+
+div.form-header.inbox-only h3 .acct-num {
+    font-weight: normal;
+    color: #5690a5;
+}
+
+div.form-header.inbox-only img {
+    float: left;
+    display: inline-block;
+    top: 5px;
+    left: 10px;
+    position: relative;
+    padding-right: 10px;
+}
+
+div.form-header.inbox-only .go-to-record {
+    margin: 0 !important;
+    background-color: #5a5775 !important;
+    border: 1px solid #5a5775 !important;
+    background:none;
+    height: 30px;
+}
+
+.patient-high-priority {
+    /*position: relative;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    text-align: right;
+    width: 300px;
+    float: right;
+    padding-top: 12px;
+    display: none;
+}
+
+div.form-label {
+    padding: 5px;
+    margin: 0;
+    height: 30px;
+    line-height: 30px;
+    color: #332c2e;
+    font-weight: bold;
+    background-color: #5690a5;
+    position: relative;
+    font-size: 15px;
+}
+
+div.form-label ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+div.form-label ul li {
+    width: 120px;
+    line-height: 30px;
+    padding: 5px 0;
+    border-left: 1px solid #fff;
+    box-sizing: border-box;
+    font-weight: normal;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    -moz-box-sizing: border-box;
+    color: #ffffff;
+}
+
+div.form-label ul li a {
+    width: 100%;
+    line-height: 30px;
+    display: inline-block;
+}
+
+div.form-label ul li:hover, div.form-label ul li:hover a {
+    background-color: #5690a9;
+    color: #fff;
+}
+
+div.form-label ul li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+div.form-label ul li.form-tab-selected, div.form-label ul li.form-tab-selected a {
+    background-color: #5a5775;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+div.form-label ul li.disabled {
+    background-color: #eee;
+}
+
+div.form-label ul li.disabled a {
+    color : #555;
+}
+
+div.save-bar {
+    width: 100%;
+    bottom: 0;
+    height: 26px;
+}
+
+tr.save-bar.hidden-inbox {
+    display: none;
+}
+
+div.save-bar>div {
+    width: 50%;
+    float: left;
+    height: 26px;
+}
+
+div.signing-activities {
+    min-width: 180px;
+    height: 40px;
+    display: inline-block;
+}
+
+div.review-cosign-check {
+    display: inline-block;
+}
+
+div.signing-activities .review-cosign-check {
+    display: block;
+}
+
+.clear { clear: both;}
+
+.scanning-folder-options {
+    min-width: 800px;
+    border: 0;
+    background-color: #ffffff;
+    position: relative;
+    border-bottom: 1px solid #CCC;
+    width: 100%;
+}
+
+div.scanning-folder-options .ui-button-text-icon-primary {
+    min-width: 50px;
+}
+
+div.scanning-folder-options .ui-button-text-icon-secondary {
+    min-width: 50px;
+}
+
+.scanning-page-selector {
+    line-height: 30px;
+    padding: 5px;
+    box-shadow: 0 1px 2px #ccc;
+}
+
+div.scanning-page-selector .ui-button-text-only {
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 34px;
+    max-height: 34px;
+    padding-top: 8px;
+}
+
+div.scanning-page-selector .ui-button-text-icon-primary,
+div.scanning-page-selector .ui-button-text-icon-secondary {
+    min-width: 40px;
+}
+
+div.scanning-page-selector .ui-button-text-icon-primary {
+    margin-left: 8px !important; /* have to override important elsewhere */
+}
+
+.scanning-page-selector:after {
+    content: " "; /* Older browser do not support empty content */
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.scanning-viewer {
+    position: relative;
+    text-align: center;
+    max-width: 800px;
+}
+
+div.scanning-viewer .ui-button-text-icon-primary {
+    min-width: 50px;
+}
+
+div.scanning-viewer .ui-button-text-icon-secondary {
+    min-width: 50px;
+}
+
+.scanning-viewer>img {
+    margin: 0 auto;
+}
+
+#addPage {
+    float: left;
+}
+
+#next {
+    float: left;
+}
+
+.start, .end {
+    padding: .4em .8em .4em .8em !important;
+}
+
+.patient-high-priority ul {
+    margin: 0 !important;
+    padding: 0  !important;
+    display: inline-block;
+    line-height: 12px;
+    vertical-align: text-bottom;
+}
+
+/* last child because float right */
+.patient-high-priority ul li:last-child a {
+    border-left: none;
+    width: 1px;
+}
+
+.patient-high-priority ul li {
+    display: block;
+    float: right;
+    height: 10px;
+    padding: 0;
+    line-height: 12px;
+    font-weight: normal;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 13px;
+}
+
+.vertical-info.patient-high-priority ul li {
+    display: block;
+    float: right;
+    padding: 0 5px;
+    line-height: 12px;
+    color: #656766;
+    font-size: 12px;
+    text-align: center;
+}
+
+.patient-high-priority ul li a {
+    text-decoration: none;
+    color: #FFFFFF;
+    text-transform: lowercase;
+    padding: 0 10px 0 10px;
+    border-left: 1px solid #FFFFFF;
+}
+
+.vertical-info.patient-high-priority ul li a {
+    text-decoration: none;
+    color: #656766;
+    text-transform: lowercase;
+    padding: 0;
+    border-left: none;
+}
+
+.patient-high-priority ul li a span {
+    color: #FFFFFF;
+    padding: 0 10px 0 0;
+}
+.vertical-info.patient-high-priority ul li a span:first-child {
+    display: block;
+}
+
+.vertical-info.patient-high-priority ul li a span {
+    color: #656766;
+    padding: 0;
+}
+
+.patient-high-priority ul li a .high {
+    background-color: #D44242;
+    font-weight: 700;
+    color: #FAFAFA;
+    border: none;
+    border-radius: 10px;
+    padding-left: 8px;
+    padding-bottom: 1px;
+    margin-right: 5px;
+}
+.vertical-info.patient-high-priority ul li a .high {
+    background-color: #D44242;
+    font-weight: 700;
+    color: #FAFAFA;
+    border: none;
+    border-radius: 10px;
+    padding-left: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+}
+
+.inbox-only.form-content {
+    padding-top: 75px;
+}
+
+/* Blue Plus Theme */
+
+.blueplus .form-label {
+    background-color: #7b7b7b;
+    color: #ffffff;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+}
+
+.blueplus .form-header.inbox-only {
+    background-color: #274c5a;
+}
+
+.blueplus .form-header.inbox-only h3 .acct-num {
+    color: #ffffff;
+}
+
+.blueplus .form-header.inbox-only .go-to-record {
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    min-width: 70px;
+    width: 75px;
+    font-size: 11px;
+}
+
+.blueplus .form-label ul .form-tab-selected,
+.blueplus .form-label ul .form-tab-selected a {
+    background-color: #4a4a4a;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.blueplus .form-label a {
+    color: #ffffff;
+}
+
+.blueplus .form-label ul li:hover,
+.blueplus .form-label ul li:hover a {
+    background-color: #4a4a4a;
+}
+
+.blueplus .patient-high-priority {
+    padding-top: 0;
+}
+
+.blueplus .patient-high-priority ul {
+    vertical-align: baseline;
+}
+
+.blueplus .vertical-info.patient-high-priority ul li a span {
+    color: #ffffff;
+}
+
+.blueplus input[type="checkbox"] {
+    border: 1px solid #252525;
+}

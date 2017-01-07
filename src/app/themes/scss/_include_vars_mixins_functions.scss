@@ -1,0 +1,16 @@
+// This file may be imported by individual truchart modules.
+
+// This provides access to bootstrap/fontawesome/mediture variables, functions and mixins.  These should not
+// contribute directly to the file size of the module's built css dist file, unless their features are used
+// in a class declaration.
+
+@import "var_bootstrap_overrides";
+
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+
+@import "../fontawesome/scss/mixins";
+@import "../fontawesome/scss/variables";
+
+@import "mixin_flex";
+@import "mixin_icons";

@@ -1,0 +1,134 @@
+/* Smart-table data tables */
+table.data {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 13px;
+  text-align: left;
+  border-spacing: 0;
+
+  > thead,
+  > tfoot {
+    > tr:last-of-type {
+      > td, th {
+        border-bottom: 3px solid $smart-table-last-row-bottom-border;
+      }
+    }
+    > tr.heading {
+      vertical-align: center;
+      height: 50px;
+      > td, th {
+        vertical-align: middle;
+        background-color: $smart-table-header-footer-bg-color;
+        color: $smart-table-header-footer-text-color;
+
+        h1, h2, h3, h4 { margin: 5px 20px 5px 20px; }
+      }
+    }
+    > tr {
+      > td, > th {
+        color: $smart-table-text;
+        background-color: $smart-table-header-footer-bg-color;
+        padding: 1px 10px 1px 10px;
+        border-left: 1px solid $smart-table-td-th-left-border;
+        line-height: 22px;
+        vertical-align: top;
+        font-size: 14px;
+        font-weight: normal;
+        white-space: nowrap;
+
+        .stSearchDropdown {
+          &.ng-enter { animation-name: fadeIn; }
+          &.ng-leave { animation-name: fadeOut; }
+          position: relative;
+          top: 0;
+          left: 0;
+          z-index: 10;
+
+          .stSearchBox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 250px;
+            background-color: white;
+            border: lightgrey solid 1px;
+            margin: -15px;
+            padding: 14px; // 15px - 1px for border
+            box-shadow: 4px 4px 15px 0px $st-search-box-shadow-color;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  > tbody {
+    > tr {
+      > td {
+        line-height: 26px;
+        white-space: nowrap;
+        font-size: 13px;
+        padding: 4px 10px 4px 10px;
+      }
+    }
+  }
+
+  /* Overall Column Header marker */
+  .column-header {
+    /* Controls should be laid out in a single horizontal line/flex layout */
+    .ctrls {
+      @extend .flex-line;
+      -ms-flex-pack: justify;
+    }
+
+    /* Sort controls should also be in flex layout, and take up the extra space */
+    .sort-ctrls {
+      @extend .flex-line;
+      -ms-flex-pack: justify;
+      @include flex-grow();
+      cursor: pointer;
+
+      /* Hovering over any part of the sort controls should highlight the icon */
+      &:hover .st-icon { @include icon-shadow(); }
+      &:hover .st-icon { @include icon-shadow(); }
+
+      /* If st-sort directive added st-sort-ascent/descent, override the st-sort icon */
+      &.st-multi-sort-ascent .st-multi-sort:before { content: $fa-var-sort-asc; }
+      &.st-multi-sort-descent .st-multi-sort:before { content: $fa-var-sort-desc; }
+    }
+  }
+
+  .st-icon {
+    @include fa-icon();
+    &:before { padding: 0.5em 1em 0.5em 1em; }
+    /* Hovering over any icon should show pointer and highlight the icon */
+    &:hover { @include icon-shadow(); }
+    cursor: pointer;
+  }
+
+  @mixin st-icon-left($icon) {
+    &:before {
+      content: $icon;
+      margin-left: -1em;
+    }
+  }
+
+  @mixin st-icon-right($icon) {
+    &:before {
+      content: $icon;
+      margin-right: -1em;
+    }
+  }
+
+  .st-search {
+    @include st-icon-right($fa-var-search);
+  }
+
+  .st-clear-search {
+    @include st-icon-right($fa-var-close);
+  }
+
+  .st-multi-sort {
+    @include st-icon-left($fa-var-sort);
+    &.st-multi-sort-ascent:before { content: $fa-var-sort-asc; }
+    &.st-multi-sort-descent:before { content: $fa-var-sort-desc; }
+  }
+}

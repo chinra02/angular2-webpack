@@ -1,0 +1,20 @@
+// Customize bootstrap variables before importing bootstrap.
+@import "var_bootstrap_overrides";
+
+// Full bootstrap for main.scss;
+// Alternatively could import each feature separately from "bootstrap/feature" for a smaller built main.css
+@import "bootstrap";
+@import "../fontawesome/scss/font-awesome";
+// Import the temporary truchart/bootstrap compatibilty shim
+@import "truchart_bootstrap_compat";
+
+// Import each mediture scss module.
+@import "etc";
+@import "flex";
+@import "modals";
+@import "mixin_icons";
+@import "tables";
+@import "buttons";
+@import "typeahead";
+@import "tooltip";
+@import "validation";

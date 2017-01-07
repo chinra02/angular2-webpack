@@ -1,0 +1,250 @@
+/* Styles for jQuery menu widget
+Author:	Maggie Wachs, maggie@filamentgroup.com
+Date:		September 2008
+*/
+
+
+/* REQUIRED STYLES - the menus will only render correctly with these rules */	
+
+.fg-menu-container { position: absolute; top:0; left:-999px; padding: .4em 0 .4em 0;  overflow: hidden; z-index: 150 }
+.fg-menu-container.fg-menu-flyout { overflow: visible; }
+.fg-menu-container-fixed { position: fixed; top:0; left: 0 !important; padding: .4em;  overflow: hidden; z-index: 200000;  }
+.fg-menu-container-fixed-right { position: fixed; top:0; right: 32px !important; padding: .4em;  overflow: hidden; z-index: 200000;}
+.fg-menu, .fg-menu ul { list-style-type:none; padding: 0; margin:0; }
+
+.fg-menu { position:relative; }
+.fg-menu-flyout .fg-menu { position:static; }
+
+.fg-menu ul { position:absolute; top:0; }
+.fg-menu ul ul { top:-1px; }
+
+.fg-menu-container.fg-menu-ipod .fg-menu-content, 
+.fg-menu-container.fg-menu-ipod .fg-menu-content ul { background: none !important; }
+
+.fg-menu.fg-menu-scroll,
+.fg-menu ul.fg-menu-scroll { overflow: scroll;  overflow-x: hidden; }
+
+.fg-menu li { clear:both; float:left; width:100%; margin: 0; padding:0; border: 0; }	
+.fg-menu li li { font-size:1em; } /* inner li font size must be reset so that they don't blow up */
+
+.fg-menu-flyout ul ul { padding: .4em; }
+.fg-menu-flyout li { position:relative; }
+
+.fg-menu-scroll { overflow: scroll; overflow-x: hidden; }
+
+.fg-menu-breadcrumb { margin: 0; padding: 0; }
+
+.fg-menu-footer {  margin-top: .4em; padding: .4em; }
+.fg-menu-header {  margin-bottom: .4em; padding: .4em; }
+
+.fg-menu-breadcrumb li { float: left; list-style: none; margin: 0; padding: 0 .2em; font-size: .9em; opacity: .7; }
+.fg-menu-breadcrumb li.fg-menu-prev-list,
+.fg-menu-breadcrumb li.fg-menu-current-crumb { clear: left; float: none; opacity: 1; }
+.fg-menu-breadcrumb li.fg-menu-current-crumb { padding-top: .2em; }
+
+.fg-menu-breadcrumb a, 
+.fg-menu-breadcrumb span { float: left; }
+
+.fg-menu-footer a:link,
+.fg-menu-footer a:visited { float:left; width:100%; text-decoration: none; }
+.fg-menu-footer a:hover,
+.fg-menu-footer a:active {  }
+
+.fg-menu-footer a span { float:left; cursor: pointer; }
+
+.fg-menu-breadcrumb .fg-menu-prev-list a:link,
+.fg-menu-breadcrumb .fg-menu-prev-list a:visited,
+.fg-menu-breadcrumb .fg-menu-prev-list a:hover,
+.fg-menu-breadcrumb .fg-menu-prev-list a:active { background-image: none; text-decoration:none; }
+	
+.fg-menu-breadcrumb .fg-menu-prev-list a { float: left; padding-right: .4em; }
+.fg-menu-breadcrumb .fg-menu-prev-list a .ui-icon { float: left; }
+	
+.fg-menu-breadcrumb .fg-menu-current-crumb a:link,
+.fg-menu-breadcrumb .fg-menu-current-crumb a:visited,
+.fg-menu-breadcrumb .fg-menu-current-crumb a:hover,
+.fg-menu-breadcrumb .fg-menu-current-crumb a:active { display:block; background-image:none; font-size:1.3em; text-decoration:none; }
+
+
+
+/* REQUIRED LINK STYLES: links are "display:block" by default; if the menu options are split into 
+	selectable node links and 'next' links, the script floats the node links left and floats the 'next' links to the right	*/
+
+.fg-menu a:link,
+.fg-menu a:visited,
+.fg-menu a:hover,
+.fg-menu a:active { float:left; width:92%; padding:.3em 3%; text-decoration:none; outline: 0 !important; }
+
+.fg-menu a { border: 1px dashed transparent; }
+
+.fg-menu a.ui-state-default:link,
+.fg-menu a.ui-state-default:visited,
+.fg-menu a.ui-state-default:hover,
+.fg-menu a.ui-state-default:active,
+.fg-menu a.ui-state-hover:link,
+.fg-menu a.ui-state-hover:visited,
+.fg-menu a.ui-state-hover:hover,
+.fg-menu a.ui-state-hover:active,
+ .fg-menu a.ui-state-active:link,
+ .fg-menu a.ui-state-active:visited,
+ .fg-menu a.ui-state-active:hover,
+.fg-menu a.ui-state-active:active { border-style: solid; font-weight: normal; }
+
+
+
+.fg-menu a.ui-state-default:link,
+.fg-menu a.ui-state-default:visited,
+.fg-menu a.ui-state-default:hover,
+.fg-menu a.ui-state-default:active { color: #FFFFFF;}
+
+.fg-menu a.ui-state-hover:link,
+.fg-menu a.ui-state-hover:visited,
+.fg-menu a.ui-state-hover:hover,
+.fg-menu a.ui-state-hover:active,
+.fg-menu a.ui-state-active:link,
+.fg-menu a.ui-state-active:visited,
+.fg-menu a.ui-state-active:hover,
+.fg-menu a.ui-state-active:active { color: #FFFFFF}
+
+.fg-menu a span { display:block; cursor:pointer; }
+
+
+ /* SUGGESTED STYLES - for use with jQuery UI Themeroller CSS */	
+ 
+.fg-menu-indicator span { float:left; }
+.fg-menu-indicator span.ui-icon { float:right; }
+
+.fg-menu-content.ui-widget-content, 
+.fg-menu-content ul.ui-widget-content { border:0; }
+
+
+/* ICONS AND DIVIDERS */
+
+.fg-menu.fg-menu-has-icons a:link,
+.fg-menu.fg-menu-has-icons a:visited,
+.fg-menu.fg-menu-has-icons a:hover,
+.fg-menu.fg-menu-has-icons a:active { padding-left:20px; }
+
+.fg-menu .horizontal-divider hr, .fg-menu .horizontal-divider span { padding:0; margin:5px .6em; }
+.fg-menu .horizontal-divider hr { border:0; height:1px; }
+.fg-menu .horizontal-divider span { font-size:.9em; text-transform: uppercase; padding-left:.2em; }
+
+.fg-hidden { position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+.fg-button { margin-right: 5px; padding: .4em 1em; text-decoration:none !important; cursor:pointer; position: relative; text-align: center; zoom: 1; }
+.fg-button .ui-icon { position: absolute; top: 50%; margin-top: -8px; left: 50%; margin-left: -8px; }
+a.fg-button { float:left;  }
+
+A.fg-button{text-decoration:none;color:#ffffff;}
+A.fg-button:link{text-decoration:none;color:#ffffff;}
+A.fg-button:visited{text-decoration:none;color:#ffffff;}
+A.fg-button:active{text-decoration:none;color:#ffffff;}
+A.fg-button:hover{text-decoration:none;color:#5690a6;}
+
+A.fg-menu-open{text-decoration:none;color:#5690a6;}
+A.fg-menu-open:link{text-decoration:none;color:#5690a6;}
+A.fg-menu-open:visited{text-decoration:none;color:#5690a6;}
+A.fg-menu-open:active{text-decoration:none;color:#5690a6;}
+
+button.fg-button { width:auto; overflow:visible; } /* removes extra button width in IE */
+
+.fg-button-icon-left { padding-left: 2.1em; }
+.fg-button-icon-right { padding-right: 2.1em; }
+.fg-button-icon-left .ui-icon { right: auto; left: .2em; margin-left: 0; }
+.fg-button-icon-right .ui-icon { left: auto; right: .2em; margin-left: 0; }
+.fg-button-icon-solo { display:block; width:8px; text-indent: -9999px; }	 /* solo icon buttons must have block properties for the text-indent to work */
+
+
+.goaltreatmentselect_problem {
+    line-height: 16px;
+    font-weight: 700;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#E3EFF9,EndColorStr=#d8e8f9);
+    background-image: -moz-linear-gradient(top,#E3EFF9 0,#d8e8f9 100%);
+    background-image: -ms-linear-gradient(top,#E3EFF9 0,#d8e8f9 100%);
+    background-image: -o-linear-gradient(top,#E3EFF9 0,#d8e8f9 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#E3EFF9),color-stop(100%,#d8e8f9));
+    background-image: -webkit-linear-gradient(top,#E3EFF9 0,#d8e8f9 100%);
+    background-image: linear-gradient(to bottom,#E3EFF9 0,d8e8f9 100%);
+    box-shadow: inset 0 -1px 0 rgba(125,125,125,.45);
+    cursor: pointer;
+}
+.goaltreatmentselect_problem a {
+    text-decoration: none;
+    float: left;
+    width: 94%;
+    padding: .3em 3%;
+    text-decoration: none;
+    outline: 0 !important;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.goaltreatmentselect_problem div {
+    display: block;
+}
+.goaltreatmentselect_disabledProblem {
+    line-height: 16px;
+    border-bottom: 1px solid #AAA;
+    background-color: #d3d3d3;
+    cursor: help;
+}
+.goaltreatmentselect_goal {
+    line-height: 16px;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFE3B4,EndColorStr=#FFDD99);
+    background-image: -moz-linear-gradient(top,#FFE3B4 0,#FFDD99 100%);
+    background-image: -ms-linear-gradient(top,#FFE3B4 0,#FFDD99 100%);
+    background-image: -o-linear-gradient(top,#FFE3B4 0,#FFDD99 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#FFE3B4),color-stop(100%,#FFDD99));
+    background-image: -webkit-linear-gradient(top,#FFE3B4 0,#FFDD99 100%);
+    background-image: linear-gradient(to bottom,#FFE3B4 0,#FFDD99 100%);
+    border-bottom: 1px solid #AAA !important;
+    cursor: pointer;
+}
+.goaltreatmentselect_goal a {
+    text-decoration: none;
+    float: left;
+    width: 94%;
+    padding: .3em 3%;
+    text-decoration: none;
+    outline: 0 !important;
+}
+.goaltreatmentselect_newitem {
+    line-height: 16px;
+    border-bottom: 1px solid #AAA;
+    background-color: #EEFFDD;
+    cursor: pointer;
+}
+.goaltreatmentselect_hover {
+    background-image: none;
+    background-color: #5690a6;
+    color: #FFF;
+}
+a.goaltreatmentselect_hover {
+    background-image: none;
+    border: none;
+}
+.fg-menu-container {
+    /*box-shadow: 0 6px 9px #666;*/
+}
+.fg-menu-container-fixed {
+    border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: #CCF;
+}
+.fg-menu-container-fixed ul li {
+    line-height: 2em;
+}
+.fg-menu-container-fixed ul li a {
+    font-variant: small-caps;
+    font-weight: 600;
+    color: #414141;
+    letter-spacing: 1px;
+}
+.fg-menu-linebreak {
+    height: 1px;
+    background-color: #caceab;
+}

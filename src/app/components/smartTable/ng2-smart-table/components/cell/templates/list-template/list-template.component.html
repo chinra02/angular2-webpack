@@ -1,0 +1,10 @@
+<div [ngSwitch]="type">
+    <div *ngSwitchCase="'list-search'">
+        <search-dropdown id="{{uniqueid + '_select'}}" (searched)="onSearch($event)" [data]="data">
+        </search-dropdown>
+    </div>
+    <search-description-template [value]="value"
+                                 *ngSwitchCase="'list-search-description'"></search-description-template>
+    <span *ngSwitchDefault>{{ value | commaSeparatedList }}</span>
+
+</div>

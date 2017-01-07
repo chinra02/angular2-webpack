@@ -1,0 +1,123 @@
+table.ToDo {
+    width: 592px;
+    border: none;
+}
+
+table.ToDo tr {
+    height: 22px;
+}
+
+table.ToDo tr td {
+    border-top: 1px solid #EEE;
+    font-size: 0.825em;
+}
+
+
+
+
+
+
+table.ToDo tr.Normal {
+    background-color: #FFF;
+}
+
+table.ToDo tr.High {
+    background-color: #FDD;
+}
+
+table.ToDo tr.OnHold {
+    background-color: #FFF4DD;
+}
+
+table.ToDo tr.Bounced {
+    background-color: #EFD;
+}
+
+table.ToDo tr.From {
+    background-color: #FFF;
+}
+
+/* Row Definitions */
+table.ToDo tr.SelectedRow {
+    background-color: #EEE;
+    font-weight: bold;
+}
+
+table.ToDo tr.NewForm td {
+    font-style: italic;
+}
+
+
+/* Column Definitions */
+table.ToDo col.ToDoStatus {
+    background-color: #FFF;
+    width: 20px;
+}
+
+table.ToDo tr td.ToDoStatus {
+    border-top: none;
+    background-color: #FFF;
+    /*border-top: none;*/
+    /*background-color: #FFF;*/
+    /*width: 20px;*/
+}
+
+table.ToDo col.FormAssignment {
+    width: 14px;
+}
+table.ToDo tr td.FormAssignment {
+    /*width: 14px;*/
+}
+
+table.ToDo col.DateTime {
+    width: 20%;
+}
+
+table.ToDo tr td.DateTime {
+    /*width: 20%;*/
+    padding-left: 5px;
+}
+
+table.ToDo col.From {
+    width: 22px;
+}
+
+table.ToDo tr td.From {
+    padding-left: 1px;
+    padding-right: 1px;
+    text-align: center;
+}
+
+table.ToDo col.Priority {
+    width: 20px;
+}
+
+table.ToDo tr td.Priority {
+    /*width: 20px;*/
+}
+
+table.ToDo col.Participant {
+    width: 37%;
+}
+
+table.ToDo tr td.Participant {
+    /*width: 37%;*/
+}
+
+table.ToDo td.Participant span.ToDoBranch {
+    font-size: xx-small;
+}
+
+
+table.ToDo col.FormDetails {
+    width: 36%;
+    /*text-align: center*/
+}
+
+table.ToDo tr td.FormDetails {
+    /*width: 36%;*/
+    text-align: center
+}
+
+
+

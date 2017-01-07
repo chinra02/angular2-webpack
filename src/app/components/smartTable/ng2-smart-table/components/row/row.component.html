@@ -1,0 +1,21 @@
+<tr *ngFor="let row of grid.getRows()" class="ng2-smart-row" [ngClass]="{selected: row.isSelected}">
+    <td *ngIf="grid.getSetting('selector')=='check'">
+        <smart-selector placeHolder="Select" [selectedValue]="row.isSelected"
+                        (edited)="onRowSelection($event,row)"></smart-selector>
+    </td>
+    <td>
+        <!-- <ng-content select="row-actions"></ng-content>-->
+        <row-action-component (selected)="onRowAction($event,row)" [rowActionModel]="rowActionModel">
+        </row-action-component>
+    </td>
+    <td *ngFor="let cell of row.getCells() | filter:{isVisible: true}">
+        <ng2-smart-table-cell [cell]="cell" [mode]="grid.getSetting('mode')"
+                              [inputClass]="grid.getSetting('edit.inputClass')"></ng2-smart-table-cell>
+    </td>
+</tr>
+
+<tr *ngIf="grid.getRows().length == 0">
+    <td [attr.colspan]="grid.getColumns().length + (grid.getSetting('actions.add') || grid.getSetting('actions.edit') || grid.getSetting('actions.delete'))">
+        {{ grid.getSetting('noDataMessage') }}
+    </td>
+</tr>

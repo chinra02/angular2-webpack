@@ -1,0 +1,9 @@
+$box-shadow-recommended:  -5px 0 0 $box-shadow-recommended-color;
+
+form {
+  input, textarea {
+    &.recommended {
+      box-shadow: $box-shadow-recommended;
+    }
+  }
+}

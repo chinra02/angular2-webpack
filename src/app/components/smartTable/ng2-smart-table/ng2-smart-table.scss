@@ -1,0 +1,26 @@
+  
+   tbody:nth-child(odd) {
+       background-color: #efefef;
+   } 
+   .table-striped > tbody > tr:nth-child(odd) {
+     background-color: transparent !important;
+   }
+  .ng2-smart-row:hover {
+      cursor: pointer
+  }
+   .quckview {
+      background-color: #274c5a !important;
+      border: 2px solid #274c5a !important;
+      border-bottom: none !important;
+   }
+
+    .quckview-background-color-white {
+      background-color: white !important;
+
+   }
+   .flex-align-center{
+      align-items: center;
+   }
+
+
+

@@ -1,0 +1,381 @@
+/*
+  This file allows Twitter Bootstrap CSS to be included at the top level of the application
+  without rewriting all the CSS of the pre-existing Truchart layout.
+
+
+
+  IMPORTANT: This should be a temporary crutch.  As these screens are touched or replaced, they should be rewritten
+             or modified to render correctly using Twitter Bootstrap.
+
+
+  Truchart's layout assumes some certain CSS styles are in place to layout the page and the child
+  components correctly.  Twitter Bootstrap alters some of those styles (applying styles to the body
+  tag, or to "*") in a way such that Truchart components which are loaded into the outer window no
+  longer look correct.
+
+  Some of those basic styles which bootstrap modifies and affects Truchart are things like:
+    - * { box-sizing: border-box }
+    - body { line-height: 1.42857, font-family: Helvetica, font-size: 14px }
+
+  Truchart components that are loaded into the outer window are:
+    - Navigation/Main Menu
+    - Modal dialog chrome
+    - Some modal dialogs' contents
+    - Patient Chart
+    - Encounter edit
+    - Worklist
+    - Plan of Care
+
+  ------------------------------
+
+  The approach taken is to specifically target certain elements that are known to expect the pre-twitter-bootstrap
+  styles and explicitly reset the styles for those components only.
+
+
+  IMPORTANT: If it so happens that these compat workarounds hang around longer than temporarily, then a CSS class should
+             be created for each workaround mixin, and those CSS classes should be added to the legacy screens' source
+             code, based on which mixins were applied in this file's "SPECIFIC SCREEN TARGETTING" section. This will
+             reduce overhead by eliminating duplicate instances of the mixin's contents.
+
+*/
+
+
+
+
+
+
+/* BEGINNING OF TRUCHART-BOOTSTRAP COMPATABILITY FIX MIXINS  (prefix: tc-bs-fix-)  */
+
+/*
+ * Each mixins tries to fix a specific issue related to adding bootstrap css to the outer window.
+ * These mixins can be applied to a selector that targets a legacy screen that is loaded to the outer window..
+ * For instance, You can target a specific tag by ID or Class that you know is a certain screen that does not
+ * play nicely with bootstrap.  Then you can add the mixin using @import mixin-name.
+ *
+ * ex:
+ * .my-screens-main-class { @include tc-bs-fix-box-size }
+ */
+
+
+/* Resets box-sizing from bootstrap's [[ * { border-box } ]] setting */
+@mixin tc-bs-fix-box-size {
+  box-sizing: content-box;
+}
+
+/* Resets line-height from bootstrap's [[ body { line-height: 1.42857 } ]] setting */
+@mixin tc-bs-fix-line-height {
+  line-height: initial;
+}
+
+/* Resets label style to ?? (Don't recall what page needed label fixes) */
+@mixin tc-bs-fix-label {
+  //label.asdfasdfasdf {
+  //  max-width: 100%;
+  //  margin-bottom: unset;
+  //  font-weight: unset;
+  //}
+}
+
+/* Truchart Buttons want to be border-box sized (I'm not sure why/how, but that seems to be the case) */
+/* This fix "undoes" the tc-bs-fix-box-size for any button elements */
+@mixin tc-bs-fix-button {
+  button { box-sizing: border-box; }
+  /* Also add a more specific selector to get higher priority */
+  button.ui-button { box-sizing: border-box; }
+}
+
+/*
+ * Bootstrap mucks with default heading sizes.
+ * Fixes heading sizes and font-weight.
+ * Taken from http://www.w3.org/TR/CSS21/sample.html
+ */
+@mixin tc-bs-fix-headings {
+  h1, h2, h3, h4, h5, h6, b, strong {
+    font-weight: bolder
+  }
+
+  h1 { font-size: 2em;    margin: .67em 0 }
+  h2 { font-size: 1.5em;  margin: .75em 0 }
+  h3 { font-size: 1.17em; margin: .83em 0 }
+  h4 { font-size: 1.0em; margin: 1.12em 0 }
+  h5 { font-size: .83em;  margin: 1.5em 0 }
+  h6 { font-size: .75em;  margin: 1.67em 0 }
+}
+
+/* Resets UL margins, according to http://www.w3.org/TR/CSS21/sample.html */
+@mixin tc-bs-fix-margins {
+  ul {
+    margin: 1.12em;
+  }
+}
+
+/*
+ * This is the ugliest bootstrap override.
+ * It is re-applying styles from form.css for nested fieldsets (specifically for inside the Encounter Edit modal and
+ * in the plan of care, which uses fieldset layout)
+ */
+@mixin tc-bs-fix-fieldset {
+  fieldset {
+    padding: unset;
+    margin: unset;
+    border: unset;
+    padding-top: 41px;
+
+    &.wide-mode {
+      margin: 0 4.5px 4px 4.5px;
+    }
+
+    legend {
+      line-height: 40px;
+      font-size: 18px;
+      color: $fieldset-legend-text-color;
+      font-weight: bold;
+      margin: 0;
+      padding: 0 0 0 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% - 10px);
+      border-bottom: 1px solid $fieldset-legend-border-bottom-color;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    fieldset {
+      display: block;
+      clear:left;
+      border: 1px solid $fieldset-legend-fieldset-border-color;
+
+      legend {
+        font-size: small;
+        color: $fieldset-legend-fieldset-legend-text-color;
+      }
+    }
+  }
+}
+
+/* Resets styles to select boxes to those found in element_overrides.css */
+@mixin tc-bs-fix-select {
+  select {
+    padding: 5px 0 5px 5px;
+    border: 1px solid $select-border-color;
+    color: $select-text-color;
+    background-color: $select-bg-color;
+    font-size: 14px;
+    vertical-align: middle;
+    min-width: 50px;
+  }
+}
+
+/* This causes any children or grandchildren of the targetted element to have their box size and line-heights reset */
+@mixin tc-bs-fix-children {
+  * {
+    @include tc-bs-fix-box-size;
+    @include tc-bs-fix-line-height;
+  }
+}
+
+/* Catchall mixin for use when targetting arbitrary content, like tool-content or contents of a modal */
+@mixin tc-bs-fix-all {
+  @include tc-bs-fix-box-size;
+  @include tc-bs-fix-line-height;
+  @include tc-bs-fix-label;
+  @include tc-bs-fix-button;
+  @include tc-bs-fix-headings;
+  @include tc-bs-fix-margins;
+  @include tc-bs-fix-fieldset;
+  @include tc-bs-fix-select;
+  @include tc-bs-fix-children;
+}
+
+/* END OF TRUCHART-BOOTSTRAP COMPAT FIX MIXINS */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BEGINNING OF SPECIFIC SCREEN TARGETTING */
+
+/*
+ * This section targets individual screens that are loaded in the outer wrapper.  They may be targetted by a known CSS
+ * class on an element of the screen, or a specific element ID, etc.  Then, the necessary mixins are added to the selector
+ */
+
+
+
+/* Entire tools loaded into the top window; for instance, worklist and plan of care */
+.tool-content
+{
+  @include tc-bs-fix-all;
+
+  /* In the worklist, this resets the margin on the main-inbox-list UL to 0 */
+  #main-inbox-list
+  {
+    margin: 0;
+  }
+}
+
+
+.action-bar /* Form Sign/Save bar in the patient module only (worklist is caught via .tool-content) */
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-button;
+  @include tc-bs-fix-box-size;
+}
+
+#editplanofcare
+{
+  * {
+    @include tc-bs-fix-box-size;
+  }
+  @include tc-bs-fix-fieldset;
+  @include tc-bs-fix-select;
+  @include tc-bs-fix-button;
+  @include tc-bs-fix-headings;
+  @include tc-bs-fix-box-size;
+  //@include tc-bs-fix-margins;
+  .form-label {
+    height: auto;
+    padding-top: 0;
+    padding-right: 0;
+  }
+}
+
+.blueplus .editplanofcare-status {
+  padding-top: 5px;
+}
+
+.blueplus .editplanofcare-controls {
+  position: static;
+  float: right;
+}
+
+/* In patient module, the quick tool modal buttons (snap/LP/Notes/Labs) have their box-model reset by bootstrap */
+.patient-quick-tool-header
+{
+  * { /* Do not use @tc-bs-fix-children because it also resets line-height */
+    @include tc-bs-fix-box-size;
+  }
+}
+
+///* In patient module, the quick tool modal buttons (snap/LP/Notes/Labs) have their line-heights reset by bootstrap */
+//.patient-module-quick-tool .quick-tool-desc {
+//  @include tc-bs-fix-box-size;
+//  line-height: 30px;
+//  * { line-height: inherit; }
+//}
+
+.blockUI /* Growl/please wait, etc need to have their old heading sizes */
+{
+  @include tc-bs-fix-headings;
+}
+
+/* The New/Edit Encounter modal */
+.patient-module-contact-edit
+{
+  @include tc-bs-fix-button;
+  @include tc-bs-fix-headings;
+  /* Edit Encounter uses the nested fieldset layout, so reset those styles */
+  @include tc-bs-fix-fieldset;
+
+  /*
+   * I don't know where these paddings are being computed from, but without bootstrap, the fieldset is offset to the
+   * right with some mystery padding values
+   */
+  > .new-encounter > fieldset.wide-mode.liquid {
+    padding: 0 10.5px 8.75px 10.5px;
+    /* Nested fieldset padding */
+    fieldset {
+      padding: 41px 0 8.75px 0;
+    }
+  }
+}
+
+/* The patient module sidebar, with demographics, form list, plans-of-care list, etc */
+.patient-module-tools-sidebar
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-headings;
+  @include tc-bs-fix-box-size;
+
+  .quick-tool-desc { line-height: 30px; } /* Set line-height on the text below icons, in the patient module (info/schedule/etc) */
+}
+
+/* Fix the with of links in fg-menu, e.g., the encounters/plan of care selector */
+.fg-menu-container .fg-menu li a { width: 100%; }
+
+/* Navigation: tools/setup */
+.module-sidebar
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-button;
+  @include tc-bs-fix-headings;
+  @include tc-bs-fix-box-size;
+  li.tool-navigation-item {
+    line-height: 70px;
+  }
+  .sub-group-display {
+    line-height: 40px;
+    * { line-height: inherit; }
+  }
+}
+
+/* Top header: buttons to activate worklist, module, patient chart, logout, etc */
+.header
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-button;
+  .view-high-priority span { line-height: 22px; }
+}
+
+/* ... the auto-completer; especially the patient search */
+.ui-autocomplete
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-button;      /* the close modal "X" button */
+  li.header * { line-height: 30px; }
+  .ui-menu-item a {
+    line-height: 1.5;  /* from jquery-ui source */
+    * { line-height: inherit; }
+  }
+}
+
+/* Top level modals (chrome and contents) */
+.ui-dialog
+{
+  @include tc-bs-fix-children;
+  @include tc-bs-fix-button;      /* the close modal "X" button */
+  /* For modal content loaded via html (not iframe), include all possible fixes to hopefuly fix arbitrary content */
+  * {
+    @include tc-bs-fix-all;
+  }
+}
+
+.ui-dialog * select.vf-invalid {
+  border-color: #D44242
+}
+
+
+/* END OF SPECIFIC SCREEN TARGETTING */
+
+
+
+
+
+
+
+/* For dev/testing, this fades any iframed content so only the top-level window content stands out.  This is useful
+ * when finding and fixing truchart/bootstrap workarounds */
+//iframe {
+//  opacity: 0.1;
+//}

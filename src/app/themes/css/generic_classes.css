@@ -1,0 +1,39 @@
+.companyname {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight: bold;}
+.address {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight: bold;}
+
+.sectionhead {font-family:Arial, Helvetica, sans-serif; font-size:18px; font-weight: bold;}
+.sectiontext {font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight: bold;}
+
+.label {
+    color: #474647 !important;
+    font-family:Arial, Helvetica, sans-serif !important;
+    font-size:13px !important;
+    font-weight: bold !important;
+}
+
+.data {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:13px;}
+.formsection {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight: bold; text-decoration:underline;}
+
+.copyright {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:10px;}
+.smallnotes {color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:10px;}
+.required {color: #FF0000;}
+
+.assessment_answer {text-indent: 20px;}
+
+.link{text-decoration:none;color:#274c59;}
+.hover{text-decoration:underline;color:#274c59;}
+
+.wrap_whites_space{white-space: -o-pre-wrap; word-wrap: break-word;white-space: pre-wrap; }
+
+
+th.bordered {background-color:#EEEEEE; color: #000000; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight: bold; border-width:1px;padding:1px;border-color:black; border-style:solid;}
+td.bordered {font-family:Arial, Helvetica, sans-serif; font-size:13px; border-width:1px;padding:1px;border-color:black; border-style:solid;}
+table.bordered {border-width:1px; border-spacing:0px; border-collapse:collapse; border-style:solid; border-color:black;}
+
+
+.displayPrintOnly { display: none; }
+
+@media pdf,print {
+    .displayPrintOnly { display: block; }
+    .displayNoPrint { display: none; }
+}

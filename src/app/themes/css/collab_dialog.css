@@ -1,0 +1,63 @@
+.collab-dialog{
+    padding: 0;
+    -webkit-box-shadow: 0 2px 10px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 10px 2px rgba(0,0,0,0.5);
+    border: 1px solid #263238;
+}
+.collab-dialog-header{
+    background: #37474F;
+    border: none;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 0 5px;
+    height: 45px;
+}
+.collab-dialog-header .ui-dialog-title {
+    padding-left: 10px;
+    flex-grow: 2;
+    width: auto;
+}
+.collab-close-button{
+    border: 0;
+    padding: 0;
+}
+#collaboration-dialog{
+    display: none;
+    overflow-x: hidden;
+    padding: 0;
+}
+#collaboration-dialog iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent; 
+}
+
+.collab-dialog .collab-dialog-header .ui-button-icon-only.ui-dialog-titlebar-close {
+    border: 0;
+    background: transparent;
+    position: static;
+    display: flex;
+    margin: 0;
+    padding:0;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+.collab-dialog .ui-dialog-titlebar-close .ui-button-icon-primary.ui-icon.ui-icon-closethick {
+    position: static;
+    margin: -8px -1px -1px;
+    padding: 0;
+} 
+
+

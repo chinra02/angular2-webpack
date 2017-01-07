@@ -1,0 +1,35 @@
+@import "mixin_flex";
+
+.flex {
+  @include flex();
+  > * {
+    @include flex0();
+  }
+}
+.flex-h {
+  @extend .flex;
+  @include flex-h();
+}
+.flex-v {
+  @extend .flex;
+  @include flex-v();
+}
+
+.flex-grow { @include flex-grow(); }
+.flex1 { @include flex-grow(); }
+
+.flex-line {
+  @include flex();
+  @include flex-align-center();
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-container.vertical { flex-direction: column; }
+.flex-container.horizontal { flex-direction: row; }
+.flex-align-center{
+  align-items: center;
+}

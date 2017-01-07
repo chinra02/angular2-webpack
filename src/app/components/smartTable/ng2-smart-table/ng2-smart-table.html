@@ -1,0 +1,64 @@
+<div class="ng2-smart-table-container">
+    <div class="flex flex-align-center">
+        <div class="btns">
+            <ng-content select="header-actions"></ng-content>
+        </div>
+        <ng2-smart-table-pager *ngIf="grid.getSetting('pager.display')" (paginated)="onPaginate($event)"
+                               [(source)]="dataSource"
+                               [perPage]="grid.getSetting('pager.perPage')"></ng2-smart-table-pager>
+        <table-settings [grid]="grid"
+                        [(selectedPage)]="pagerData.perPage"
+                        (pageSizeChange)="onPageSizeChange($event)"
+                        (columnFiterChange)="onColumnFilterChange($event,passedValue,isColumnSelected,this.columns,this.rows)"></table-settings>
+    </div>
+    <table class="data table-responsive table-striped  compressed content_body" [id]="grid.getSetting('attr.id')">
+        <thead *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')">
+        <tr class="ng2-smart-titles" *ngIf="!grid.getSetting('hideHeader')">
+            <th *ngIf="grid.getSetting('selector')=='check'">
+                <smart-selector placeHolder="Select All" [(selectedValue)]="selectAll"
+                                (edited)="onHeaderSelectAll($event)"></smart-selector>
+            </th>
+            <th>
+            </th>
+            <th *ngFor="let column of getColumns()" class="ng2-smart-th {{ column.id }}" [ngClass]="column.class">
+                <div class="ng2-smart-title" *ngIf="column.isVisible">
+                    <form class="column-header" connect="myForm">
+                        <ng2-smart-table-title [source]="dataSource" [column]="column"
+                                               (sorted)="onColumnSort($event)"></ng2-smart-table-title>
+                    </form>
+
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let row of getRows()" [ngClass]="{quckview:row.isQuickViewOpen}">
+            <tr class="ng2-smart-row" (click)="onRowClick($event,row);" >
+                
+                <td *ngIf="grid.getSetting('selector')=='check'">
+                    <smart-selector placeHolder="Select" [selectedValue]="row.isSelected"
+                                    (edited)="onRowSelection($event,row)"></smart-selector>
+                </td>
+                <td>
+                    <row-action-component [row]="row" (selected)="onRowAction($event,row)" [rowActionModel]="rowActionModel">
+                    </row-action-component>
+                </td>
+                <td *ngFor="let cell of getCells(row)" class="ani-med">
+                    <ng2-smart-table-cell [cell]="cell" [mode]="grid.getSetting('mode')" class="st-cell-view"
+                                        [inputClass]="grid.getSetting('edit.inputClass')"
+                                        (edited)="onSave(row, $event)"></ng2-smart-table-cell>
+                                        
+                </td>
+            
+
+            </tr>
+            <tr *ngIf="row.isQuickViewOpen" class="quckview-background-color-white">
+                <td [attr.colspan]="getColSpanLength()">
+                    <quick-view [row]="row" [columns]="getColumns()" (onPrevious)="onPrevious($event)"
+                     (onNext)="onNext($event)" (onClose)="onQuickViewClose($event)"> </quick-view>
+                </td>
+            </tr> 
+            
+        </tbody>
+    </table>
+
+</div>

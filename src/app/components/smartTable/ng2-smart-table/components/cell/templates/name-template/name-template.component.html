@@ -1,0 +1,21 @@
+<div [ngSwitch]="type">
+    <div *ngSwitchCase="'name-search'">
+        <div>
+            <input id="{{uniqueid + '_name_last'}}" placeholder="Last" [(ngModel)]="name.last" (ngModelChange)="onSearch($event)" type="search"
+                class="form-control">
+        </div>
+        <div>
+            <input id="{{uniqueid + '_name_first'}}" placeholder="First" [(ngModel)]="name.first" (ngModelChange)="onSearch($event)"
+                type="search" class="form-control">
+        </div>
+        <div>
+            <input id="{{uniqueid + '_name_middle'}}" placeholder="Middle" [(ngModel)]="name.middle" (ngModelChange)="onSearch($event)"
+                type="search" class="form-control">
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'name-search-description'">[ {{ value | SmartTableName }} ]</div>
+    <div *ngSwitchDefault class="st-cell-view"> <span >{{ value | SmartTableName }}</span> </div>
+    
+
+</div>

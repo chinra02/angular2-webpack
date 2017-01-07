@@ -1,0 +1,15 @@
+.ui-icon-additional { width: 16px; height: 16px; background-image: url(images/ui-icons_222222_additional.png); }
+.ui-widget-content .ui-icon-additional {background-image: url(images/ui-icons_222222_additional.png); }
+.ui-widget-header .ui-icon-additional {background-image: url(images/ui-icons_222222_additional.png); }
+.ui-state-default .ui-icon-additional { background-image: url(images/ui-icons_ffffff_additional.png); }
+.ui-state-hover .ui-icon-additional, .ui-state-focus .ui-icon-additional {background-image: url(images/ui-icons_454545_additional.png); }
+.ui-state-active .ui-icon-additional {background-image: url(images/ui-icons_454545_additional.png); }
+.ui-state-highlight .ui-icon-additional {background-image: url(images/ui-icons_2e83ff_additional.png); }
+.ui-state-error .ui-icon-additional, .ui-state-error-text .ui-icon-additional {background-image: url(images/ui-icons_cd0a0a_additional.png); }
+
+.ui-icon-additional-filter-off { background-position: 0 0; }
+.ui-icon-additional-filter { background-position: -16px 0; }
+.ui-icon-additional-eye-open { background-position: -32px 0; }
+.ui-icon-additional-eye-closed { background-position: -48px 0; }
+.ui-icon-additional-light-on { background-position: -64px 0; }
+.ui-icon-additional-light-off { background-position: -80px 0; }

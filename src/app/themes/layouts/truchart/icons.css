@@ -1,0 +1,125 @@
+.ui-module-icon,
+.ui-widget-content .ui-module-icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url('images/ui-module-icons_656766.png');
+}
+.ui-widget-header .ui-module-icon {
+    background-image: url('images/ui-module-icons_656766.png');
+}
+.ui-state-default .ui-module-icon {
+    background-image: url('images/ui-module-icons_656766.png');
+}
+.selected .ui-module-icon,
+.ui-state-hover .ui-module-icon,
+.ui-state-focus .ui-module-icon {
+    background-image: url('images/ui-module-icons_fffff.png');
+}
+.ui-state-active .ui-module-icon {
+    background-image: url('images/ui-module-icons_5a5775.png');
+}
+
+.ui-icon-worklist { background-position: -14px -14px; }
+.ui-icon-schedule { background-position: -63px -14px; }
+.ui-icon-rev-mgmt { background-position: -112px -14px; }
+.ui-icon-claims-adj { background-position: -162px -14px; }
+.ui-icon-qi-events { background-position: -15px -58px; }
+.ui-icon-enrollment { background-position: -63px -58px; }
+.ui-icon-util-mgmt { background-position: -112px -58px; }
+.ui-icon-ereport { background-position: -162px -58px; }
+.ui-icon-plan-admin { background-position: -15px -102px; }
+.ui-icon-gen-admin { background-position: -63px -102px; }
+.ui-icon-med-admin { background-position: -112px -102px; }
+.ui-icon-care-mgmt { background-position: -162px -102px; }
+
+
+.ui-other-patient-icon,
+.ui-widget-content .ui-other-patient-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('images/ui-other-patient-icons_656766.png');
+}
+.ui-widget-header .ui-other-patient-icon {
+    background-image: url('images/ui-other-patient-icons_656766.png');
+}
+.ui-state-default .ui-other-patient-icon {
+    background-image: url('images/ui-other-patient-icons_656766.png');
+}
+.ui-state-hover .ui-other-patient-icon,
+.ui-state-focus .ui-other-patient-icon {
+    background-image: url('images/ui-other-patient-icons_ffffff.png');
+}
+.ui-state-active .ui-other-patient-icon {
+    background-image: url('images/ui-other-patient-icons_5a5775.png');
+}
+
+.ui-icon-patient-print { background-position: -15px -15px; }
+.ui-icon-patient-info { background-position: -63px -15px; }
+.ui-icon-patient-schedule { background-position: -113px -15px; }
+.ui-icon-patient-care-team { background-position: -162px -15px; }
+
+.ui-other-icon,
+.ui-widget-content .ui-other-icon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background-image: url('images/ui-other-icons_656766.png');
+}
+.ui-widget-header .ui-other-icon {
+    background-image: url('images/ui-other-icons_656766.png');
+}
+.ui-state-default .ui-other-icon {
+    background-image: url('images/ui-other-icons_656766.png');
+}
+
+.ui-state-hover .ui-other-icon,
+.ui-state-focus .ui-other-icon {
+    background-image: url('images/ui-other-icons_ffffff.png');
+}
+.ui-state-active .ui-other-icon {
+    background-image: url('images/ui-other-icons_5a5775.png');
+}
+
+.ui-icon-menu { background-position: -15px -14px; }
+.ui-icon-lg-plus { background-position: -63px -14px; }
+.ui-icon-lg-minus { background-position: -112px -14px; }
+.ui-icon-go-to { background-position: -162px -14px; }
+.ui-icon-lg-lock { background-position: -12px -31px; }
+.ui-icon-lg-gear { background-position: -44px -31px; }
+.ui-icon-lg-search { background-position: -225px -31px }
+.ui-icon-lg-pencil { background-position: -162px -58px; }
+.ui-icon-lg-avatar { background-position: -12px -58px; }
+.ui-icon-lg-filter { background-position: -63px -86px; }
+.ui-icon-lg-triangle-s { background-position: -75px -58px; }
+.ui-icon-lg-dual-avatar { background-position: -107px -59px }
+.ui-icon-lg-multi-avatar { background-position: -162px -86px; }
+
+.ui-icon-lg-collab{
+    background-image: url('images/collab_large.png') !important;
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+}
+
+/* Blue Plus theme */
+
+.blueplus .ui-other-icon,
+.blueplus .ui-widget-content .ui-other-icon,
+.blueplus .ui-widget-header .ui-other-icon,
+.blueplus .ui-state-default .ui-other-icon {
+    background-image: url('images/ui-other-icons_ffffff.png');
+}
+
+.blueplus .action-bar .ui-button-icon-only .ui-button-icon-primary {
+    background-image:url('images/ui-icons_ffffff_256x240.png');
+}
+
+.blueplus .action-bar .ui-button-icon-only .ui-icon-gear {
+    width: 25px;
+    height: 25px;
+    margin-top: -12px;
+    margin-left: -12px;
+    background-image: url('images/ui-other-icons_ffffff.png');
+    background-position: -44px -32px;
+}

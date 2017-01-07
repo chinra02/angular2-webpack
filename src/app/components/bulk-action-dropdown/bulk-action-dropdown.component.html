@@ -1,0 +1,20 @@
+<span class="dropdown" dropdown>
+    <button class="btn btn-std btn-primary dropdown-toggle bulk-action-button " dropdown-open
+            [ngClass]="{disabled: rowSelections.length<=0}">
+        <span>
+            {{ bulkActionModel.label }}
+        </span>
+        <span *ngIf="bulkActionModel.label==null || bulkActionModel.label==undefined"> {{ label }} </span> 
+        <span *ngIf="rowSelections.length>0">
+            <span class="badge ng-binding">{{rowSelections.length}}</span>
+            <span class="caret icon-right"></span>
+        </span>
+    </button>
+    <ul class="dropdown-menu" *ngIf="rowSelections.length>0">
+        <li *ngFor="let option of bulkActionModel | objectFilter: 'actions'">
+            <a (click)="onSelect($event,option)" class="btn" [ngClass]="{disabled: option.isEnabled === false}">
+                {{option[optionsDisplayProperty]}}
+            </a>
+        </li>
+    </ul>
+</span>

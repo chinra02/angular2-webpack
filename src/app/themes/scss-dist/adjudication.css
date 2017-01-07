@@ -1,0 +1,1127 @@
+@charset "UTF-8";
+/**
+ * adjudication.css
+ *
+ * This file is a GENERATED file built from the SCSS files in the adjudication module.
+ * DO NOT make changes to this file directly, as they will be wiped out when regenerated.
+ * To manually regenerate this file, run the gulp script 'styles'
+ *
+ * mikes 3/4/2016
+ *
+ */
+@media (min-width: 768px) {
+  .compressed .col-sm-nopad {
+    padding-left: 0;
+    padding-right: 0; }
+  .compressed .col-sm-halfpad {
+    padding-left: 7.5px;
+    padding-right: 7.5px; } }
+
+@media (min-width: 992px) {
+  .compressed .col-md-nopad {
+    padding-left: 0;
+    padding-right: 0; }
+  .compressed .col-md-halfpad {
+    padding-left: 7.5px;
+    padding-right: 7.5px; } }
+
+.compressed select.ng-invalid,
+.compressed input[type=text].ng-invalid,
+.compressed input[type=checkbox].ng-invalid {
+  box-shadow: -5px 0 0 red; }
+
+.compressed input[type=text] {
+  transition: none;
+  background-color: #dfdfdf;
+  height: auto;
+  border: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  padding: 0 0 0 5px;
+  margin: 0; }
+  .compressed input[type=text][disabled] {
+    background-color: #ababab; }
+  .compressed input[type=text].recommended {
+    box-shadow: -5px 0 0 #28f; }
+  .compressed input[type=text]:hover, .compressed input[type=text].hover {
+    z-index: 2;
+    outline: #cecece solid 1px;
+    outline-offset: -1px;
+    box-shadow: 0 0 8px rgba(39, 76, 90, 0.3); }
+    .compressed input[type=text]:hover.recommended, .compressed input[type=text].hover.recommended {
+      box-shadow: 0 0 8px rgba(39, 76, 90, 0.3), -5px 0 0 #28f; }
+  .compressed input[type=text]:focus, .compressed input[type=text].focus {
+    position: relative;
+    box-sizing: content-box;
+    padding: 0.5em 1em;
+    margin: -0.5em -1em;
+    outline: #274c5a solid 1px;
+    outline-offset: 0;
+    background-color: #ffffff;
+    transition: 0.1s, background-color .5s;
+    z-index: 3;
+    box-shadow: 0 0 8px rgba(39, 76, 90, 0.6), inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+    .compressed input[type=text]:focus.recommended, .compressed input[type=text].focus.recommended {
+      box-shadow: 0 0 8px rgba(39, 76, 90, 0.6), inset 0 1px 1px rgba(0, 0, 0, 0.075), -5px 0 0 #28f !important; }
+
+.compressed input[type=text]:hover.ng-invalid, .compressed input[type=text].hover.ng-invalid, .compressed input[type=text]:focus.ng-invalid, .compressed input[type=text].focus.ng-invalid {
+  box-shadow: 0 0 8px rgba(39, 76, 90, 0.3), -5px 0 0 red !important; }
+
+.compressed .btn-group-xs .btn {
+  min-width: 2em; }
+
+.panel {
+  border: 1px solid #cde1e8; }
+  .panel.row {
+    margin: 1em 0; }
+  .panel .panel-heading {
+    padding: 0.2em;
+    margin: 0;
+    border: 0;
+    background-color: #ffffff; }
+  .panel .panel-title {
+    font-size: .85em;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    color: #222222;
+    background-color: #f6f6f7;
+    padding: 0.25em 1em; }
+  .panel .panel-content {
+    padding: 0.25em .5em .25em .5em; }
+    .panel .panel-content:before, .panel .panel-content:after {
+      content: " ";
+      display: table; }
+    .panel .panel-content:after {
+      clear: both; }
+
+.input-box-title {
+  font-size: 0.7em; }
+
+.box {
+  border-top: 1px solid #cde1e8; }
+
+.cb {
+  margin: 0;
+  font-weight: normal; }
+
+.input-group-addon {
+  padding: 0 12px; }
+
+.claim-line-table tr:not(.has-data) td.secondary {
+  display: none;
+  border: 0; }
+
+.claim-line-table th {
+  font-weight: normal;
+  font-size: .7em;
+  text-align: center;
+  border: 0; }
+
+.claim-line-table tr {
+  height: 37px; }
+
+.claim-line-table td {
+  border: 1px solid #cecece;
+  padding: 0; }
+  .claim-line-table td.td-label {
+    border: 0;
+    text-align: right; }
+
+@media (min-width: 768px) {
+  .claim-line-table .sm-only {
+    display: none; }
+  .claim-line-table tr th:first-of-type {
+    padding: 0 1em; } }
+
+@media (max-width: 768px) {
+  .claim-line-table thead {
+    display: none; }
+  .claim-line-table tr {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    margin-bottom: 1.0em; }
+    .claim-line-table tr:last-of-type {
+      margin-bottom: 0; }
+  .claim-line-table th, .claim-line-table td {
+    display: block;
+    padding: 0;
+    white-space: normal;
+    text-align: left; }
+  .claim-line-table th[scope="row"] {
+    text-align: center;
+    background-color: #949494;
+    color: #ffffff; }
+  .claim-line-table td[data-title]:before {
+    content: attr(data-title);
+    z-index: 4;
+    height: 1em;
+    margin-bottom: -1em;
+    position: absolute;
+    right: 2em;
+    font-size: .6em;
+    color: rgba(94, 93, 82, 0.75); } }
+
+.auth-line-table th {
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid #cecece; }
+
+.auth-line-table tr {
+  height: 37px; }
+
+.auth-line-table td {
+  border: 2px solid #cecece;
+  padding: 0;
+  text-align: center; }
+
+@media (min-width: 768px) {
+  .auth-line-table .sm-only {
+    display: none; }
+  .auth-line-table tr th:first-of-type {
+    padding: 0 1em; } }
+
+@media (max-width: 768px) {
+  .auth-line-table thead {
+    display: none; }
+  .auth-line-table tr {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    margin-bottom: 1.0em; }
+    .auth-line-table tr:last-of-type {
+      margin-bottom: 0; }
+  .auth-line-table th, .auth-line-table td {
+    display: block;
+    padding: 0;
+    white-space: normal;
+    text-align: left; }
+  .auth-line-table th[scope="row"] {
+    text-align: center;
+    background-color: #949494;
+    color: #ffffff; }
+  .auth-line-table td[data-title]:before {
+    content: attr(data-title);
+    z-index: 4;
+    height: 1em;
+    margin-bottom: -1em;
+    position: absolute;
+    right: 2em;
+    font-size: .6em;
+    color: rgba(94, 93, 82, 0.75); } }
+
+.module-sidebar {
+  width: 150px;
+  position: absolute; }
+
+#FULL-HEIGHT,
+.module-sidebar,
+.tool-navigation,
+.collapse-button,
+.full-height {
+  height: 100%; }
+
+#FULL-WIDTH,
+.navigation-collapsed .collapse-button,
+.tool-group-views,
+.full-width {
+  width: 100%; }
+
+#CURSOR-POINTER,
+.module-tool,
+.collapse-button,
+.tool-group-views ul li,
+.cursor-pointer {
+  cursor: pointer; }
+
+#INLINE-BLOCK,
+.module-tool span,
+.tool-group-views ul,
+.tool-group-views ul li,
+.collapse-button,
+.inline-block {
+  display: inline-block; }
+
+#RESET_PADDING_MARGIN,
+.tool-navigation,
+.tool-group-views ul,
+.reset-padding-margin {
+  padding: 0;
+  margin: 0; }
+
+.menu-options {
+  height: calc(100% - 46px); }
+
+.tool-navigation {
+  list-style: none;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+.tool-navigation .selected,
+.tool-navigation li:hover {
+  border-color: #274c5a; }
+
+.tool-navigation li.selected {
+  border-bottom: 1px solid #274c5a;
+  text-shadow: none;
+  font-weight: bold; }
+
+.module-tool {
+  height: 70px;
+  border-bottom: 1px solid #ffffff; }
+
+.module-tool {
+  text-align: center;
+  font-size: 15px;
+  line-height: 70px;
+  font-weight: bold;
+  text-decoration: none; }
+
+.module-tool span {
+  vertical-align: middle;
+  line-height: 20px; }
+
+.tool-group-views {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #7d797a;
+  height: 45px;
+  border-color: #ffffff; }
+
+.tool-group-views ul {
+  top: 0;
+  position: absolute; }
+
+.tool-group-views ul li {
+  width: 47px;
+  border-bottom: none;
+  text-align: center;
+  line-height: 45px;
+  font-size: 11px; }
+
+.collapse-button {
+  width: 56px;
+  top: 0;
+  left: 94px;
+  position: absolute; }
+
+.collapse-button span {
+  margin-top: 15px;
+  margin-left: 20px; }
+
+.tool-group-views ul li.selected {
+  font-weight: 700; }
+
+.tool-group-views ul li,
+.collapse-button {
+  box-sizing: border-box; }
+
+.tool-group-views ul li a {
+  text-decoration: none;
+  line-height: 45px; }
+
+.tool-group-views ul li {
+  border-right: 2px solid #ffffff; }
+
+.navigation-collapsed {
+  width: 60px; }
+
+.navigation-collapsed .module-tool {
+  font-size: 8px;
+  line-height: 15px; }
+
+.navigation-collapsed .collapse-button {
+  left: 0; }
+
+.toolgroupbold {
+  font-weight: bold; }
+
+#BG-GRAY-MED-DARK,
+.tool-group-views ul li,
+.collapse-button,
+.bg-gray-med-dark {
+  background-color: #7d797a; }
+
+#BG-GRAY,
+.tool-group-views ul li:hover,
+.collapse-button:hover,
+.bg-gray {
+  background-color: #949494; }
+
+#BG-BRAND-LIGHTER,
+.module-tool,
+.tool-navigation,
+.bg-brand-lighter {
+  background-color: #5690a6; }
+
+#BG-BRAND-PRIMARY,
+.tool-navigation li:hover,
+.tool-navigation li.selected,
+.bg-brand-primary {
+  background-color: #274c5a; }
+
+#WHITE_TEXT,
+.tool-navigation li.selected,
+.tool-navigation li:hover
+.tool-group-views ul li,
+.tool-group-views ul li a,
+.collapse-button,
+.module-tool,
+.white-text {
+  color: #ffffff; }
+
+.datepicker {
+  width: 100%; }
+  .datepicker input[type="text"] {
+    overflow: hidden; }
+  .datepicker button {
+    float: right;
+    width: 26px; }
+
+html, body {
+  height: 100%;
+  padding: 0; }
+
+#NO_MARGIN,
+html,
+body,
+.adjudication ul.pagination,
+.money-line,
+.no-margin {
+  margin: 0 !important; }
+
+#OVERFLOW_Y_AUTO,
+html,
+body,
+.modal,
+.modal-dialog,
+.adjudication .priceclaim,
+.import-claim-file-log-modal,
+.import-eds-file-results,
+.overflow-y-auto {
+  overflow-y: auto; }
+
+#OVERFLOW_X_AUTO,
+html,
+body,
+.modal-dialog,
+.overflow-x-auto {
+  overflow-x: auto; }
+
+.modal-active {
+  display: block; }
+
+.modal-content {
+  position: relative;
+  overflow: auto;
+  background-color: #ffffff;
+  border: 1px solid #5690a6;
+  border-radius: 3px;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  outline: 0; }
+
+/* Override bootstrap form-control */
+.form-control {
+  color: #222222; }
+
+/* End Override bootstrap form-control */
+/* Styles for directives created using multi-field-editor.js */
+.zerosize {
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden;
+  position: absolute; }
+
+/* End multi-field-editor.js styles */
+/* When viewing a claim in the modal, shrink the TR that claim div was inside. */
+body.adjudication_release .adjudication table tr.editing:not(.summary) {
+  height: 0 !important;
+  outline: none !important; }
+  body.adjudication_release .adjudication table tr.editing:not(.summary) > td {
+    padding: 0 !important;
+    border: none !important; }
+    body.adjudication_release .adjudication table tr.editing:not(.summary) > td > div {
+      height: 0 !important; }
+
+.adjudication {
+  /* Edit claim Start*/
+  /* Edit claim End*/
+  /* Pagination Start */
+  /* Pagination End */
+  /* Modal start */
+  /* Modal end */
+  /* Table animations start */
+  /* Table animations end */ }
+  .adjudication .claims-table tr {
+    /* tr.editing matches the highlighted tr summary row, as well as the details "cursor" tr */ }
+    .adjudication .claims-table tr td {
+      max-width: 20em;
+      /* custom directive st-cell-view */ }
+      .adjudication .claims-table tr td st-cell-view {
+        display: block; }
+      .adjudication .claims-table tr td .st-cell-view {
+        /* view-only mode for custom directive */
+        /* Hide overflow for extra wide cells */
+        overflow: hidden;
+        text-overflow: ellipsis; }
+        .adjudication .claims-table tr td .st-cell-view:hover {
+          /* Allow scroll on hover for extra wide cells */
+          overflow: auto;
+          text-overflow: initial; }
+    .adjudication .claims-table tr.editing {
+      /* Highlight the selected claim in light-purple */
+      background-color: #274c5a;
+      border: 2px solid #274c5a;
+      border-bottom: none;
+      /* highlighted summary tr */
+      /* Edit/detail view tr */ }
+      .adjudication .claims-table tr.editing.summary td {
+        border-bottom: 1px solid #60a1ba;
+        color: #ffffff; }
+        .adjudication .claims-table tr.editing.summary td .popover {
+          color: #222222; }
+        .adjudication .claims-table tr.editing.summary td a {
+          color: #ffffff;
+          font-weight: bold; }
+      .adjudication .claims-table tr.editing.detail {
+        background-color: #ffffff;
+        color: #222222;
+        border: 2px solid #274c5a;
+        border-top: none;
+        /* small outset border to pop it up a bit */
+        outline: 3px outset rgba(39, 76, 90, 0.5);
+        outline-offset: -3px;
+        /* small box-shadow */
+        box-shadow: 3px 3px 6px rgba(39, 76, 90, 0.7);
+        /* Make the cursor a consistent height */
+        height: 26em; }
+        .adjudication .claims-table tr.editing.detail > td > div {
+          height: 26em; }
+  .adjudication .modal-inactive {
+    /* When viewing a claim as a cursor, make the button bar always visible and limit the .editclaim height (to scroll vertically) */ }
+    .adjudication .modal-inactive .priceclaim {
+      height: 23em; }
+    .adjudication .modal-inactive .btns {
+      height: 3em; }
+  .adjudication .priceclaim {
+    padding: 5px; }
+    .adjudication .priceclaim .payment {
+      min-width: 150px; }
+  .adjudication ul.pagination {
+    display: -ms-flexbox;
+    display: flex; }
+  .adjudication div.dimmer {
+    background-color: #000000;
+    opacity: 0.4; }
+  .adjudication .modal.modal-active .screen-overlay {
+    z-index: 3; }
+  .adjudication .modal.modal-active .priceclaim {
+    padding: 2em; }
+  .adjudication .ani-fast, .adjudication .ani-med, .adjudication .ani-slow, .adjudication .ani-turtle, .adjudication .ani-fadeInOut.ng-enter, .adjudication .ani-fadeInOut.ng-leave {
+    animation-fill-mode: both; }
+  .adjudication .ani-fast {
+    animation-duration: 0.2s; }
+  .adjudication .ani-med {
+    animation-duration: 0.4s; }
+  .adjudication .ani-slow {
+    animation-duration: 1s; }
+  .adjudication .ani-turtle {
+    animation-duration: 15s; }
+  .adjudication .ani-fadeInOut.ng-enter {
+    animation-duration: 0.8s;
+    animation-name: fadeIn; }
+  .adjudication .ani-fadeInOut.ng-leave {
+    animation-duration: 0.2s;
+    animation-name: fadeOut; }
+  .adjudication .claims-table th.ng-enter, .adjudication .claims-table td.ng-enter {
+    animation-name: unsquash;
+    overflow-x: hidden; }
+  .adjudication .claims-table th.ng-leave, .adjudication .claims-table td.ng-leave {
+    animation-name: squash;
+    overflow-x: hidden;
+    white-space: nowrap; }
+  .adjudication .claims-table thead tr.heading th {
+    min-height: 50px; }
+
+/* Keyframe animation start */
+@keyframes squash {
+  0% {
+    max-width: 500px; }
+  10% {
+    max-width: 200px; }
+  20% {
+    max-width: 100px; }
+  100% {
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0; } }
+
+@keyframes unsquash {
+  0% {
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0; }
+  80% {
+    max-width: 100px; }
+  90% {
+    max-width: 200px; }
+  100% {
+    max-width: 500px; } }
+
+/* Keyframe animation end */
+/* ui-collapse directive animation classes start */
+.ui-collapse-h {
+  transition: all 0.3s ease; }
+  .ui-collapse-h.collapsed {
+    overflow: hidden;
+    max-width: 0; }
+  .ui-collapse-h.visible {
+    max-width: none; }
+  .ui-collapse-h.animating {
+    overflow-x: hidden; }
+
+.ui-collapse-v {
+  transition: all 0.3s ease; }
+  .ui-collapse-v.collapsed {
+    overflow: hidden;
+    max-height: 0; }
+  .ui-collapse-v.visible {
+    max-height: none; }
+  .ui-collapse-v.animating {
+    overflow-y: hidden; }
+
+/* ui-collapse directive animation classes end */
+.panel-default > .panel-heading {
+  margin: 0.2em;
+  color: #222222;
+  background-color: #cecece;
+  border: 1px solid #cde1e8; }
+
+.bulk-action-button.disabled .badge, .bulk-action-button.disabled .fa {
+  display: none; }
+
+.settings-slider {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 5px;
+  /* show border/background when hovered */
+  /* Place Gear/caret widget  inside .toggle div */
+  transition: background-color 0.4s ease; }
+  .settings-slider:hover {
+    background-color: #cecece; }
+  .settings-slider .toggle:hover {
+    text-shadow: 0 0 3px #274c5a, 0 0 6px #274c5a; }
+
+.settings-slider-open {
+  transition: background-color 0.4s ease;
+  background-color: #ababab !important; }
+  .settings-slider-open i.fa.fa-caret-right:before {
+    content: ""; }
+
+.section-toggle {
+  cursor: pointer; }
+  .section-toggle:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: ""; }
+  .section-toggle:hover {
+    background-color: #5690a6 !important; }
+  .section-toggle.collapsed:before {
+    content: ""; }
+
+.section-toggle-plus-sign {
+  height: 10px;
+  cursor: pointer; }
+  .section-toggle-plus-sign:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: ""; }
+  .section-toggle-plus-sign:hover {
+    background-color: #5690a6 !important; }
+  .section-toggle-plus-sign.collapsed:before {
+    content: ""; }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.column-header {
+  outline: none !important;
+  user-select: none;
+  /* CSS3 (little to no support) */
+  -ms-user-select: none;
+  /* IE 10+ */
+  -moz-user-select: none;
+  /* Gecko (Firefox) */
+  -webkit-user-select: none;
+  /* Webkit (Safari, Chrome) */ }
+
+.glCodingModalButton {
+  margin-right: 10px; }
+
+.gl-code-input {
+  width: 174px; }
+
+.gl-claim-type {
+  width: 200px; }
+
+#PADDING_SMALL,
+.apply-gl-code-paragraph,
+.gl-coding-errors,
+.import-eds-file-results,
+.gl-coding-messages,
+.gl-coding-no-errors,
+.payer-input-line-level-row,
+.padding-small {
+  padding: 10px; }
+
+#MARGIN_SMALL,
+.gl-code-modal-button,
+.apply-gl-code-paragraph,
+.gl-coding-errors,
+.gl-coding-messages,
+.gl-coding-no-errors,
+.apply-gl-code-button,
+.margin-small {
+  margin: 10px; }
+
+.primary-payer-input,
+.primary-payer-full-width-input,
+.primary-payer-percentage {
+  margin: 0 !important;
+  padding: 0 0 0 10px !important; }
+
+#BASIC_PANEL_1200,
+.gl-coding-errors,
+.gl-coding-messages,
+.gl-coding-no-errors,
+.basic-panel-1200 {
+  border-radius: 10px;
+  border: 1px solid #ababab;
+  max-width: 1200px; }
+
+.gl-coding-errors {
+  background-color: #FFCCCC; }
+
+.gl-coding-no-errors {
+  background-color: #DDFFDD; }
+
+#BASIC_BORDER,
+.basic-border {
+  border: 1px solid #ababab; }
+
+#FULL-WIDTH,
+html,
+body,
+.modal-table-lg,
+.claim-note-view,
+.claim-line-table,
+.auth-line-table,
+.money-line,
+table.primaryPayerInput,
+.address-input-L input,
+.address-input-R input,
+.address-input-M input,
+.datepicker,
+.datepicker input[type=text],
+table.primaryPayerInput,
+.full-width {
+  width: 100%; }
+
+.primary-payer-full-width-input,
+.input-dos {
+  width: 100% !important; }
+
+.primary-payer-input {
+  max-width: 100%; }
+
+#HALF-WIDTH,
+.small-modal .modal-lg,
+.half-width {
+  width: 50%; }
+
+.primary-payer-percentage {
+  width: 37px; }
+
+.row-spacer {
+  margin-top: 10px; }
+
+.ui-icon-trash {
+  background-image: url(../../themes/jquery/images/ui-icons_254b59_256x240.png) !important; }
+
+.module-adjudication-content {
+  margin-left: 150px;
+  overflow-y: scroll; }
+
+.module-adjudication-content.navigation-collapsed {
+  margin-left: 60px; }
+
+.modal-backdrop {
+  z-index: 1; }
+
+.import-claim-file-log-modal {
+  max-height: 90%; }
+
+.import-log-messages {
+  padding-bottom: 12px;
+  padding-top: 5px; }
+
+.import-eds-file-results {
+  max-height: 300px;
+  border: 1px solid #ababab; }
+
+table.primaryPayerInput {
+  margin-top: 10px; }
+  table.primaryPayerInput th {
+    font-weight: normal;
+    font-size: .7em;
+    text-align: left;
+    border: 0;
+    padding: 0 0 2px 5px; }
+
+.primaryPayerInputLine {
+  border: 1px solid #cecece;
+  padding: 5px 5px 5px 5px; }
+
+.reason-code-table-cell {
+  border: 1px solid #cecece;
+  padding: 10px 10px 10px 10px; }
+
+.paddingfix {
+  padding-right: 14px !important; }
+
+.paddingfix-left {
+  padding-left: 14px !important; }
+
+.address-input-L,
+.address-input-M {
+  padding-right: 0; }
+
+.address-input-R,
+.address-input-M {
+  padding-left: 0; }
+
+.tooth-button {
+  min-width: 1px !important;
+  width: 25px; }
+
+.input-trash {
+  padding: 0 !important; }
+
+.input-dx {
+  margin: 0 5px; }
+
+.input-dos-table,
+.input-dos-table-single,
+.input-serv-date,
+.input-dx-table,
+.input-non-covered,
+.input-procedures,
+.input-rev-code,
+.input-ada-qty,
+.input-serv-units,
+.input-totalamount,
+.input-charges,
+.input-id-qual,
+.input-description,
+.input-ada-fee,
+.input-cavityarea,
+.input-tooth-number,
+.input-ada-description,
+.input-tooth-surface,
+.input-tooth-system,
+.input-hcpcs,
+.days-or-units-readonly,
+.input-provider-npi,
+.days-or-units,
+.input-epdst,
+.input-lineindex {
+  padding: 0 5px !important; }
+
+.input-totalamount,
+.input-non-covered {
+  min-width: 100px !important; }
+  .input-totalamount input,
+  .input-non-covered input {
+    width: 84px; }
+
+.input-tooth-number input {
+  width: 100px !important; }
+
+.input-dos-table {
+  width: 250px !important; }
+
+.input-serv-date {
+  min-width: 119px !important; }
+
+.input-dos-table-single {
+  width: 119px !important; }
+
+.input-pos {
+  min-width: 10px !important;
+  width: 53px !important; }
+  .input-pos input {
+    width: 43px;
+    margin: 0 5px 0 5px !important; }
+
+.input-procedures {
+  min-width: 142px !important; }
+
+.input-procedure {
+  width: 132px !important; }
+
+.input-dental-procedure {
+  width: 150px !important; }
+
+.input-provider-npi input {
+  width: 90px !important; }
+
+.input-dx {
+  width: 60px !important; }
+
+.input-cavityarea-editor {
+  width: 60px !important;
+  padding: 0 !important; }
+
+.input-serv-units {
+  min-width: 50px !important; }
+  .input-serv-units input {
+    width: 40px !important; }
+
+.input-units {
+  float: left; }
+  .input-units input {
+    width: 46px !important; }
+
+.input-tooth-surface input,
+.input-charges input {
+  width: 70px !important; }
+
+.input-epdst input {
+  width: 20px !important; }
+
+.select-unittype {
+  float: left;
+  margin-left: 5px; }
+  .select-unittype select {
+    width: 77px !important; }
+
+.days-or-units {
+  width: 143px; }
+
+.input-dos {
+  max-width: 80px !important; }
+
+.form1500, .form1500eclaim {
+  min-width: 978px; }
+
+.formUB04 {
+  min-width: 860px; }
+
+.formADA, .formADAeclaim {
+  min-width: 1027px; }
+
+.input-rev-code input,
+.input-ada-fee input,
+.days-or-units-readonly input {
+  width: 50px; }
+
+.input-id-qual input {
+  width: 30px; }
+
+.input-ada-qty input {
+  width: 20px; }
+
+.input-ada-description input {
+  width: 150px !important; }
+
+.total-row {
+  background-color: #BDFCC9;
+  font-weight: bold; }
+
+.container-correction {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.ub04-payer-row {
+  margin-bottom: 10px; }
+
+.money-line {
+  padding: 0;
+  border-top: 1px solid #222222; }
+
+.money, .money_calc, .adjustment-cell {
+  text-align: right !important; }
+
+.money_calc button {
+  float: right; }
+
+.corrected-remit-total {
+  font-weight: bold; }
+
+.claim-detail-table td {
+  vertical-align: top; }
+
+.override-button {
+  margin-bottom: -4px !important; }
+
+.remit-history-item {
+  border: 2px solid #ababab;
+  margin-bottom: 15px; }
+
+.bar-container {
+  position: absolute;
+  display: none;
+  border: 1px solid #474647;
+  height: 10px;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  margin: 5px 0 0 -150px;
+  background-color: #ffffff;
+  z-index: 2; }
+  .bar-container .bar-progress {
+    z-index: 3;
+    height: 100%;
+    background-color: #cde1e8; }
+
+.popover-content {
+  overflow-x: auto;
+  overflow-y: auto; }
+
+.claim-message-popover {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important; }
+  .claim-message-popover li {
+    padding: 3px 0 3px 0;
+    word-wrap: break-word; }
+
+#OPTIONS-BAR-SPACER,
+.bulk-action-button,
+.new-claim-button,
+.upload-button,
+.export-all-button,
+.csv-button,
+.load-claim-data-button,
+.import-payment-button,
+.pagination-container,
+.invoice-total-selected,
+.options-bar-spacer {
+  margin-right: 8px; }
+
+.allowed-field-number {
+  float: left;
+  margin-right: 5px;
+  width: 65px; }
+
+.allowed-field-calc {
+  float: right; }
+
+.force-scrolling {
+  overflow-y: auto !important; }
+
+.load-claim-data-row {
+  margin-bottom: 10px; }
+
+.modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 95%;
+  margin: 0; }
+
+.detail-view-top-column {
+  float: left;
+  margin-right: 50px; }
+
+.claim-notes-view {
+  padding: 0 5px 5px 5px;
+  margin: 0 0 10px 0; }
+
+.claim-notes-view {
+  max-height: 154px;
+  font-size: 12.5px;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid #777; }
+
+.wide-note-table, .control-table {
+  width: 600px; }
+
+.wide-control-column {
+  width: 400px;
+  margin-left: -5px; }
+
+.narrow-control-column {
+  width: 100px;
+  margin-left: 5px; }
+
+.wide-note-column {
+  width: 400px;
+  margin-right: 10px; }
+
+.narrow-note-column {
+  margin-right: 10px;
+  width: 25px; }
+
+.payer-line-level-warning {
+  font-weight: bold;
+  color: red; }
+
+.payment-override-text {
+  font-weight: bold !important;
+  font-size: 9px !important;
+  text-align: right;
+  line-height: 9px; }
+
+.claim-import-option {
+  font-weight: bold; }
+
+.claim-import-radio-label {
+  font-weight: normal !important;
+  margin-left: 10px; }
+
+.claim-import-options {
+  margin-bottom: 6px;
+  margin-right: 13px; }
+
+.note-text {
+  font-weight: normal; }
+
+.note-reference, .note-user-date {
+  font-size: 11px; }
+
+.note-user-date {
+  font-style: italic; }
+
+.control-table tr {
+  background-color: #f5f5f5; }
+
+.note-input {
+  width: 265px;
+  margin-right: 5px; }
+
+.add-note-button {
+  margin-left: 5px; }

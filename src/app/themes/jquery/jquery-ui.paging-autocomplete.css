@@ -1,0 +1,64 @@
+/**
+ * Created with IntelliJ IDEA.
+ * User: jesseb
+ * Date: 1/4/13
+ * Time: 8:32 AM
+ *
+ * This file supports the styles for jquery-ui.paging-autocomplete.js extension.
+ */
+.ui-widget .ui-autocomplete.ui-widget {
+    font-size: 15px;
+}
+.ui-autocomplete.ui-menu {
+    padding: 0;
+}
+.ui-autocomplete .header {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #656867;
+    color: #FFFFFF;
+    height: 30px;
+    line-height: 30px;
+}
+.ui-autocomplete .paging {
+    font-weight: normal;
+    float: right;
+    margin-bottom: 2px;
+    top: -4px;
+}
+.ui-autocomplete .header .ui-icon {
+    left: 0;
+    position: relative;
+    top: 1px;
+    display : inline-block;
+    background-image: url(images/ui-icons_ffffff_256x240.png);
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.ui-autocomplete .category {
+    padding: 5px;
+    background-color: #5690a6;
+    color: #ffffff;
+    line-height: 20px;
+}
+.ui-autocomplete .smallnotes {
+    padding-left: 6px;
+    border-left: none;
+    display: inline-block;
+}
+
+.ui-autocomplete .ui-state-focus .smallnotes {
+    color: #ffffff;
+}
+
+.wide-mode .ui-autocomplete-dictionary {
+    display: inline-block;
+    height: 16px;
+    padding: 11px 11px 11px 11px;
+    border: 1px solid #cce;
+    background: #cce;
+    top: -1px;
+}
+.wide-mode .ui-autocomplete-dictionary .ui-icon {
+    background-image: url(images/ui-icons_ffffff_256x240.png);
+}

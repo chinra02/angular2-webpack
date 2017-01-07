@@ -1,0 +1,40 @@
+<div [ngSwitch]="type">
+    <div class="money" *ngSwitchCase="'money-edit'">
+        <input type="text" [(ngModel)]="attribute" currencyFormatter/>
+    </div>
+    <div class="money" *ngSwitchCase="'money-view'">
+        {{ (value || 0) | currency:'USD':true:'1.2-2' }}
+    </div>
+    <div *ngSwitchCase="'money-search'">
+        <div class="flex-container">
+            <div class="flex1" style="width: 230px;">
+                <input id="search_greater_than" placeholder="Greater than" [(ngModel)]="range.$high"
+                       (ngModelChange)="onSearch($event)" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <div class="flex1">
+                <input id="search_less_than" placeholder="Less than" [(ngModel)]="range.$low"
+                       (ngModelChange)="onSearch($event)" type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'money-search-description'">
+        <div *ngIf="isHighAndLowAvailable()">
+            {{value.low}} -
+            {{value.high}}
+        </div>
+        <div *ngIf="isLowAlone()">
+            &gt; {{value.low}}
+        </div>
+        <div *ngIf="isHighAlone()">
+            &lt; {{value.high}}
+        </div>
+    </div>
+
+    <div class="money" *ngSwitchDefault>
+        {{ (value || 0) | currency:'USD':true:'1.2-2' }}
+    </div>
+</div>

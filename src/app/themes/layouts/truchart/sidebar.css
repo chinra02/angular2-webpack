@@ -1,0 +1,258 @@
+.module-views {
+    position: absolute;
+    top: 45px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    border-top: 5px solid #5690a9;
+    min-width: 980px;
+}
+.module-view {
+    height: 100%;
+    display: none;
+    position: relative;
+    background-color: #e5e5e6;
+}
+
+.module-view.patient-module {
+    background-color: #ffffff;
+}
+
+.module-views>.selected {
+    display: block;
+}
+.module-sidebar {
+    width: 150px;
+    height: 100%;
+}
+.module-sidebar.navigation-collapsed {
+    width: 60px;
+}
+
+.module-sidebar .tool-navigation  {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin: 0 0 45px 0;
+    height: -webkit-calc(100% - 45px);
+    height: calc(100% - 45px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.module-sidebar .tool-sub-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.module-sidebar .tool-group-views {
+    position: absolute;
+    width: 150px;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #7d797a;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    background: #FFFFFF;
+    height: 45px;
+}
+.module-sidebar.navigation-collapsed .tool-group-views {
+    width: 60px;
+}
+
+.module-sidebar .tool-group-views .collapse-button {
+    cursor: pointer;
+    display: inline-block;
+    height: 45px;
+    background-color: #959494;
+    width: 56px;
+    top: 0;
+    left: 94px;
+    position: absolute;
+}
+.module-sidebar.navigation-collapsed .tool-group-views .collapse-button {
+    left: 0;
+    width: 60px;
+}
+.module-sidebar .tool-group-views .collapse-button span {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+.module-sidebar .tool-group-views ul {
+    padding: 0;
+    background-color: #FFFFFF;
+    margin: 0;
+    display: inline-block;
+    top: 0;
+    position: absolute;
+}
+
+.module-sidebar .tool-group-views ul li {
+    cursor: pointer;
+    display: inline-block;
+    width: 47px;
+    border-bottom: none;
+    text-align: center;
+    line-height: 45px;
+    color: #949494;
+    font-size: 11px;
+
+}
+.module-sidebar .tool-group-views ul li.selected {
+    color: #222222;
+    font-weight: 700;
+}
+
+
+.module-sidebar .tool-navigation .tool-sub-group .sub-group-display .ui-icon {
+    display: inline-block;
+}
+.sub-group-display {
+    background-color: #cecece;
+    line-height: 40px;
+    height: 40px;
+    font-size: 13px;
+    border-bottom: 3px solid #656867;
+    text-align: center;
+}
+.module-sidebar.navigation-collapsed .sub-group-display {
+    font-size: 8px;
+    line-height: 15px;
+}
+
+
+.module-tool,
+.patient-module-quick-tools li,
+.patient-module-tools li  {
+    text-align: center;
+    border-bottom: none;
+    font-size: 15px;
+    font-style:normal;
+    text-decoration:none;
+    cursor: pointer;
+    height: 70px;
+    line-height: 70px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.module-tool span,
+.patient-module-quick-tools li span,
+.patient-module-tools li span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+.module-sidebar.navigation-collapsed ul .module-tool span {
+    font-size: 8px;
+    line-height: 15px;
+}
+
+.module-tool,
+.patient-module-tools li {
+    border-bottom: 1px solid #ffffff;
+}
+.module-sidebar ul li .ui-icon,
+.patient-module-tools li .ui-icon,
+.patient-module-form .ui-icon,
+.patient-module-quick-tools li .ui-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.patient-module-form .ui-icon-check {
+    float: right;
+}
+.module-sidebar .tool-navigation li.selected,
+.contact-recent-list ul li.selected,
+.patient-module-tools li.selected,
+.patient-module-quick-tools li.selected {
+    background-color: #264c5a;
+    border-bottom: 1px solid #264c5a;
+    text-shadow:none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.module-sidebar .tool-navigation li:hover,
+.patient-module-tools li:hover,
+.patient-module-quick-tools li:hover {
+    background-color: #264c5a;
+    text-shadow:none;
+    color: #FFF;
+}
+
+.module-sidebar .tool-navigation li.selected,
+.patient-module-tools li.selected {
+}
+
+/* Blue Plus Theme */
+
+.blueplus .module-tool,
+.blueplus .patient-module-quick-tools li,
+.blueplus .patient-module-tools li {
+    background-color: #5690a6;
+    color: #ffffff;
+}
+
+.blueplus .module-sidebar .tool-group-views {
+    border-color: #ffffff;
+}
+
+.blueplus .module-sidebar .tool-group-views ul li,
+.blueplus .module-sidebar .tool-group-views .collapse-button {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #717070;
+    color: #ffffff;
+}
+.blueplus .module-sidebar .tool-group-views ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 45px;
+}
+
+.toolgroupbold {
+    font-weight: bold;
+}
+
+.blueplus .module-sidebar .tool-group-views ul li {
+    border-right: 2px solid #ffffff;
+}
+
+.blueplus .module-sidebar .tool-group-views ul li:hover,
+.blueplus .module-sidebar .tool-group-views .collapse-button:hover {
+    background-color: #959494;
+}
+
+.blueplus .module-sidebar .tool-navigation  {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin: 0 0 45px 0;
+    height: -webkit-calc(100% - 45px);
+    height: calc(100% - 45px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #5690a6;
+}
+
+.blueplus .module-sidebar .tool-navigation .selected,
+.blueplus .contact-recent-list .selected,
+.blueplus .patient-module-tools .selected,
+.blueplus .patient-module-quick-tools .selected,
+.blueplus .module-sidebar .tool-navigation li:hover,
+.blueplus .patient-module-tools li:hover,
+.blueplus .patient-module-quick-tools li:hover {
+    background-color: #274c5a;
+    border-color: #274c5a;
+    color: #ffffff;
+}
+
+

@@ -1,0 +1,117 @@
+.black {
+    background-color: #332c2e;
+}
+.dark-purple {
+    background-color: #5a5775;
+}
+.truchart-purple {
+    background-color: #6e65a9;
+}
+.purple {
+    background-color: #9b92c4;
+}
+.light-purple {
+    background-color: #dfdcee;
+}
+.white {
+    background-color: #ffffff;
+}
+.eggshell {
+    background-color: #f6f6f7;
+}
+.light-gray {
+    background-color: #cecece;
+}
+.medium-gray{
+    background-color: #ababab;
+}
+.gray {
+    background-color: #949494;
+}
+.dark-gray {
+    background-color: #656766;
+}
+
+
+/**  Blue Plus theme colors **/
+
+.aqua,
+.blueplus > .header {
+    background-color: #5690a6;
+}
+.slate {
+    background-color: #274c5a;
+}
+.lighter-gray {
+    background-color: #e5e5e5;
+}
+.gold {
+    background-color: #efba66;
+}
+.light-red {
+    background-color: #e26666;
+}
+.light-maroon {
+    background-color: #ba6570;
+}
+.turquoise {
+    background-color: #71aeb3;
+}
+/*** FONTS ****/
+.black-font {
+    color: #332c2e;
+}
+.dark-purple-font {
+    color: #5a5775;
+}
+.truchart-purple-font {
+    color: #6e65a9;
+}
+.purple-font {
+    color: #9b92c4;
+}
+.light-purple-font {
+    color: #dfdcee;
+}
+.white-font {
+    color: #ffffff;
+}
+.eggshell-font {
+    color: #f6f6f7;
+}
+.light-gray-font {
+    color: #cecece;
+}
+.medium-gray-font {
+    color: #ababab;
+}
+.gray-font {
+    color: #949494;
+}
+.dark-gray-font {
+    color: #656766;
+}
+
+/**  Blue Plus theme colors **/
+
+.aqua-font {
+    color: #5690a6;
+}
+.slate-font {
+    color: #274c5a;
+}
+.lighter-gray-font {
+    color: #e5e5e5;
+}
+.gold-font {
+    color: #efba66;
+}
+.light-red-font {
+    color: #e26666;
+}
+.light-maroon-font {
+    color: #ba6570;
+}
+.turquoise-font {
+    color: #71aeb3;
+}

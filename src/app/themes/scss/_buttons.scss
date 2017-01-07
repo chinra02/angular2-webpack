@@ -1,0 +1,29 @@
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+
+.btns {
+  padding: 5px;
+  .dropdown, .btn {
+    + .dropdown, + .btn {
+      margin-right: 1em;
+      margin-left: 1em;
+    }
+  }
+}
+
+// Standard mediture style buttons. Wide, with padding and set height.
+.btn-std {
+  height: 30px;
+  min-width: 120px;
+  border: 0;
+  padding: 0 20px;
+  line-height: normal;
+}
+
+.btn {
+  .icon-right {
+    margin-left: 10px;
+    margin-right: -10px;
+  }
+}
