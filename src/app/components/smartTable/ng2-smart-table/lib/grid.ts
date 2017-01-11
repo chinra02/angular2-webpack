@@ -130,6 +130,7 @@ export class Grid {
   protected processDataChange(changes: any): void {
     if (this.shouldProcessChange(changes)) {
       this.dataSet.setData(changes['elements']);
+      this.dataSet.updateRows();
       // Commenting this out to remove default first row selection
       /* let row = this.determineRowToSelect(changes);
        if (row) {

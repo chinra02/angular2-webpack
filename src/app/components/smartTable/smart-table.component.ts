@@ -24,11 +24,14 @@ import { Observable, Subject } from 'rxjs/Rx';
 
 
 
+
 @Component({
     selector: 'smart-table-component',
     moduleId: module.id,
     templateUrl: './smart-table.component.html',
-    providers: [Ng2SmartTableComponent, SmartTableSearchService, SmartTableStorageActions, LocalStorageService],
+    providers: [Ng2SmartTableComponent, SmartTableSearchService,
+        SmartTableActionService,
+        SmartTableStorageActions, LocalStorageService],
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
@@ -66,13 +69,14 @@ export class SmartTableComponent implements OnChanges, OnInit {
     private smartTableStorageActions: SmartTableStorageActions;
 
 
-    @select(['smartTable', 'smartTableSort']) sortSelections$: Observable<Object>;
-    @select(['smartTable', 'smartTableColumnSelection']) columnSelections$: Observable<Object>;
-    @select(['smartTable', 'smartTablePager']) pagerSelections$: Observable<Object>;
-    @select(['smartTable', 'smartTableRowSelection']) rowSelections$: Observable<Object>;  
+    sortSelections: any;
+    columnSelections: any;
+    pagerSelections: any;
+    rowSelections: any;
 
 
-    constructor(private injector: Injector, private changeDetectRef: ChangeDetectorRef,private localStorageService:LocalStorageService) {
+    constructor(private injector: Injector, private changeDetectRef: ChangeDetectorRef,
+        private localStorageService: LocalStorageService) {
 
         this.columnService = injector.get(SmartTableColumnService);
         this.actionService = injector.get(SmartTableActionService);
@@ -89,10 +93,15 @@ export class SmartTableComponent implements OnChanges, OnInit {
 
         if (changes['data'])
             this.dataSource.next(this.data);
-        if (changes['storageKey']){
-           this.localStorageService.createStorage(INITIAL_COMPONENT_STATE,COMPONENTS_REDUCERS,this.storageKey);
-        }
-            
+       if (changes['storageKey']) {
+           this.localStorageService.updateKey(this.storageKey);
+           this.sortSelections = this.localStorageService.select(['smartTable', 'smartTableSort'],null,'sorts');
+           this.rowSelections = this.localStorageService.select(['smartTable', 'smartTableRowSelection'],null,'rows');
+           this.columnSelections = this.localStorageService.select(['smartTable', 'smartTableColumnSelection'],null,'columns');
+           this.pagerSelections = this.localStorageService.select(['smartTable', 'smartTablePager'],null,'pager');
+            //this.localStorageService.createStorage(INITIAL_COMPONENT_STATE, COMPONENTS_REDUCERS, this.storageKey);
+        } 
+
     }
 
     ngOnInit() {
@@ -158,11 +167,17 @@ export class SmartTableComponent implements OnChanges, OnInit {
 
     protected onPaginate(event) {
         this.onPaginateEvent.emit(event);
-        this.smartTableStorageActions.onPaginate(event);
+        this.smartTableStorageActions.onPaginate({
+            tableName:this.storageKey,
+            pager:event
+        });
     }
 
     protected onPageSizeChanged(event) {
-        this.smartTableStorageActions.onPaginate(event);
+        this.smartTableStorageActions.onPaginate({
+            tableName:this.storageKey,
+            pager:event
+        });
         // PlaceHolder to propagate onPageSizeChanged event
     }
 
@@ -174,7 +189,10 @@ export class SmartTableComponent implements OnChanges, OnInit {
             rowsSelection.push(new SmartTableSelectionData(row.id, row.isSelected));
         });
         this.changeDetectRef.markForCheck();
-        this.smartTableStorageActions.onRowSelectionChange(rowsSelection);
+        this.smartTableStorageActions.onRowSelectionChange({
+            tableName: this.storageKey,
+            rows: rowsSelection
+        });
     }
 
     protected onColumnSelectionChange(columns: Array<Column>) {
@@ -183,13 +201,23 @@ export class SmartTableComponent implements OnChanges, OnInit {
             columnsSelection.push(new SmartTableSelectionData(column.id, column.isVisible));
         });
         this.changeDetectRef.markForCheck();
-        this.smartTableStorageActions.onColumnSelectionChange(columnsSelection);
+        this.smartTableStorageActions.onColumnSelectionChange({
+            tableName: this.storageKey,
+            columns: columnsSelection
+        });
         // PlaceHolder to propagate onRowSelectionChange event
     }
 
-    protected onColumnSort(sorts: Array<any>) {
+    protected onColumnSort(sorts: [{
+        field: 'temp',
+        direction: 'asc',
+        compare: null
+    }]) {
         this.onColumnSortEvent.emit(sorts);
-        this.smartTableStorageActions.onColumnSort(sorts);
+        this.smartTableStorageActions.onColumnSort({
+            tableName: this.storageKey,
+            sorts: sorts
+        });
 
     }
 

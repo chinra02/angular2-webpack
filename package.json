@@ -1,6 +1,6 @@
 {
   "name": "angular2-webpack-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "private",
   "angular-cli": {},
   "scripts": {
@@ -67,6 +67,7 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
+    "ng2-redux": "^5.1.0",
     "ng2-bootstrap": "^1.1.16-11",
     "ng2-dropdown": "0.0.14",
     "ng2-modal": "0.0.21",

@@ -18,11 +18,11 @@ import { SmartTableDetailActionModel } from './../model/actions/smart-table-deta
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'smart-table-test',
+    selector: 'smart-table-test1',
     template: `
         <smart-table-component
         columnJson="entry_eclaim_columns"
-        storageKey="entry"
+        storageKey="entry1"
         (onPreviousRowEvent)="onPreviousRow($event)"
         (onNextRowEvent)="onNextRow($event)"
         [(data)]="data"
@@ -33,7 +33,7 @@ import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
     `,
 
 })
-export class SmartTableTest extends SmartTableComponent implements OnInit {
+export class SmartTableTest1 extends SmartTableComponent implements OnInit {
 
     constructor(injector: Injector, changeDetectRef: ChangeDetectorRef,localStorage:LocalStorageService) {
         super(injector,changeDetectRef,localStorage);

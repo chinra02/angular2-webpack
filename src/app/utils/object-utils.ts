@@ -13,16 +13,16 @@ export class ObjectUtils {
 
     }
 
-    static contains(list: Array<any>, inputItem: any): boolean {
-        let isEqual = false;
+    static contains(list: Array<any>, inputItem: any,checker:string): any {
+        let matchedItem:any;
         if (ObjectUtils.isNotNullAndUndefined(list) && ObjectUtils.isNotNullAndUndefined(inputItem)) {
             list.forEach(item => {
-                if (item === inputItem)
-                    isEqual = true;
+                if (item[checker] === inputItem[checker])
+                    matchedItem = item;
                 return;
             })
         }
-        return isEqual;
+        return matchedItem;
     }
 
     static containsItem(obj: Object, inputItem: any): boolean {
@@ -75,6 +75,22 @@ export class ObjectUtils {
 
     static isEmptyArray(value: Array<any>) {
         return value === null || value === undefined || (Object.keys(value).length === 0);
+    }
+
+    static crudRightToLeft(leftArray:Array<any>,rightArray:Array<any>){
+      let finalArray:Array<any> = new Array<any>();
+      rightArray.forEach(item=>{
+          let matchedItem = ObjectUtils.contains(leftArray,item,'id');
+          if(ObjectUtils.isNotNullAndUndefined(matchedItem)){
+             Object.keys(item).forEach(itemKey=>{
+                 matchedItem[itemKey]=item[itemKey];
+             })
+          }
+          else {
+             leftArray.push(item); 
+          }
+      });
+      return leftArray;
     }
 
 

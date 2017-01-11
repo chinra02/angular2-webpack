@@ -127,7 +127,7 @@ export abstract class DataSource {
 
   protected emitOnChanged(action: string): void {
     this.getElements().then((elements) => {
-      console.log('emitOnChanged');
+  
       this.onChangedSource.next({
         action: action,
         elements: elements,

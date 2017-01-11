@@ -105,12 +105,11 @@ export class Ng2SmartTableComponent implements OnChanges {
 
             }
             if (changes['source']) {
-                this.changeDetectRef.detach();
                 let data: any = changes['source'].currentValue;
                 if (this.dataSource && data.length>0) {
                     console.log('changes[source]');
                     this.grid.getDataSource().load(data);
-                     this.updateComponentFromState();
+                    this.updateComponentFromState();
                 }
                 else {
                     this.dataSource = this.prepareSource();
@@ -119,6 +118,7 @@ export class Ng2SmartTableComponent implements OnChanges {
                 }
 
             }
+             
 
         } else {
             this.initGrid();
@@ -138,7 +138,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         }
         this.grid.getDataSet().setSelectedRows(this.selectedRows);
         this.grid.getDataSet().setSelectedColumns(this.selectedColumns);
-        // this.changeDetectRef.markForCheck();
+        
     }
 
     private onAdd(event: any): boolean {
@@ -184,8 +184,8 @@ export class Ng2SmartTableComponent implements OnChanges {
         this.dataSource = this.prepareSource();
         this.dataSource.onChanged().subscribe((changes) => {
            if(changes['elements'] && changes['elements'].length>0){
-                console.log(changes.elements);
-                this.changeDetectRef.reattach();
+                this.changeDetectRef.markForCheck();
+               
            }
             
         });
@@ -221,7 +221,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected onRowSelection(event, row: Row) {
         row.isSelected = event.selectedValue;
-        this.rowSelectionChange.emit(this.grid.getSelectedRows());
+        this.rowSelectionChange.emit([row]);
         //this.changeDetectRef.markForCheck();
     }
 
