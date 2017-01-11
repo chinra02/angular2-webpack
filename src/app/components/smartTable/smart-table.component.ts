@@ -28,7 +28,7 @@ import { Observable, Subject } from 'rxjs/Rx';
     selector: 'smart-table-component',
     moduleId: module.id,
     templateUrl: './smart-table.component.html',
-    providers: [Ng2SmartTableComponent, SmartTableSearchService],
+    providers: [Ng2SmartTableComponent, SmartTableSearchService, SmartTableStorageActions, LocalStorageService],
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
@@ -62,7 +62,6 @@ export class SmartTableComponent implements OnChanges, OnInit {
     columnService: SmartTableColumnService;
     actionService: SmartTableActionService;
     searchService: SmartTableSearchService;
-    localStorageService: LocalStorageService;
 
     private smartTableStorageActions: SmartTableStorageActions;
 
@@ -73,13 +72,12 @@ export class SmartTableComponent implements OnChanges, OnInit {
     @select(['smartTable', 'smartTableRowSelection']) rowSelections$: Observable<Object>;  
 
 
-    constructor(private injector: Injector, private changeDetectRef: ChangeDetectorRef) {
+    constructor(private injector: Injector, private changeDetectRef: ChangeDetectorRef,private localStorageService:LocalStorageService) {
 
         this.columnService = injector.get(SmartTableColumnService);
         this.actionService = injector.get(SmartTableActionService);
         this.searchService = injector.get(SmartTableSearchService);
         this.smartTableStorageActions = injector.get(SmartTableStorageActions);
-        this.localStorageService = injector.get(LocalStorageService);
 
     }
 
@@ -91,8 +89,10 @@ export class SmartTableComponent implements OnChanges, OnInit {
 
         if (changes['data'])
             this.dataSource.next(this.data);
-        if (changes['storageKey'])
-            this.localStorageService.updateKey(this.storageKey);
+        if (changes['storageKey']){
+           this.localStorageService.createStorage(INITIAL_COMPONENT_STATE,COMPONENTS_REDUCERS,this.storageKey);
+        }
+            
     }
 
     ngOnInit() {

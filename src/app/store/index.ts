@@ -28,7 +28,7 @@ export const INITIAL_SMART_TABLE_STATE: ISmartTableState = {
   smartTableColumnSelection: Array<SmartTableSelectionData>(),
 };
 
-export const smartTableReducer = combineReducers({
+export const smartTableReducer:any = combineReducers({
   smartTableRowSelection: smartTableRowSelectionReducer,
   smartTableColumnSelection: smartTableColumnSelectionReducer,
   smartTablePager: smartTablePagerReducer,
@@ -44,11 +44,10 @@ export const INITIAL_COMPONENT_STATE: IComponentState = {
   smartTable: INITIAL_SMART_TABLE_STATE
 };
 
-export const componentsReducer = combineReducers({
+export const COMPONENTS_REDUCERS:any = combineReducers({
   smartTable: smartTableReducer
 });
 
-export const COMPONENTS_REDUCERS = componentsReducer;
 
 
 

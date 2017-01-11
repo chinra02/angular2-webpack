@@ -16,7 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
     declarations: [
         AppComponent,
         SmartTableTest,
- 
+
     ],
     imports: [
         CommonModule,
@@ -28,12 +28,10 @@ import { BrowserModule } from '@angular/platform-browser';
         SmartTableModule,
 
     ],
-    bootstrap: [AppComponent],
-    providers:[LocalStorageService]
+    bootstrap: [AppComponent]
+
 
 })
 export class AppModule {
-    constructor(private localStorage: LocalStorageService) {
-         this.localStorage.createStorage(INITIAL_COMPONENT_STATE, COMPONENTS_REDUCERS);
-    }
+
 }

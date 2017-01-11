@@ -1,4 +1,4 @@
-import { SmartTableStorageActions } from './../../actions/smart-table/smart-table-storage.actions';
+import { Constants } from './../../utils/constants';
 
 //PagerFilter
 export interface ISmartTablePagerFilterData {
@@ -33,7 +33,7 @@ export const INITIAL_SORT_STATE: ISmartTableSortFilterData = [{
 
 export function smartTableSortReducer(state: Object = INITIAL_SORT_STATE, action: any) {
   switch (action.type) {
-    case SmartTableStorageActions.ON_COLUMN_SORT:
+    case Constants.ON_COLUMN_SORT:
       return Object.assign([], state, action.payload);
     default:
       return state;
@@ -44,7 +44,7 @@ export function smartTableSortReducer(state: Object = INITIAL_SORT_STATE, action
 //Pager reducer
 export function smartTablePagerReducer(state: Object = INITIAL_PAGER_STATE, action: any) {
   switch (action.type) {
-    case SmartTableStorageActions.ON_PAGINATED:
+    case Constants.ON_PAGINATED:
       return Object.assign({}, state, action.payload);
     default:
       return state;
@@ -55,7 +55,7 @@ export function smartTablePagerReducer(state: Object = INITIAL_PAGER_STATE, acti
 //Row selection Reducer
 export function smartTableRowSelectionReducer(state: Object = [], action: any) {
   switch (action.type) {
-    case SmartTableStorageActions.ON_ROW_SELECTION_CHANGE: {
+    case Constants.ON_ROW_SELECTION_CHANGE: {
       return Object.assign([], state, action.payload);
     }
     default:
@@ -68,7 +68,7 @@ export function smartTableRowSelectionReducer(state: Object = [], action: any) {
 //Column selection Reducer
 export function smartTableColumnSelectionReducer(state: any = [], action: any) {
   switch (action.type) {
-    case SmartTableStorageActions.ON_COLUMN_SELECTION_CHANGE: {
+    case Constants.ON_COLUMN_SELECTION_CHANGE: {
       return Object.assign([], state, action.payload);
     }
     default:

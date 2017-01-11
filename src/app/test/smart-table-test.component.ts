@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../services/local-storage.service';
 import { SmartTableActionService } from '../services/smart-table-actions.service';
 import { SmartTableComponent } from './../components/smartTable/smart-table.component';
 import {
@@ -28,6 +29,15 @@ import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
         [(actionModel)]="actionModel">
 </smart-table-component>
 
+        <smart-table-component
+        columnJson="entry_eclaim_columns"
+        storageKey="entry1"
+        (onPreviousRowEvent)="onPreviousRow($event)"
+        (onNextRowEvent)="onNextRow($event)"
+        [(data)]="data"
+        [(actionModel)]="actionModel">
+</smart-table-component>
+
     `,
     providers: [
         SmartTableActionService
@@ -35,8 +45,8 @@ import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 })
 export class SmartTableTest extends SmartTableComponent implements OnInit {
 
-    constructor(injector: Injector, changeDetectRef: ChangeDetectorRef) {
-        super(injector,changeDetectRef);
+    constructor(injector: Injector, changeDetectRef: ChangeDetectorRef,localStorage:LocalStorageService) {
+        super(injector,changeDetectRef,localStorage);
         
     }
 
