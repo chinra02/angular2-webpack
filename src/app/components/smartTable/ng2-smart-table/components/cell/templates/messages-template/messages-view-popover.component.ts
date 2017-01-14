@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'messages-view-template',
     template: `
     <ul class="claim-message-popover">
-    <li *ngFor="let message of messages">
+    <li *ngFor="let message of messages" class="message-popover">
         {{message.countMessage}}{{ message | MultiJoiner }}
     </li>
 </ul>

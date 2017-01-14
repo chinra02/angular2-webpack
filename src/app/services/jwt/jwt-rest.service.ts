@@ -1,3 +1,4 @@
+import { RequestOptionsArgs } from '@angular/http';
 import { JwtAuthConfiguration } from './jwt-auth-configuration';
 import { Injectable } from '@angular/core';
 import { RequestOptions, Response, URLSearchParams } from '@angular/http';
@@ -30,7 +31,7 @@ export class JwtRestService {
             (authHttp: AuthHttp) => {
                 let uri = this.config.baseRestUrl + url;
                 let urlParams: URLSearchParams = new URLSearchParams();
-                let options = new RequestOptions({search: urlParams});
+                let options:RequestOptionsArgs = new RequestOptions({search: urlParams});
                 if (params) {
                     _.mapObject(params, function (value, key) {
                         urlParams.set(key, value);

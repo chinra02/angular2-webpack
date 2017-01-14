@@ -15,13 +15,14 @@
         [selectedRows]="rowSelections"
         [rowActionModel]="actionModel | objectFilter: 'rowActionModel'"
         [settings]="settings$ | async"
-        [source]="dataSource$ | async">
+        [(source)]="data"
+        [quickViewTemplateUrl]="quickViewTemplateUrl">
     <header-actions>
 
-        <ui-bulk-action-component optionsDisplayProperty="name" (selected)="onBulkAction($event)" [bulkActionModel]="actionModel | objectFilter: 'bulkActionModel' ">
+        <ui-bulk-action-component [rowSelections]="rowSelections"  optionsDisplayProperty="name" (selected)="onBulkAction($event)" [bulkActionModel]="actionModel | objectFilter: 'bulkActionModel' ">
         </ui-bulk-action-component>
 
-        <header-action-component  (selected)="onHeaderAction($event)" [headerActionModel]="actionModel | objectFilter: 'headerActionModel' ">
+        <header-action-component [rowSelections]="rowSelections"  (selected)="onHeaderAction($event)" [headerActionModel]="actionModel | objectFilter: 'headerActionModel' ">
         </header-action-component>
       
     </header-actions>

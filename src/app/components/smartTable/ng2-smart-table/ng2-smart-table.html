@@ -31,8 +31,8 @@
             </th>
         </tr>
         </thead>
-        <tbody *ngFor="let row of getRows()" [ngClass]="{quckview:row.isQuickViewOpen}">
-            <tr class="ng2-smart-row" (click)="onRowClick($event,row);" >
+        <tbody *ngFor="let row of getRows()" [ngClass]="{quickview:row.isQuickViewOpen}">
+            <tr class="ng2-smart-row">
                 
                 <td *ngIf="grid.getSetting('selector')=='check'">
                     <smart-selector placeHolder="Select" [selectedValue]="row.isSelected"
@@ -42,7 +42,7 @@
                     <row-action-component [row]="row" (selected)="onRowAction($event,row)" [rowActionModel]="rowActionModel">
                     </row-action-component>
                 </td>
-                <td *ngFor="let cell of getCells(row)" class="ani-med">
+                <td *ngFor="let cell of getCells(row)" class="ani-med" (click)="onRowClick($event,row)">
                     <ng2-smart-table-cell [cell]="cell" [mode]="grid.getSetting('mode')" class="st-cell-view"
                                         [inputClass]="grid.getSetting('edit.inputClass')"
                                         (edited)="onSave(row, $event)"></ng2-smart-table-cell>
@@ -51,10 +51,10 @@
             
 
             </tr>
-            <tr *ngIf="row.isQuickViewOpen" class="quckview-background-color-white">
+            <tr *ngIf="row.isQuickViewOpen" class="quickview-background-color-white">
                 <td [attr.colspan]="getColSpanLength()">
-                    <quick-view [row]="row" [columns]="getColumns()" (onPrevious)="onPrevious($event)"
-                     (onNext)="onNext($event)" (onClose)="onQuickViewClose($event)"> </quick-view>
+                    <quick-view [row]="row" [columns]="getColumns()" (onPrevious)="onPrevious($event)" [componentTemplateUrl]="quickViewTemplateUrl" [isModalOpen]="isModalOpen"
+                     (onNext)="onNext($event)" (onClose)="onQuickViewClose($event)" (modalNext)="onModalNext($event)" (modalPrevious)="onModalPrevious($event)"> </quick-view>
                 </td>
             </tr> 
             

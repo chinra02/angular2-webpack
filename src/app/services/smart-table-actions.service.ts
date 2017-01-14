@@ -1,9 +1,8 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class SmartTableActionService {
-   //implements OnDestroy {
 
     private actionValidForSource: Subject<any> = new Subject<any>();
     private actionValidForRespSource: Subject<any> = new Subject<any>();
@@ -108,20 +107,6 @@ export class SmartTableActionService {
     onActionValidForAll() {
         return this.actionValidForAllSource.asObservable();
     }
-
-   /* ngOnDestroy() {
-        this.actionValidForSource.unsubscribe();
-        this.actionValidForRespSource.unsubscribe();
-        this.actionValidForAllSource.unsubscribe();
-        this.actionValidForAllRespSource.unsubscribe();
-        this.actionConfirmationMessageSource.unsubscribe();
-        this.actionConfirmationMessageRespSource.unsubscribe();
-        this.actionConfirmationSource.unsubscribe();
-        this.performedHeaderActionsSource.unsubscribe();
-        this.performedBulkActionsSource.unsubscribe();
-        this.performedRowActionSource.unsubscribe();
-        this.rowSelectionSource.unsubscribe();
-    } */
 
 
 }

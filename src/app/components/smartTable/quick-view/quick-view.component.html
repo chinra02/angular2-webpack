@@ -1,10 +1,21 @@
 <div>
     <div class="btns">
-        <button type="button" class="btn btn-std btn-secondary" id="remit_detail_ui_modal">Modal</button>
+        <template dynamic-component (dynamicComponentReady)="dynamicCallback($event)" class="quickview-dynamic-component"
+                  *ngIf="componentTemplateUrl!=null && componentTemplateUrl!=undefined"
+                  [componentContext]="contextValue"
+                  [componentDefaultTemplate]='"<span style=\"color: red\">This is fallback template</span>"' 
+                  [componentTemplateUrl]="componentTemplateUrl">
+        </template>
+        <button type="button" class="btn btn-std btn-secondary" id="remit_detail_ui_modal" (click)="onModalClick()">Modal</button>
         <button type="button" class="btn btn-std btn-secondary" id="remit_detail_close" (click)="onClose.emit(row)">Close</button>
-        <button type="button" class="btn btn-std btn-secondary"  id="detail_view_previous" (click)="onPrevious.emit(row);">prev</button>
-        <button type="button" class="btn btn-std btn-secondary"  id="detail_view_next" (click)="onNext.emit(row);">next</button>
-        <!--<prev-next listcontroller="listctrl" remitid="ctrl.remit.id"></prev-next> -->
+        <button type="button" class="btn btn-std btn-secondary" id="detail_view_previous" (click)="onPrevious.emit(row);">prev</button>
+        <button type="button" class="btn btn-std btn-secondary" id="detail_view_next" (click)="onNext.emit(row);">next</button>
     </div>
 
 </div>
+ <quick-view-modal #quickViewModal [row]="row" [componentTemplateUrl]="componentTemplateUrl" 
+            (modalPrevious)="modalPrevious.emit(row)" (modalNext)="modalNext.emit(row)"
+            (modalClose)="onClose.emit(row)"> 
+ </quick-view-modal> 
+
+

@@ -1,0 +1,21 @@
+<modal #modal  title="Modal title"
+        [hideCloseButton]="true"
+        [closeOnEscape]="true"
+        [closeOnOutsideClick]="true">
+
+    <modal-content>
+         <template dynamic-component
+                  [componentContext]="contextValue"
+                  [componentDefaultTemplate]='"<span style=\"color: red\">Failed to load the template</span>"' 
+                  [componentTemplateUrl]="componentTemplateUrl">
+        </template>
+    </modal-content>
+
+    <modal-footer>
+        <button type="button" class="btn btn-std btn-secondary" id="remit_detail_ui_modal" (click)="modal.close()">Modal</button>
+        <button type="button" class="btn btn-std btn-secondary" id="remit_detail_close" (click)="onModalClose()">Close</button>
+        <button type="button" class="btn btn-std btn-secondary" id="detail_view_previous" (click)="onModalPrevious()">prev</button>
+        <button type="button" class="btn btn-std btn-secondary" id="detail_view_next" (click)="onModalNext()">next</button>
+    </modal-footer>
+        
+</modal>

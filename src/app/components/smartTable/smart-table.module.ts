@@ -25,12 +25,6 @@ import { ModalModule } from 'ng2-modal';
         HeaderActionComponent,
         SmartTableComponent
     ],
-    providers: [
-        SmartTableActionService,
-        LocalStorageService,
-        SmartTableStorageActions,
-
-    ],
     exports: [SmartTableComponent],
 
 })

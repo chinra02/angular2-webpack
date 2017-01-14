@@ -1,7 +1,6 @@
-import { ObjectUtils } from './../../../utils/object-utils';
-import { SmartTableSelectionData } from './../../../model/actions/smart-table-rows-selections.model';
-import { QuickViewComponent } from './../quick-view/quick-view.component';
 import { RowActionModel } from './../../../model/actions/smart-table-action.model';
+import { SmartTableSelectionData } from './../../../model/actions/smart-table-rows-selections.model';
+import { ObjectUtils } from './../../../utils/object-utils';
 import { Cell } from './lib/data-set/cell';
 import { Column } from './lib/data-set/column';
 import { Row } from './lib/data-set/row';
@@ -17,16 +16,15 @@ import {
     Input,
     OnChanges,
     Output,
-    SimpleChange,
-    ViewChild
+    SimpleChange
 } from '@angular/core';
 
 @Component({
     selector: 'ng2-smart-table',
     moduleId: module.id,
     styleUrls: ['./ng2-smart-table.scss'],
-    templateUrl: 'ng2-smart-table.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: 'ng2-smart-table.html'
+
 
 })
 export class Ng2SmartTableComponent implements OnChanges {
@@ -40,6 +38,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     @Input() selectedPager: any;
     @Input() selectedSort: Array<any>;
     @Input() rowActionModel: RowActionModel;
+    @Input() quickViewTemplateUrl: string;
 
     @Output() public rowSelect: EventEmitter<any> = new EventEmitter<any>();
     @Output() public userRowSelect: EventEmitter<any> = new EventEmitter<any>();
@@ -74,9 +73,7 @@ export class Ng2SmartTableComponent implements OnChanges {
         }
     };
     colSpanLength: number;
-
-    constructor(private changeDetectRef: ChangeDetectorRef) {
-    }
+    isModalOpen: boolean = false;
 
     protected getColumns() {
         return this.grid.getColumns();
@@ -102,14 +99,13 @@ export class Ng2SmartTableComponent implements OnChanges {
         if (this.grid) {
             if (changes['settings']) {
                 this.grid.updateSettings(this.prepareSettings());
-
+                if (!ObjectUtils.isEmptyArray(this.grid.getRows()))
+                    this.grid.getDataSource().refresh();
             }
             if (changes['source']) {
                 let data: any = changes['source'].currentValue;
-                if (this.dataSource && data.length>0) {
-                    console.log('changes[source]');
+                if (this.dataSource) {
                     this.grid.getDataSource().load(data);
-                    this.updateComponentFromState();
                 }
                 else {
                     this.dataSource = this.prepareSource();
@@ -118,7 +114,7 @@ export class Ng2SmartTableComponent implements OnChanges {
                 }
 
             }
-             
+            this.updateComponentFromState();
 
         } else {
             this.initGrid();
@@ -129,16 +125,16 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     private updateComponentFromState() {
         if (this.selectedPager && this.selectedPager.page && this.selectedPager.perPage) {
-            this.grid.getDataSource().setPaging(this.selectedPager.page, this.selectedPager.perPage,false);
+            this.grid.getDataSource().setPaging(this.selectedPager.page, this.selectedPager.perPage, false);
             this.pagerData.page = this.selectedPager.page;
             this.pagerData.perPage = this.selectedPager.perPage;
         }
         if (this.selectedSort && this.selectedSort.length > 0) {
-            this.grid.getDataSource().setSort(this.selectedSort,false);
+            this.grid.getDataSource().setSort(this.selectedSort, false);
         }
         this.grid.getDataSet().setSelectedRows(this.selectedRows);
         this.grid.getDataSet().setSelectedColumns(this.selectedColumns);
-        
+        // this.changeDetectRef.markForCheck();
     }
 
     private onAdd(event: any): boolean {
@@ -182,13 +178,6 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected initGrid(): void {
         this.dataSource = this.prepareSource();
-        this.dataSource.onChanged().subscribe((changes) => {
-           if(changes['elements'] && changes['elements'].length>0){
-                this.changeDetectRef.markForCheck();
-               
-           }
-            
-        });
         this.grid = new Grid(this.dataSource, this.prepareSettings());
         this.grid.onSelectRow().subscribe((row) => this.onSelectRow(row));
     }
@@ -209,34 +198,39 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected onHeaderSelectAll(event): void {
         this.onSelectAll(event.selectedValue);
-        this.changeDetectRef.markForCheck();
+      
     }
 
     protected onSelectAll(selectedValue: any): void {
         this.selectAll = selectedValue;
         this.updateRowSelections(selectedValue);
-        this.rowSelectionChange.emit(this.grid.getSelectedRows());
-        this.changeDetectRef.markForCheck();
+
     }
 
     protected onRowSelection(event, row: Row) {
         row.isSelected = event.selectedValue;
-        this.rowSelectionChange.emit([row]);
-        //this.changeDetectRef.markForCheck();
+        let rowsSelection: Array<any> = new Array<any>();
+        rowsSelection.push({ id: row.id, selected: row.isSelected });
+        this.rowSelectionChange.emit(rowsSelection);
+       
     }
 
     protected updateRowSelections(selectedValue: any): void {
+        let rowsSelection: Array<any> = new Array<any>();
+
         this.getRows().forEach((row: Row) => {
             row.isSelected = selectedValue;
+            rowsSelection.push({ id: row.id, selected: row.isSelected });
         });
-        this.changeDetectRef.markForCheck();
+        this.rowSelectionChange.emit(rowsSelection);
+      
     }
 
     protected onPaginate(event) {
         this.pagerData.page = event.page;
         this.pagerData.perPage = event.perPage;
         this.paginated.emit(this.pagerData);
-        this.changeDetectRef.markForCheck();
+        
     }
 
     // This is parent onColumnFilterChange, whih is a caller
@@ -254,7 +248,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
         });
         this.columnSelectionChange.emit(this.grid.getAllColumns());
-        this.changeDetectRef.markForCheck();
+     
 
     }
 
@@ -280,46 +274,33 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected onColumnSort(sorts: Array<any>): void {
         this.sorted.emit(sorts);
-        this.changeDetectRef.markForCheck();
+        
     }
 
     protected onRowAction(event, selectedRow) {
         event.selectedRow = selectedRow;
         this.onSelectedRowAction.emit(event);
-        this.changeDetectRef.markForCheck();
+  
     }
 
     protected onRowClick(event: Event, row: Row) {
         this.rowClicked.emit(row);
-        if (event.srcElement.nodeName != 'INPUT') {
+        if (ObjectUtils.isNotNullAndUndefined(this.quickViewTemplateUrl)) {
             this.getRows().forEach((innerRow: Row) => {
-                if (row.id === innerRow.id) {
-                    innerRow.isQuickViewOpen = true;
-                }
-                else {
-                    innerRow.isQuickViewOpen = false;
-                }
+                innerRow.isQuickViewOpen = row.id === innerRow.id;
             });
         }
-
-
 
     }
 
     protected onNext(row: Row) {
-        row.isQuickViewOpen = false;
-        let previousRow = this.grid.getNextRow(row);
-        if (ObjectUtils.isNotNullAndUndefined(previousRow)) {
-            previousRow.isQuickViewOpen = true;
-        }
-        else {
-            this.onNextEvent.emit(row);
-        }
+        this.moveQuickViewNext(row);
+
     }
 
-    protected onPrevious(row: Row) {
+    protected moveQuickViewNext(row: Row) {
         row.isQuickViewOpen = false;
-        let nextRow = this.grid.getPreviousRow(row);
+        let nextRow = this.grid.getNextRow(row);
         if (ObjectUtils.isNotNullAndUndefined(nextRow)) {
             nextRow.isQuickViewOpen = true;
         }
@@ -328,9 +309,34 @@ export class Ng2SmartTableComponent implements OnChanges {
         }
     }
 
-    protected onQuickViewClose(row: Row){
-       let rowIndex:number = this.grid.getRowIndex(row);
-       this.grid.getRows()[rowIndex].isQuickViewOpen = false;
+    protected moveQuickViewPrevious(row: Row) {
+        row.isQuickViewOpen = false;
+        let previousRow = this.grid.getPreviousRow(row);
+        if (ObjectUtils.isNotNullAndUndefined(previousRow)) {
+            previousRow.isQuickViewOpen = true;
+        }
+        else {
+            this.onPreviousEvent.emit(row);
+        }
+    }
+
+    protected onPrevious(row: Row) {
+        this.moveQuickViewPrevious(row);
+    }
+
+    protected onModalNext(row: Row) {
+        this.isModalOpen = true;
+        this.moveQuickViewNext(row);
+    }
+
+    protected onModalPrevious(row: Row) {
+        this.isModalOpen = true;
+        this.moveQuickViewPrevious(row);
+    }
+
+    protected onQuickViewClose(row: Row) {
+        let rowIndex: number = this.grid.getRowIndex(row);
+        this.grid.getRows()[rowIndex].isQuickViewOpen = false;
     }
 
 }

@@ -1,0 +1,10 @@
+[
+	{ "attr": "name",			"title": "Name",			"visible": true,	"type": "text",	"uniqueId": "pend_list_name"},
+	{ "attr": "description",	"title": "Description",		"visible": true,	"type": "text",	"uniqueId": "pend_list_description"},
+	{ "attr": "createdDate",	"title": "Date Created",	"visible": true,	"type": "text",	"uniqueId": "pend_list_date_created"},
+	{ "attr": "assignedToUser.username",	"title": "Assigning User",	"visible": true,	"type": "text",	"uniqueId": "pend_list_assigning_user" },
+	{ "attr": "open",			"title": "Open",			"visible": true,	"type": "text",	"uniqueId": "pend_list_open" },
+	{ "attr": "research",		"title": "Research",		"visible": true,	"type": "text",	"uniqueId": "pend_list_research" },
+	{ "attr": "approved",		"title": "Approved",		"visible": true,	"type": "text",	"uniqueId": "pend_list_approved" },
+	{ "attr": "denied",			"title": "Denied",			"visible": true,	"type": "text",	"uniqueId": "pend_list_denied" } 
+]

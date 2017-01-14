@@ -1,4 +1,3 @@
-import { LocalStorageService } from './../services/local-storage.service';
 import { SmartTableActionService } from '../services/smart-table-actions.service';
 import { SmartTableComponent } from './../components/smartTable/smart-table.component';
 import {
@@ -15,14 +14,17 @@ import {
     SmartTableActionModel
 } from './../model/actions/smart-table-action.model';
 import { SmartTableDetailActionModel } from './../model/actions/smart-table-detail-action.model';
+import { LocalStorageService } from './../services/local-storage.service';
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 
 @Component({
     selector: 'smart-table-test',
     template: `
-        <smart-table-component
-        columnJson="entry_eclaim_columns"
-        storageKey="entry"
+
+    <smart-table-component
+        [columnJson]="columnJson"
+        [storageKey]="storageKey"
+        (onRowClickEvent)="onRowClick($event)"
         (onPreviousRowEvent)="onPreviousRow($event)"
         (onNextRowEvent)="onNextRow($event)"
         [(data)]="data"
@@ -31,19 +33,24 @@ import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 
 
     `,
+    providers: [SmartTableActionService, LocalStorageService]
+
 
 })
 export class SmartTableTest extends SmartTableComponent implements OnInit {
 
-    constructor(injector: Injector, changeDetectRef: ChangeDetectorRef,localStorage:LocalStorageService) {
-        super(injector,changeDetectRef,localStorage);
-        
+    constructor(injector: Injector,actionService:SmartTableActionService,  localStorageService:LocalStorageService ) {
+        super(injector, actionService,localStorageService);
+
     }
 
     ngOnInit() {
-        this.setLocalData();
         this.handleActions();
 
+    }
+
+    onRowClick(event) {
+        this.onRowClickEvent.emit(event);
     }
 
 
@@ -86,25 +93,25 @@ export class SmartTableTest extends SmartTableComponent implements OnInit {
         });
 
         this.actionService.onHeaderActionPerform().subscribe((action: HeaderActionParams) => {
-           
+
         });
 
         this.actionService.onBulkActionPerform().subscribe((action: BulkActionParams) => {
-           
+
         });
 
         this.actionService.onRowActionPerform().subscribe((rowActionParam: RowActionParams) => {
-           
+
         });
 
         this.actionService.onActionValidFor().subscribe((actionValidationParams: ActionValidationParams) => {
-           
+
             this.validateForActions(actionValidationParams);
             this.actionService.getActionValidForRespSource().next(actionValidationParams);
         });
 
         this.actionService.onActionValidForAll().subscribe((actionValidationParams: ActionValidationParams) => {
-          
+
             this.validateForAllActions(actionValidationParams);
             this.actionService.getActionValidForAllRespSource().next(actionValidationParams);
         });
@@ -134,18 +141,13 @@ export class SmartTableTest extends SmartTableComponent implements OnInit {
         return false;
     }
 
-    private setLocalData() {
-        this.columnService.getData('entry_eclaim_data').subscribe((resp) => {
-            this.data = JSON.parse(resp._body);
-        });
+
+    private onPreviousRow(event) {
+        console.log(event);
     }
 
-    private onPreviousRow(event){
-           console.log(event);
-    }
-
-    private onNextRow(event){
-         console.log(event);
+    private onNextRow(event) {
+        console.log(event);
     }
 
 }
