@@ -1,3 +1,5 @@
+import { Ng2RadioGroupComponent } from './../components/ng2radiogroup/ng2radiogroup.component';
+import { Ng2Select } from '../components/ng2select/ng2-select.component';
 import { SmartTableActionService } from '../services/smart-table-actions.service';
 import { SmartTableComponent } from './../components/smartTable/smart-table.component';
 import {
@@ -15,78 +17,38 @@ import {
 } from './../model/actions/smart-table-action.model';
 import { SmartTableDetailActionModel } from './../model/actions/smart-table-detail-action.model';
 import { LocalStorageService } from './../services/local-storage.service';
-import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'smart-table-test',
-    template: `
-
-    <smart-table-component
-        [columnJson]="columnJson"
-        [storageKey]="storageKey"
-        (onRowClickEvent)="onRowClick($event)"
-        (onPreviousRowEvent)="onPreviousRow($event)"
-        (onNextRowEvent)="onNextRow($event)"
-        [(data)]="data"
-        [(actionModel)]="actionModel">
-</smart-table-component>
-
-
-    `,
+    templateUrl: './smart-table-test.component.html',
     providers: [SmartTableActionService, LocalStorageService]
 
 
 })
 export class SmartTableTest extends SmartTableComponent implements OnInit {
+    @ViewChild('pendListFilter', Ng2Select) ng2Select: Ng2Select;
+    @ViewChild('smarTableRadio', Ng2RadioGroupComponent) ng2RadioGroup: Ng2RadioGroupComponent;
+    pendListFilterMessage = { id: -1, name: '---All LIST---' };
+    allListFilterdData: Array<any>;
 
-    constructor(injector: Injector,actionService:SmartTableActionService,  localStorageService:LocalStorageService ) {
-        super(injector, actionService,localStorageService);
+
+    public genders = [
+        { value: 'F', display: 'Female' },
+        { value: 'M', display: 'Male' }
+    ];
+
+
+    constructor(injector: Injector, changeDetectRef: ChangeDetectorRef, actionService: SmartTableActionService, localStorageService: LocalStorageService) {
+        super(injector, changeDetectRef, actionService, localStorageService);
 
     }
+
 
     ngOnInit() {
-        this.handleActions();
 
-    }
-
-    onRowClick(event) {
-        this.onRowClickEvent.emit(event);
-    }
-
-
-    handleActions() {
-
-        this.actionModel = new SmartTableActionModel();
-
-        let headerActionModel: HeaderActionModel = new HeaderActionModel();
-        let smartTableDetailActionModel: SmartTableDetailActionModel = new SmartTableDetailActionModel();
-        smartTableDetailActionModel.$id = 'export';
-        smartTableDetailActionModel.$name = 'Export All';
-        let deleteClaimActionModel: SmartTableDetailActionModel = new SmartTableDetailActionModel();
-        deleteClaimActionModel.$id = 'deleteClaim';
-        deleteClaimActionModel.$name = 'Delete Claim';
-        deleteClaimActionModel.$actionValidForFunc = this.actionValidFor;
-        headerActionModel.$actions = [smartTableDetailActionModel, deleteClaimActionModel];
-        headerActionModel.$label = 'New Claims';
-        headerActionModel.$isActionValidForRequired = false;
-        this.actionModel.$headerActionModel = headerActionModel;
-
-
-        let bulkActionModel: BulkActionModel = new BulkActionModel();
-        let smartTablePaperClaimDetailActionModel: SmartTableDetailActionModel = new SmartTableDetailActionModel();
-        smartTablePaperClaimDetailActionModel.$id = 'edit_paper_claim';
-        smartTablePaperClaimDetailActionModel.$name = 'Edit Paper Claim';
-        smartTablePaperClaimDetailActionModel.$actionValidForFunc = this.actionValidFor;
-        bulkActionModel.$actions = [smartTablePaperClaimDetailActionModel, smartTableDetailActionModel];
-        bulkActionModel.$label = 'Claim';
-        bulkActionModel.$isActionValidForRequired = false;
-        this.actionModel.$bulkActionModel = bulkActionModel;
-
-        let rowActionModel: RowActionModel = new RowActionModel();
-        rowActionModel.$actions = [smartTablePaperClaimDetailActionModel, smartTableDetailActionModel];
-        rowActionModel.$isActionValidForRequired = true;
-        this.actionModel.$rowActionModel = rowActionModel;
-
+        this.ng2Select.selectedOption = this.pendListFilterMessage.id;
+        this.ng2RadioGroup.selectedRadioButton = 'M';
         this.actionService.onActionConfirmationMessage().subscribe((params: BaseActionParams) => {
             params.message = "Hello Modal!!";
             this.actionService.getActionConfirmationMessageRespSource().next(params);
@@ -117,6 +79,29 @@ export class SmartTableTest extends SmartTableComponent implements OnInit {
         });
     }
 
+    setTableData(data) {
+        this.allListFilterdData = data;
+    }
+
+
+    onRadioButtonSelected(event) {
+        console.log(event);
+    }
+
+    onRowClick(event) {
+        this.onRowClickEvent.emit(event);
+    }
+
+
+
+    private onPreviousRow(event) {
+        console.log(event);
+    }
+
+    private onNextRow(event) {
+        console.log(event);
+    }
+
     private validateForActions(actionValidationParams: ActionValidationParams): void {
         let actions: Array<any> = actionValidationParams.actionModel.$actions;
         let rowSelections: Array<any> = actionValidationParams.rowSelections;
@@ -135,19 +120,6 @@ export class SmartTableTest extends SmartTableComponent implements OnInit {
                 action.$isEnabled = action.$actionValidForAllFunc.call(this, rowSelections);
 
         })
-    }
-
-    private actionValidFor(): boolean {
-        return false;
-    }
-
-
-    private onPreviousRow(event) {
-        console.log(event);
-    }
-
-    private onNextRow(event) {
-        console.log(event);
     }
 
 }

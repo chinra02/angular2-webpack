@@ -1,0 +1,22 @@
+<div class="flex flex-align-center">
+        <ng2-select #pendListFilter [message]="pendListFilterMessage" [options]="allListFilterdData"  (selectChanged)="getSinglePendList($event)" key="name" >
+    </ng2-select>
+
+    <ng2-radio-group title='Gender' #smarTableRadio
+                 [options]="genders"
+                 key='display'
+                 name='gender'
+                 (radioButtonSelected)='onRadioButtonSelected($event)'>
+   </ng2-radio-group>
+</div>
+
+<smart-table-component
+        [columnJson]="columnJson"
+        [storageKey]="storageKey"
+        (onRowClickEvent)="onRowClick($event)"
+        (onPreviousRowEvent)="onPreviousRow($event)"
+        (onNextRowEvent)="onNextRow($event)"
+        [isRestSort]="false"
+        [(data)]="data"
+        [actionModel]="actionModel">
+</smart-table-component>

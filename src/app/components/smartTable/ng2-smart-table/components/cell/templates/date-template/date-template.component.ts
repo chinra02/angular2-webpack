@@ -1,3 +1,4 @@
+import { FilterParamsUtil } from './../../../../../../../utils/filter-params-utils';
 import { Constants } from '../../../../../../../utils/constants';
 import { ObjectUtils } from './../../../../../../../utils/object-utils';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChange } from '@angular/core';
@@ -12,12 +13,14 @@ import * as moment from 'moment';
 export class DateTemplate implements OnChanges {
     @Input() type;
     @Input() value: any;
-    @Input() id;
     @Input() title;
-    @Input() uniqueid;
+    @Input() uniqueId;
+    @Input() attr;
+
 
 
     dates: { low: string, high: string } = { low: null, high: null };
+    dateWithYearFirst: { low: string, high: string } = { low: null, high: null };
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
         if (changes['value'] && typeof this.value === 'string') {
@@ -28,14 +31,43 @@ export class DateTemplate implements OnChanges {
 
     @Output() searched: EventEmitter<any> = new EventEmitter<any>();
 
-    onDateChange(event: any, key: string) {
-        if (key === 'beforeDate') {
-            this.dates.high = moment(event).format(Constants.DATE_FORMAT);
+    onDateChange(event: any, key: string) { // filter=%22claim.serviceStartDate-gt%22~%222017-01-24%22
+        let searchParams: any = { key: this.attr, value: null, param: '' };
+        if (key === 'afterDate') {
+            if (moment(event).isValid()) {
+                this.dates.high = moment(event).format(Constants.DATE_FORMAT);
+                this.dateWithYearFirst.high = moment(event).format(Constants.DATE_FORMAT_YEAR);
+            }
+            else {
+                this.dates.high = null;
+                this.dateWithYearFirst.high = null;
+            }
         }
         else {
-            this.dates.low = moment(event).format(Constants.DATE_FORMAT);;
+            if (moment(event).isValid()) {
+                this.dates.low = moment(event).format(Constants.DATE_FORMAT);
+                this.dateWithYearFirst.low = moment(event).format(Constants.DATE_FORMAT_YEAR);
+            }
+            else {
+                this.dates.low = null;
+                this.dateWithYearFirst.low = null;
+            }
+
         }
-        this.searched.emit(this.dates);
+        this.populateParams(searchParams);
+        this.searched.emit(searchParams);
+    }
+
+    private populateParams(searchParams: any) {
+        if (this.dateWithYearFirst.high)
+            searchParams.param = FilterParamsUtil.prepareGreaterThanParam(searchParams.key, this.dateWithYearFirst.high);
+        if (searchParams.param && this.dateWithYearFirst.low) {
+            searchParams.param = FilterParamsUtil.prepareLessThanParam(searchParams.key, this.dateWithYearFirst.low);
+        }
+        else if (this.dateWithYearFirst.low) {
+            searchParams.param = searchParams.param + ',' + FilterParamsUtil.prepareLessThanParam(searchParams.key, this.dateWithYearFirst.low);
+        }
+        searchParams.value = this.dates;
     }
 
     isHighAlone(): boolean {
@@ -52,7 +84,7 @@ export class DateTemplate implements OnChanges {
 
     getDate(date: string): Date {
         if (ObjectUtils.isNotNullAndUndefined(date))
-            return moment(date,Constants.DATE_FORMAT).toDate();
+            return moment(date, Constants.DATE_FORMAT).toDate();
         return new Date();
     }
 

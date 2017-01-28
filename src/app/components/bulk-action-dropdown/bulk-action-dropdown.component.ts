@@ -1,6 +1,7 @@
+import { SmartTableDetailActionModel } from './../../model/actions/smart-table-detail-action.model';
 import { Row } from '../smartTable/ng2-smart-table/lib/data-set/row';
 import { SmartTableActionService } from '../../services/smart-table-actions.service';
-import { ActionValidationParams } from './../../model/actions/smart-table-action-params.model';
+import { ActionValidationParams, ExternalActionValidationParams } from './../../model/actions/smart-table-action-params.model';
 import { BulkActionModel } from './../../model/actions/smart-table-action.model';
 import { ObjectUtils } from './../../utils/object-utils';
 import {
@@ -26,66 +27,77 @@ import {
 })
 export class UiBulkActionComponent implements OnInit, OnChanges {
     @Input() label = 'Bulk Actions';
-    @Input() bulkActionModel:BulkActionModel;
-    @Input() context:any;
-    @Input() menuId:string;
-    @Input() rowSelections:Array<any> = new Array<any>();
-    @Input() toolTip:string;
-    @Input() optionsDisplayProperty:string = 'label';
+    @Input() bulkActionModel: BulkActionModel;
+    @Input() context: any;
+    @Input() menuId: string;
+    @Input() rowSelections: Array<any> = new Array();
+    @Input() toolTip: string;
+    @Input() optionsDisplayProperty: string = 'label';
 
-    @Output() selected:EventEmitter<any> = new EventEmitter<any>();
+    @Output() selected: EventEmitter<any> = new EventEmitter<any>();
 
-    displayValue:any;
+    displayValue: any;
 
-    constructor(private actionService:SmartTableActionService, private changeDetectRef:ChangeDetectorRef) {
+    constructor(private actionService: SmartTableActionService, private changeDetectRef: ChangeDetectorRef) {
     }
 
-    ngOnChanges(changes:{ [propertyName: string]: SimpleChange }) {
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
         if (ObjectUtils.isNullOrUndefined(this.rowSelections)) {
-            this.rowSelections = new Array<any>();
+            this.rowSelections = new Array();
         }
     }
 
-    getSelectedRows(){
-        return this.rowSelections.filter(row=>row.selected==true);
+    getSelectedRows() {
+        return this.rowSelections.filter(row => row.selected == true);
     }
 
     ngOnInit() {
-        this.actionService.onRowSelection().subscribe((rows:Array<any>) => {
-            if (this.rowSelections.length == 0) {
-                this.rowSelections.push(rows[0]);
-            }
-            else {
-                let matchedFound:boolean = false;
-                this.rowSelections.forEach((row:Row) => {
-                    if (row.id === rows[0].id) {
-                        row = rows[0];
-                        matchedFound = true;
-                    }
-
-                });
-                if (!matchedFound)
-                    this.rowSelections.push(rows[0]);
-
-            }
-
-            this.changeDetectRef.markForCheck();
+        this.actionService.onRowSelection().subscribe((rows: Array<any>) => {
+            this.createOrUpdateRowSelections(rows);
             if (this.bulkActionModel.$isActionValidForAllRequired) {
-                let actionValidationParams:ActionValidationParams = new ActionValidationParams();
+                let actionValidationParams: ActionValidationParams = new ActionValidationParams();
                 actionValidationParams.actionModel = this.bulkActionModel;
                 actionValidationParams.rowSelections = this.rowSelections;
                 this.actionService.getActionValidForAllSource().next(actionValidationParams);
             }
-
+            this.changeDetectRef.markForCheck();
         });
 
-        this.actionService.onActionValidForAllResponse().subscribe((resp:ActionValidationParams) => {
+        this.actionService.onActionValidForAllResponse().subscribe((resp: ActionValidationParams) => {
             if (resp.actionModel instanceof BulkActionModel) {
                 this.bulkActionModel.$actions = resp.actionModel.$actions;
-                this.changeDetectRef.markForCheck();
             }
-
+            this.changeDetectRef.markForCheck();
         });
+
+    }
+
+
+    private createOrUpdateRowSelections(rows: Array<any>) {
+        if (ObjectUtils.isEmptyArray(rows)) {
+            this.rowSelections = new Array();
+        }
+        else {
+            if (!ObjectUtils.isEmptyArray(this.rowSelections)) {
+                rows.forEach(inputRow => {
+                    let matchedFound: boolean = false;
+                    this.rowSelections.forEach((row: any) => {
+                        if (row.id === inputRow.id) {
+                            row.selected = inputRow.selected;
+                            matchedFound = true;
+                        }
+
+                    });
+                    if (!matchedFound)
+                        this.rowSelections.push(inputRow);
+
+                });
+            }
+            else {
+                this.rowSelections = new Array();
+                rows.forEach(row => this.rowSelections.push(row));
+            }
+        }
     }
 
     onSelect(event, selectedOption) {

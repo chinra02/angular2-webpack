@@ -9,20 +9,31 @@
         (storeDispatch)="onStoreDispatch($event)"
         (onPreviousEvent)="onPrevious($event)"
         (onNextEvent)="onPrevious($event)"
+        (stateChanged)="stateChanged.emit($event)"
+        [isSmartSelectorEnabled]="actionModel!=null && actionModel!=undefined"
         [selectedSort]="sortSelections"
         [selectedPager]="pagerSelections"
         [selectedColumns]="columnSelections"
         [selectedRows]="rowSelections"
+        [columnSearch]="columnSearch"
         [rowActionModel]="actionModel | objectFilter: 'rowActionModel'"
+        [pageData]="pagerData"
         [settings]="settings$ | async"
         [(source)]="data"
+        [isRestSort]="isRestSort"
         [quickViewTemplateUrl]="quickViewTemplateUrl">
-    <header-actions>
+    <header-actions *ngIf="actionModel!=null && actionModel!=undefined">
 
-        <ui-bulk-action-component [rowSelections]="rowSelections"  optionsDisplayProperty="name" (selected)="onBulkAction($event)" [bulkActionModel]="actionModel | objectFilter: 'bulkActionModel' ">
+        <ui-bulk-action-component [rowSelections]="rowSelections"
+                                  optionsDisplayProperty="name" 
+                                  (selected)="onBulkAction($event)" 
+                                  [bulkActionModel]="actionModel | objectFilter: 'bulkActionModel' ">
         </ui-bulk-action-component>
 
-        <header-action-component [rowSelections]="rowSelections"  (selected)="onHeaderAction($event)" [headerActionModel]="actionModel | objectFilter: 'headerActionModel' ">
+        <header-action-component 
+                                 [rowSelections]="rowSelections"
+                                 (selected)="onHeaderAction($event)"
+                                 [headerActionModel]="actionModel | objectFilter: 'headerActionModel' ">
         </header-action-component>
       
     </header-actions>

@@ -1,4 +1,5 @@
-import { ActionValidationParams } from './../../model/actions/smart-table-action-params.model';
+import { SmartTableDetailActionModel } from './../../model/actions/smart-table-detail-action.model';
+import { ActionValidationParams, ExternalActionValidationParams } from './../../model/actions/smart-table-action-params.model';
 import { HeaderActionModel } from './../../model/actions/smart-table-action.model';
 import { SmartTableActionService } from './../../services/smart-table-actions.service';
 import {
@@ -14,7 +15,8 @@ import {
 @Component({
     selector: 'header-action-component',
     template: `
-        <ng2-dropdown-comp [label]="headerActionModel.label" [displayLength]="false" (selected)="onHeaderAction($event)"
+        <ng2-dropdown-comp *ngIf="headerActionModel!=null && headerActionModel!=undefined" 
+                           [label]="headerActionModel.label" [displayLength]="false" (selected)="onHeaderAction($event)"
                            optionsDisplayProperty="name" [isSmartSelectorEnabled]="false"
                            [data]="headerActionModel | objectFilter: 'actions'">
         </ng2-dropdown-comp>
@@ -22,16 +24,16 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderActionComponent implements OnInit {
-    @Input() displayLength:boolean = true;
-    @Input() headerActionModel:HeaderActionModel;
-    @Input() optionsDisplayProperty:string = 'label';
-    @Input() isSmartSelectorEnabled:boolean = true;
+    @Input() displayLength: boolean = true;
+    @Input() headerActionModel: HeaderActionModel;
+    @Input() optionsDisplayProperty: string = 'label';
+    @Input() isSmartSelectorEnabled: boolean = true;
 
-    @Output() public selected:EventEmitter<any> = new EventEmitter<any>();
+    @Output() public selected: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input() rowSelections:Array<any> = new Array<any>();
+    @Input() rowSelections: Array<any> = new Array<any>();
 
-    constructor(private actionService:SmartTableActionService, private changeDetectRef:ChangeDetectorRef) {
+    constructor(private actionService: SmartTableActionService, private changeDetectRef: ChangeDetectorRef) {
     }
 
     onHeaderAction(event) {
@@ -39,10 +41,10 @@ export class HeaderActionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.actionService.onRowSelection().subscribe((rows:Array<any>) => {
+        this.actionService.onRowSelection().subscribe((rows: Array<any>) => {
             this.rowSelections = rows;
             if (this.headerActionModel.$isActionValidForAllRequired) {
-                let actionValidationParams:ActionValidationParams = new ActionValidationParams();
+                let actionValidationParams: ActionValidationParams = new ActionValidationParams();
                 actionValidationParams.rowSelections = this.rowSelections;
                 actionValidationParams.actionModel = this.headerActionModel;
                 this.actionService.getActionValidForAllSource().next(actionValidationParams);
@@ -50,13 +52,14 @@ export class HeaderActionComponent implements OnInit {
 
         });
 
-        this.actionService.onActionValidForAllResponse().subscribe((resp:ActionValidationParams) => {
+        this.actionService.onActionValidForAllResponse().subscribe((resp: ActionValidationParams) => {
             if (resp.actionModel instanceof HeaderActionModel) {
                 this.headerActionModel.$actions = resp.actionModel.$actions;
                 this.changeDetectRef.markForCheck();
             }
 
         });
+
     }
 
 }

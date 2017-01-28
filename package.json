@@ -1,6 +1,6 @@
 {
-  "name": "angular2-webpack-app",
-  "version": "1.0.2",
+  "name": "util_angular2",
+  "version": "1.0.0",
   "license": "private",
   "angular-cli": {},
   "scripts": {
@@ -16,10 +16,9 @@
     "server:prod": "http-server dist --cors",
     "server": "npm run server:dev",
     "start:hmr": "npm run server:dev:hmr",
-    "start": "npm run server:dev",
-    "prepublish": "tsc"
+    "start": "npm run server:dev"
   },
-  "typings": "src/custom-typings.d.ts",
+  "private": true,
   "dependencies": {
     "@angular/common": "~2.4.0",
     "@angular/compiler": "~2.4.0",
@@ -30,8 +29,11 @@
     "@angular/platform-browser-dynamic": "~2.4.0",
     "@angular/router": "~3.4.0",
     "angular-in-memory-web-api": "~0.2.4",
+    "node-sass": "^4.2.0",
+    "raw-loader": "^0.5.1",
     "rxjs": "5.0.1",
-    "zone.js": "^0.7.4"
+    "sass-loader": "^4.1.1",
+    "zone.js": "^0.7.6"
   },
   "devDependencies": {
     "@angular/upgrade": "2.1.0",
@@ -47,7 +49,7 @@
     "@types/webpack": "^1.12.34",
     "angular-cli": "1.0.0-beta.24",
     "angular2-dynamic-component": "^1.3.2",
-    "angular2-jwt": "^0.1.27",
+    "angular2-jwt": "^0.1.28",
     "angular2-select": "^1.0.0-alpha.12",
     "angular2-template-loader": "^0.6.0",
     "assets-webpack-plugin": "^3.4.0",

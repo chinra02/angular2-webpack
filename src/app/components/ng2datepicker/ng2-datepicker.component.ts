@@ -64,6 +64,9 @@ export class DatePickerComponent {
         this.dateChanged.emit(this.dt);
       }
     }
+    else {
+      this.dateChanged.emit(null);
+    }
   }
 
   public onDateSelection(date: string) {

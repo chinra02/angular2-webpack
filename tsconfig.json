@@ -10,7 +10,6 @@
     "noEmitHelpers": true,
     "strictNullChecks": false,
     "baseUrl": "./src",
-    "declaration": true,
     "paths": {
     },
     "lib": [
@@ -39,10 +38,5 @@
   },
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false },
-  "files": [
-        "src/index.ts",
-        "src/custom-typings.d.ts"
-    ]
-
+  "atom": { "rewriteTsconfig": false }
 }

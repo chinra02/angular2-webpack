@@ -1,5 +1,6 @@
 import { RowActionModel } from './../../../model/actions/smart-table-action.model';
 import { SmartTableSelectionData } from './../../../model/actions/smart-table-rows-selections.model';
+import { SmartTableActionService } from './../../../services/smart-table-actions.service';
 import { ObjectUtils } from './../../../utils/object-utils';
 import { Cell } from './lib/data-set/cell';
 import { Column } from './lib/data-set/column';
@@ -8,6 +9,7 @@ import { DataSource } from './lib/data-source/data-source';
 import { LocalDataSource } from './lib/data-source/local/local.data-source';
 import { Grid } from './lib/grid';
 import { deepExtend } from './lib/helpers';
+import { PagerModel } from './lib/pager.model';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -15,6 +17,7 @@ import {
     EventEmitter,
     Input,
     OnChanges,
+    OnInit,
     Output,
     SimpleChange
 } from '@angular/core';
@@ -23,22 +26,25 @@ import {
     selector: 'ng2-smart-table',
     moduleId: module.id,
     styleUrls: ['./ng2-smart-table.scss'],
-    templateUrl: 'ng2-smart-table.html'
-
+    templateUrl: 'ng2-smart-table.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class Ng2SmartTableComponent implements OnChanges {
+export class Ng2SmartTableComponent implements OnChanges, OnInit {
     // DoCheck,AfterViewChecked, AfterViewInit {
 
     @Input() source: any;
     @Input() settings: any;
-    @Input() selectAll: any;
-    @Input() selectedRows: any;
+    @Input() selectedRows: Array<any> = new Array();
     @Input() selectedColumns: any;
     @Input() selectedPager: any;
     @Input() selectedSort: Array<any>;
+    @Input() columnSearch: Array<any>;
     @Input() rowActionModel: RowActionModel;
     @Input() quickViewTemplateUrl: string;
+    @Input() pageData: PagerModel;
+    @Input() isRestSort: boolean;
+    @Input() isSmartSelectorEnabled: boolean = true;
 
     @Output() public rowSelect: EventEmitter<any> = new EventEmitter<any>();
     @Output() public userRowSelect: EventEmitter<any> = new EventEmitter<any>();
@@ -47,7 +53,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     @Output() public createConfirm: EventEmitter<any> = new EventEmitter<any>();
     @Output() public paginated: EventEmitter<any> = new EventEmitter<any>();
-    @Output() public pagsChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public stateChanged: EventEmitter<any> = new EventEmitter<any>();
     @Output() public rowSelectionChange: EventEmitter<any> = new EventEmitter<any>();
     @Output() public columnSelectionChange: EventEmitter<any> = new EventEmitter<any>();
     @Output() public sorted: EventEmitter<any> = new EventEmitter<any>();
@@ -60,6 +66,7 @@ export class Ng2SmartTableComponent implements OnChanges {
     protected grid: Grid;
     protected dataSource: DataSource;
     protected pagerData = { page: 1, perPage: 50 };
+    protected stateChanges: any = { pager: null, sort: null, searchParam: null };
     protected defaultSettings: Object = {
 
         hideHeader: false,
@@ -75,12 +82,34 @@ export class Ng2SmartTableComponent implements OnChanges {
     colSpanLength: number;
     isModalOpen: boolean = false;
 
+    constructor(private changeDetectRef: ChangeDetectorRef, protected actionService: SmartTableActionService) {
+    }
+
     protected getColumns() {
         return this.grid.getColumns();
     }
 
+
+    protected isRowActionModelAvilable() {
+        return (ObjectUtils.isNotNullAndUndefined(this.rowActionModel) && !Array.isArray(this.rowActionModel));
+    }
+
     protected getRows() {
         return this.grid.getDataSet().getRows();
+    }
+
+    protected isAllRowsSelected() {
+        let isAllSelected = true;
+        if (ObjectUtils.isEmptyArray(this.getRows())) {
+            isAllSelected = false;
+        }
+        else {
+            this.getRows().forEach(row => {
+                if (!row.isSelected)
+                    isAllSelected = false;
+            });
+        }
+        return isAllSelected;
     }
 
     protected getColSpanLength() {
@@ -89,53 +118,100 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected getCells(row: Row) {
         return row.getCells().filter((cell: Cell) => {
-            return cell.isVisible === true;
+            return cell.getColumn().isVisible === true;
         });
 
     };
+
+    ngOnInit() {
+        this.dataSource.isRestSort = this.isRestSort;
+        this.updateComponentFromState();
+        if (this.rowActionModel == null) {
+            this.isSmartSelectorEnabled = false;
+        }
+
+    }
 
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (this.grid) {
             if (changes['settings']) {
                 this.grid.updateSettings(this.prepareSettings());
-                if (!ObjectUtils.isEmptyArray(this.grid.getRows()))
-                    this.grid.getDataSource().refresh();
+
             }
             if (changes['source']) {
-                let data: any = changes['source'].currentValue;
-                if (this.dataSource) {
-                    this.grid.getDataSource().load(data);
-                }
-                else {
-                    this.dataSource = this.prepareSource();
-                    this.grid.setSource(this.dataSource);
-
-                }
+                this.setSource(changes['source'].currentValue);
 
             }
-            this.updateComponentFromState();
 
         } else {
             this.initGrid();
 
         }
 
+
+    }
+
+    private setSource(data) {
+        if (this.dataSource) {
+            this.grid.getDataSource().load(data);
+            if (this.pageData) {
+                this.dataSource.getPagerDataChangeSource().next(this.pageData);
+            }
+            else {
+                this.dataSource.setPaging(this.pagerData.page, this.pagerData.perPage, false);
+            }
+        }
+        else {
+            this.dataSource = this.prepareSource();
+            this.grid.setSource(this.dataSource);
+
+        }
     }
 
     private updateComponentFromState() {
+        this.updatePagerState();
+        this.updateSortState();
+        this.grid.getDataSet().setSelectedColumns(this.selectedColumns);
+        this.loadSearchParamsToState();
+        this.stateChanged.emit(this.stateChanges);
+    }
+
+    private updatePagerState() {
         if (this.selectedPager && this.selectedPager.page && this.selectedPager.perPage) {
-            this.grid.getDataSource().setPaging(this.selectedPager.page, this.selectedPager.perPage, false);
             this.pagerData.page = this.selectedPager.page;
             this.pagerData.perPage = this.selectedPager.perPage;
+            if (this.pageData) {
+                this.stateChanges.pager = {
+                    page: this.pagerData.page,
+                    perPage: this.pagerData.perPage
+                }
+            }
+
         }
-        if (this.selectedSort && this.selectedSort.length > 0) {
-            this.grid.getDataSource().setSort(this.selectedSort, false);
+        else {
+            this.stateChanges.pager = {
+                page: 1,
+                perPage: this.pagerData.perPage
+            }
         }
-        this.grid.getDataSet().setSelectedRows(this.selectedRows);
-        this.grid.getDataSet().setSelectedColumns(this.selectedColumns);
-        // this.changeDetectRef.markForCheck();
     }
+
+    private updateSortState() {
+        if (!ObjectUtils.isEmptyArray(this.selectedSort)) {
+            if (this.isRestSort) {
+                this.stateChanges.sorts = this.selectedSort;
+            }
+            this.grid.getDataSource().setSort(this.selectedSort);
+        }
+    }
+
+    private loadSearchParamsToState() {
+        if (this.columnSearch) {
+            this.stateChanges.searchParams = ObjectUtils.joinObjectPropertyValues(this.columnSearch, 'param', ',');;
+        }
+    }
+
 
     private onAdd(event: any): boolean {
         event.stopPropagation();
@@ -178,6 +254,9 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected initGrid(): void {
         this.dataSource = this.prepareSource();
+        this.dataSource.onChanged().subscribe((changes) => {
+            this.changeDetectRef.markForCheck();
+        });
         this.grid = new Grid(this.dataSource, this.prepareSettings());
         this.grid.onSelectRow().subscribe((row) => this.onSelectRow(row));
     }
@@ -198,11 +277,10 @@ export class Ng2SmartTableComponent implements OnChanges {
 
     protected onHeaderSelectAll(event): void {
         this.onSelectAll(event.selectedValue);
-      
+        this.changeDetectRef.markForCheck();
     }
 
     protected onSelectAll(selectedValue: any): void {
-        this.selectAll = selectedValue;
         this.updateRowSelections(selectedValue);
 
     }
@@ -211,8 +289,10 @@ export class Ng2SmartTableComponent implements OnChanges {
         row.isSelected = event.selectedValue;
         let rowsSelection: Array<any> = new Array<any>();
         rowsSelection.push({ id: row.id, selected: row.isSelected });
+        this.selectedRows = ObjectUtils.crudRightToLeft(this.selectedRows, rowsSelection);
+        this.grid.getDataSet().setSelectedRows(this.selectedRows);
         this.rowSelectionChange.emit(rowsSelection);
-       
+        //this.changeDetectRef.markForCheck();
     }
 
     protected updateRowSelections(selectedValue: any): void {
@@ -222,15 +302,17 @@ export class Ng2SmartTableComponent implements OnChanges {
             row.isSelected = selectedValue;
             rowsSelection.push({ id: row.id, selected: row.isSelected });
         });
+        this.selectedRows = ObjectUtils.crudRightToLeft(this.selectedRows, rowsSelection);
+        this.grid.getDataSet().setSelectedRows(this.selectedRows);
         this.rowSelectionChange.emit(rowsSelection);
-      
+        this.changeDetectRef.markForCheck();
     }
 
     protected onPaginate(event) {
         this.pagerData.page = event.page;
         this.pagerData.perPage = event.perPage;
         this.paginated.emit(this.pagerData);
-        
+        this.changeDetectRef.markForCheck();
     }
 
     // This is parent onColumnFilterChange, whih is a caller
@@ -248,7 +330,7 @@ export class Ng2SmartTableComponent implements OnChanges {
 
         });
         this.columnSelectionChange.emit(this.grid.getAllColumns());
-     
+        this.changeDetectRef.markForCheck();
 
     }
 
@@ -268,19 +350,24 @@ export class Ng2SmartTableComponent implements OnChanges {
     protected onPageSizeChange(event): void {
         let perPage = event.selectedPage;
         this.pagerData.perPage = perPage;
-        this.dataSource.setPaging(1, perPage, true);
-        this.pagsChanged.emit(this.pagerData);
+        this.pagerData.page = 1;
+        if (ObjectUtils.isNullOrUndefined(this.pageData)) {
+            this.dataSource.setPaging(1, perPage, true);
+        }
+        this.paginated.emit(this.pagerData);
+
+
     }
 
     protected onColumnSort(sorts: Array<any>): void {
         this.sorted.emit(sorts);
-        
+        this.changeDetectRef.markForCheck();
     }
 
     protected onRowAction(event, selectedRow) {
         event.selectedRow = selectedRow;
         this.onSelectedRowAction.emit(event);
-  
+        this.changeDetectRef.markForCheck();
     }
 
     protected onRowClick(event: Event, row: Row) {
@@ -338,5 +425,6 @@ export class Ng2SmartTableComponent implements OnChanges {
         let rowIndex: number = this.grid.getRowIndex(row);
         this.grid.getRows()[rowIndex].isQuickViewOpen = false;
     }
+
 
 }

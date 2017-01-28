@@ -12,6 +12,7 @@ export class RangeTemplate {
     @Input() title: string;
     @Input() value: Range;
     @Input() uniqueId;
+    @Input() attr;
 
     @Input() range: Range = new Range();
 

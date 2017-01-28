@@ -14,16 +14,17 @@
     <table class="data table-responsive table-striped  compressed content_body" [id]="grid.getSetting('attr.id')">
         <thead *ngIf="!grid.getSetting('hideHeader') || !grid.getSetting('hideSubHeader')">
         <tr class="ng2-smart-titles" *ngIf="!grid.getSetting('hideHeader')">
-            <th *ngIf="grid.getSetting('selector')=='check'">
-                <smart-selector placeHolder="Select All" [(selectedValue)]="selectAll"
+            <th *ngIf="grid.getSetting('selector')=='check' && isSmartSelectorEnabled" >
+                <smart-selector  placeHolder="Select All" [selectedValue]="isAllRowsSelected()"
                                 (edited)="onHeaderSelectAll($event)"></smart-selector>
             </th>
-            <th>
+            <th *ngIf="isRowActionModelAvilable()"> 
             </th>
+
             <th *ngFor="let column of getColumns()" class="ng2-smart-th {{ column.id }}" [ngClass]="column.class">
                 <div class="ng2-smart-title" *ngIf="column.isVisible">
                     <form class="column-header" connect="myForm">
-                        <ng2-smart-table-title [source]="dataSource" [column]="column"
+                        <ng2-smart-table-title [source]="dataSource" [column]="column" [isRestSort]="isRestSort"
                                                (sorted)="onColumnSort($event)"></ng2-smart-table-title>
                     </form>
 
@@ -31,17 +32,19 @@
             </th>
         </tr>
         </thead>
+  
         <tbody *ngFor="let row of getRows()" [ngClass]="{quickview:row.isQuickViewOpen}">
             <tr class="ng2-smart-row">
                 
-                <td *ngIf="grid.getSetting('selector')=='check'">
-                    <smart-selector placeHolder="Select" [selectedValue]="row.isSelected"
+                <td *ngIf="grid.getSetting('selector')=='check' && isSmartSelectorEnabled">
+                    <smart-selector  placeHolder="Select" [selectedValue]="row.isSelected"
                                     (edited)="onRowSelection($event,row)"></smart-selector>
                 </td>
-                <td>
+                <td *ngIf="isRowActionModelAvilable()">
                     <row-action-component [row]="row" (selected)="onRowAction($event,row)" [rowActionModel]="rowActionModel">
                     </row-action-component>
                 </td>
+                           
                 <td *ngFor="let cell of getCells(row)" class="ani-med" (click)="onRowClick($event,row)">
                     <ng2-smart-table-cell [cell]="cell" [mode]="grid.getSetting('mode')" class="st-cell-view"
                                         [inputClass]="grid.getSetting('edit.inputClass')"

@@ -1,6 +1,12 @@
 import { IComponentState } from './../../store/index';
 import { NgRedux } from 'ng2-redux';
-import { ISmartTableRowSelectionData, ISmartTablePagerFilterData, ISmartTableColumnSelectionData, ISmartTableSortFilterData } from './../../store/smart-table/smart-table.reducers';
+import {
+    ISmartTableColumnSearchData,
+    ISmartTableColumnSelectionData,
+    ISmartTablePagerFilterData,
+    ISmartTableRowSelectionData,
+    ISmartTableSortFilterData
+} from './../../store/smart-table/smart-table.reducers';
 import { Constants } from './../../utils/constants';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { SmartTableSelectionData } from './../../model/actions/smart-table-rows-selections.model';
@@ -44,7 +50,7 @@ export class SmartTableStorageActions {
     }
 
 
-    onColumnSearch(searchParams: Object): void {
+    onColumnSearch(searchParams: ISmartTableColumnSearchData): void {
         this.ngRedux.dispatch({
             type: Constants.ON_COLUMN_SEARCH,
             payload: searchParams

@@ -1,3 +1,4 @@
+import { ComponentsModule } from './components/components.module';
 import { SmartTableStorageActions } from './actions/smart-table/smart-table-storage.actions';
 import { AppComponent } from './app.component';
 import { SmartTableModule } from './components/smartTable/smart-table.module';
@@ -29,8 +30,9 @@ const createLogger = require('redux-logger');
         HttpModule,
         JsonpModule,
         ReactiveFormsModule,
-        SmartTableModule,
-        NgReduxModule
+        NgReduxModule,
+        ComponentsModule,
+        SmartTableModule
 
     ],
     providers:[SmartTableStorageActions],

@@ -1,3 +1,4 @@
+import { ObjectUtils } from './../../../../utils/object-utils';
 import { Column } from './data-set/column';
 import { DataSet } from './data-set/data-set';
 import { Row } from './data-set/row';
@@ -8,50 +9,52 @@ import { Observable, Subject } from 'rxjs/Rx';
 var _ = require('underscore');
 export class Grid {
 
-    createFormShown:boolean = false;
+    createFormShown: boolean = false;
 
-    protected source:DataSource;
-    protected settings:any;
-    protected dataSet:DataSet;
+    protected source: DataSource;
+    protected settings: any;
+    protected dataSet: DataSet;
 
     protected onSelectRowSource = new Subject<any>();
 
-    constructor(source:DataSource, settings:any) {
+    constructor(source: DataSource, settings: any) {
         this.setSettings(settings);
         this.setSource(source);
     }
 
-    showActionColumn():boolean {
+    showActionColumn(): boolean {
         return this.getSetting('actions.add') || this.getSetting('actions.edit') || this.getSetting('actions.delete');
     }
 
-    getNewRow():Row {
+    getNewRow(): Row {
         return this.dataSet.newRow;
     }
 
 
-    setSettings(settings:Object):void {
+    setSettings(settings: Object): void {
         this.settings = settings;
         this.dataSet = new DataSet([], this.getSetting('columns'));
 
     }
 
-    updateSettings(settings:Object):void {
+    updateSettings(settings: Object): void {
         this.settings = settings;
         this.dataSet.createColumns(settings);
+        if (!ObjectUtils.isEmptyArray(this.getRows()))
+            this.getDataSource().refresh();
 
     }
 
-    getDataSet():DataSet {
+    getDataSet(): DataSet {
         return this.dataSet;
     }
 
-    getDataSource():DataSource {
+    getDataSource(): DataSource {
         return this.source;
     }
 
 
-    setSource(source:DataSource):void {
+    setSource(source: DataSource): void {
         this.source = this.prepareSource(source);
         this.source.onChanged().subscribe((changes) => this.processDataChange(changes));
         this.source.onUpdated().subscribe((data) => {
@@ -60,7 +63,7 @@ export class Grid {
         });
     }
 
-    getSetting(name:string, defaultValue?:any):any {
+    getSetting(name: string, defaultValue?: any): any {
         let keys = name.split('.');
         let level = this.settings;
         keys.forEach((k) => {
@@ -72,37 +75,34 @@ export class Grid {
         return typeof level === 'undefined' ? defaultValue : level;
     }
 
-    getColumns():Array<Column> {
-        let columns = _.filter(this.dataSet.getColumns(), function (column) {
-            return (column.isVisible == null || column.isVisible == undefined || column.isVisible === true);
-        });
-        return columns;
+    getColumns(): Array<Column> {
+        return this.dataSet.getColumns().filter((column: Column) => column.isVisible === true);
     }
 
-    getAllColumns():Array<Column> {
+    getAllColumns(): Array<Column> {
         let columns = _.filter(this.dataSet.getColumns(), function (column) {
             return (column.title != null && column.title != undefined);
         });
         return columns;
     }
 
-    getRows():Array<Row> {
+    getRows(): Array<Row> {
         return this.dataSet.getRows();
     }
 
-    getSelectedRows():Array<Row> {
+    getSelectedRows(): Array<Row> {
         return this.dataSet.getSelectedRows();
     }
 
-    selectRow(row:Row):void {
+    selectRow(row: Row): void {
         this.dataSet.selectRow(row);
     }
 
-    onSelectRow():Observable<any> {
+    onSelectRow(): Observable<any> {
         return this.onSelectRowSource.asObservable();
     }
 
-    create(row:Row, confirmEmitter:EventEmitter<any>):void {
+    create(row: Row, confirmEmitter: EventEmitter<any>): void {
 
         let deferred = new Deferred();
         deferred.promise.then((newData) => {
@@ -126,10 +126,10 @@ export class Grid {
         }
     }
 
-    protected processDataChange(changes:any):void {
+    protected processDataChange(changes: any): void {
         if (this.shouldProcessChange(changes)) {
             this.dataSet.setData(changes['elements']);
-             this.dataSet.updateRows();
+            this.dataSet.updateRows();
             // Commenting this out to remove default first row selection
             /* let row = this.determineRowToSelect(changes);
              if (row) {
@@ -138,7 +138,7 @@ export class Grid {
         }
     }
 
-    protected shouldProcessChange(changes:any):boolean {
+    protected shouldProcessChange(changes: any): boolean {
         if (['filter', 'sort', 'page', 'paging', 'remove', 'refresh', 'load'].indexOf(changes['action']) !== -1) {
             return true;
         } else if (['prepend', 'append'].indexOf(changes['action']) !== -1 && !this.getSetting('pager.display')) {
@@ -149,7 +149,7 @@ export class Grid {
     }
 
     // TODO: move to selectable? Separate directive
-    protected determineRowToSelect(changes:any):Row {
+    protected determineRowToSelect(changes: any): Row {
 
         if (['load', 'page', 'filter', 'sort', 'refresh'].indexOf(changes['action']) !== -1) {
             return this.dataSet.select();
@@ -164,7 +164,7 @@ export class Grid {
         return null;
     }
 
-    protected prepareSource(source:any):DataSource {
+    protected prepareSource(source: any): DataSource {
         let initialSource = this.getInitialSort();
         if (initialSource && initialSource['field'] && initialSource['direction']) {
             source.setSort([initialSource], false);
@@ -179,7 +179,7 @@ export class Grid {
 
     protected getInitialSort() {
         let sortConf = {};
-        this.getColumns().forEach((column:Column) => {
+        this.getColumns().forEach((column: Column) => {
             if (column.isSortable && column.defaultSortDirection) {
                 sortConf['field'] = column.id;
                 sortConf['direction'] = column.defaultSortDirection;
@@ -189,10 +189,10 @@ export class Grid {
         return sortConf;
     }
 
-    getPreviousRow(currentRow:Row):Row {
+    getPreviousRow(currentRow: Row): Row {
         let currentRowIndex = this.getRowIndex(currentRow);
-        let previousRowIndex:number = currentRowIndex - 1;
-        let previousRow:Row;
+        let previousRowIndex: number = currentRowIndex - 1;
+        let previousRow: Row;
         if (previousRowIndex > -1) {
             previousRow = this.getRows()[previousRowIndex];
 
@@ -200,9 +200,9 @@ export class Grid {
         return previousRow;
     }
 
-    getRowIndex(row:Row):number {
+    getRowIndex(row: Row): number {
         let rowIndex = -1;
-        this.getRows().forEach((innerRow:Row, index:number, rows:Array<Row>) => {
+        this.getRows().forEach((innerRow: Row, index: number, rows: Array<Row>) => {
             if (innerRow.id === row.id) {
                 rowIndex = index;
                 return true;
@@ -212,11 +212,11 @@ export class Grid {
         return rowIndex;
     }
 
-    getNextRow(currentRow:Row):Row {
-        let rows:Array<Row> = this.getRows();
-        let nextRow:Row;
+    getNextRow(currentRow: Row): Row {
+        let rows: Array<Row> = this.getRows();
+        let nextRow: Row;
         let currentRowIndex = this.getRowIndex(currentRow);
-        let nextRowIndex:number = currentRowIndex + 1;
+        let nextRowIndex: number = currentRowIndex + 1;
         if (nextRowIndex < rows.length - 1) {
             nextRow = rows[nextRowIndex];
 

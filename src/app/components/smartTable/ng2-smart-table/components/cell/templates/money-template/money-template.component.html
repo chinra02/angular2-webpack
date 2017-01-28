@@ -26,11 +26,11 @@
             {{value.low}} -
             {{value.high}}
         </div>
-        <div *ngIf="isLowAlone()">
-            &gt; {{value.low}}
-        </div>
         <div *ngIf="isHighAlone()">
-            &lt; {{value.high}}
+            &gt; {{value.high}}
+        </div>
+        <div *ngIf="isLowAlone()">
+            &lt; {{value.low}}
         </div>
     </div>
 

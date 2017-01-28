@@ -1,4 +1,4 @@
-<div class="predicate flex-line" [(ngSwitch)]="descriptType" *ngIf="value!=null && value!=undefined">
+<div class="predicate flex-line" [(ngSwitch)]="descriptType" *ngIf="isValidValue()">
     <cell-template *ngSwitchCase="'customType'"
                    [(cellData)]="value"
                    [(type)]="type">

@@ -1,3 +1,4 @@
+import { SmartTableSearchService } from './services/smart-table-search.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { SmartTableActionService } from '../../services/smart-table-actions.service';
 import { SmartTableServicesModule } from '../../services/smart-table-services.module';
@@ -25,6 +26,7 @@ import { ModalModule } from 'ng2-modal';
         HeaderActionComponent,
         SmartTableComponent
     ],
+    providers: [Window, SmartTableSearchService],
     exports: [SmartTableComponent],
 
 })

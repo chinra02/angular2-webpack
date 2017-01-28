@@ -1,7 +1,8 @@
-import { SmartTableSearchService } from './../../../services/smart-table-search';
+import { SmartTableSearchService } from '../../../services/smart-table-search.service';
+import { EventEmitter } from '@angular/forms/src/facade/async';
 import { ObjectUtils } from './../../../../../utils/object-utils';
 import { Column } from '../../lib/data-set/column';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChange, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, SimpleChange, OnInit, Output } from '@angular/core';
 @Component({
     selector: 'search-description',
     templateUrl: './search-description.component.html',
@@ -13,19 +14,38 @@ export class SearchDescriptionComponent implements OnChanges, OnInit {
     @Input() templateHtml: string;
     @Input() column: Column;
 
+
     descriptType: string;
     value: any;
     type: string;
+    searchParam: any;
 
     constructor(private changeDetectionRef: ChangeDetectorRef, private searchService: SmartTableSearchService) { }
 
     ngOnInit() {
         this.searchService.onSearchAsObservable().subscribe((searchParam: any) => {
-            if (ObjectUtils.isNotNullAndUndefined(searchParam.key) && this.column.id === searchParam.key) {
-                this.value = searchParam.value;
-                this.changeDetectionRef.markForCheck();
+            if (ObjectUtils.isNotNullAndUndefined(searchParam) && this.column.attr === searchParam.key) {
+                this.updateComponent(searchParam);
             }
-        })
+        });
+
+        this.searchService.onSearchStateAsObservable().subscribe((columnSearch: Array<any>) => {
+            if (columnSearch) {
+                columnSearch.forEach(searchParam => {
+                    if (ObjectUtils.isNotNullAndUndefined(searchParam) && this.column.attr === searchParam.key) {
+                        this.updateComponent(searchParam);
+                    }
+                });
+            }
+
+        });
+
+    }
+
+    updateComponent(searchParam: any) {
+        this.value = searchParam.value;
+        this.searchParam = searchParam;
+        this.changeDetectionRef.markForCheck();
     }
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
@@ -44,13 +64,13 @@ export class SearchDescriptionComponent implements OnChanges, OnInit {
         else if (this.column.templateModel.$type) {
             this.descriptType = 'customType';
             let columnType: string = this.column.templateModel.$type;
-            if(columnType === 'number'){
+            if (columnType === 'number') {
                 this.type = 'numeric-search-description';
             }
             else {
                 this.type = columnType + '-search-description';
             }
-            
+
         }
     }
 
@@ -59,8 +79,20 @@ export class SearchDescriptionComponent implements OnChanges, OnInit {
     }
 
     clearComponent(event) {
+        this.searchService.getClearSearchSource().next(this.searchParam);
         this.value = null;
         this.changeDetectionRef.markForCheck();
     }
+
+    isValidValue() {
+        if (typeof this.value === 'string') {
+            return !ObjectUtils.isEmpty(this.value);
+        }
+        else if (typeof this.value === 'object') {
+            return !ObjectUtils.objectIsEmpty(this.value);
+        }
+        return false;
+    }
+
 
 }

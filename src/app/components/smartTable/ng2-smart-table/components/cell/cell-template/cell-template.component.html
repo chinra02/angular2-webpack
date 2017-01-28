@@ -1,11 +1,11 @@
 <div [ngSwitch]="templateType">
-    <text-template *ngSwitchCase="'text'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)"> </text-template>
-    <date-template *ngSwitchCase="'date'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)"> </date-template>
-    <list-template *ngSwitchCase="'list'" [type]="type" [value]="cellData"  [title]="title" (searched)="onColumnSearch($event)" [column]="column"></list-template>
-    <name-template *ngSwitchCase="'name'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)" > </name-template>
-    <range-template *ngSwitchCase="'range'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)" > </range-template>
-    <money-template *ngSwitchCase="'money'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)" > </money-template>
-    <messages-template *ngSwitchCase="'message'" [type]="type" [value]="cellData"  [title]="title"  [messages]=cellData > </messages-template>
-    <numeric-template *ngSwitchCase="'numeric'" [type]="type" [value]="cellData" [title]="title" (searched)="onColumnSearch($event)" > </numeric-template>
+    <text-template *ngSwitchCase="'text'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)"> </text-template>
+    <date-template *ngSwitchCase="'date'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)"> </date-template>
+    <list-template *ngSwitchCase="'list'" [type]="type" [value]="cellData"  [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)" [column]="column"></list-template>
+    <name-template *ngSwitchCase="'name'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)" > </name-template>
+    <range-template *ngSwitchCase="'range'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)" > </range-template>
+    <money-template *ngSwitchCase="'money'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)" > </money-template>
+    <messages-template *ngSwitchCase="'message'" [type]="type" [value]="cellData"  [title]="title" [uniqueId]="uniqueId" [attr]="attr"  [messages]=cellData > </messages-template>
+    <numeric-template *ngSwitchCase="'numeric'" [type]="type" [value]="cellData" [title]="title" [uniqueId]="uniqueId" [attr]="attr" (searched)="onColumnSearch($event)" > </numeric-template>
 
 </div>

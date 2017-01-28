@@ -1,5 +1,6 @@
 import { ObjectUtils } from './../../../../../utils/object-utils';
-import { SmartTableSearchService } from './../../../services/smart-table-search';
+import { LocalSorter } from './../../lib/data-source/local/local.sorter';
+import { SmartTableSearchService } from '../../../services/smart-table-search.service';
 import { Column } from './../../lib/data-set/column';
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChange } from '@angular/core';
 
@@ -10,37 +11,46 @@ import { Component, EventEmitter, Input, Output, OnChanges, SimpleChange } from 
 
 })
 export class TemplateModal implements OnChanges {
-    @Input() title:string = 'text';
-    @Input() type:string = 'text';
-    @Input() column:Column;
+    @Input() title: string = 'text';
+    @Input() type: string = 'text';
+    @Input() column: Column;
+    @Input() currentDirection: string = 'sort-ctrls';
 
-    columnType:string;
+    @Output() onSort: EventEmitter<any> = new EventEmitter<any>();
 
-    @Output() closeModal:EventEmitter<any> = new EventEmitter<any>();
+    columnType: string;
 
-    ngOnChanges(changes:{[propertyName:string]:SimpleChange}) {
+    @Output() closeModal: EventEmitter<any> = new EventEmitter<any>();
+
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
         if (ObjectUtils.isNotNullAndUndefined(this.type)) {
-            if(this.type === 'number'){
-               this.columnType = 'numeric-search';
+            if (this.type === 'number') {
+                this.columnType = 'numeric-search';
             }
-            else{
+            else {
                 this.columnType = this.type + '-search';
             }
-            
+
         }
     }
 
-    searchParams:any;
+    searchParams: any;
 
-    constructor(private searchService:SmartTableSearchService) {
+    constructor(private searchService: SmartTableSearchService) {
     }
 
-    onColumnSearch(searchValue) {
-        let searchParams = {key: this.column.id, value: searchValue};
+    onColumnSearch(searchParams) {
         this.searchService.getSearchSource().next(searchParams);
     }
 
-    triggerCloseModal(event:any) {
+    triggerCloseModal(event: any) {
         this.closeModal.emit(event);
     }
+
+    sort(event) {
+        this.onSort.emit(event);
+        LocalSorter.changeSortDirection(this.currentDirection,this.column.sortDirection);
+    }
+
+
 }

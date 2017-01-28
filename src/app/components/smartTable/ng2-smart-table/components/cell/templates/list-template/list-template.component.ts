@@ -1,3 +1,4 @@
+import { FilterParamsUtil } from './../../../../../../../utils/filter-params-utils';
 import { ObjectUtils } from './../../../../../../../utils/object-utils';
 import { Column } from './../../../../lib/data-set/column';
 import { OnChanges, Input, EventEmitter, Output, SimpleChange, Component } from '@angular/core';
@@ -14,14 +15,19 @@ let _ = require('underscore');
 export class ListTemplate implements OnChanges {
     @Input() type: string;
     @Input() column: Column;
-    @Input() uniqueid;
+    @Input() uniqueId;
     @Input() value;
+    @Input() attr;
     data: Array<Object>;
-  
+
     @Output() searched: EventEmitter<any> = new EventEmitter<any>();
 
     onSearch(searchedValue) {
-        this.searched.emit(searchedValue.value);
+        let searchParams: any = { key: this.attr, value: searchedValue.value, param: '' };
+        if (searchedValue.value)
+            searchParams.param = FilterParamsUtil.prepareContainsParam(searchParams.key, searchedValue.value);
+
+        this.searched.emit(searchParams);
     }
 
 

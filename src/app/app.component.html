@@ -1,15 +1,16 @@
 <div *ngIf="isFirst">
-    <smart-table-test 
-    columnJson="entry_eclaim_columns" 
-    storageKey="entry" [(data)]="data" 
-    (onRowClickEvent)="onRowClick($event)">
+    <smart-table-test
+            columnJson="entry_eclaim_columns"
+            storageKey="entry" [(data)]="data"
+            (onRowClickEvent)="onRowClick($event)">
     </smart-table-test>
 </div>
 <div *ngIf="!isFirst">
-    <smart-table-test 
-    columnJson="entry_eclaim_columns_no_templates" 
-    storageKey="entry1" 
-    [(data)]="secondData" 
-    (onRowClickEvent)="onRowClick($event)">
+    <smart-table-test
+            columnJson="entry_eclaim_columns"
+            [actionModel]="actionModel"
+            storageKey="entry1"
+            [(data)]="secondData"
+            (onRowClickEvent)="onRowClick($event)">
     </smart-table-test>
 </div>

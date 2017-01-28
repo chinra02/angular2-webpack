@@ -1,7 +1,10 @@
+import { SmartTableModalEventsService } from './services/smart-table-modal-events';
+import { SmartTableSearchService } from './services/smart-table-search.service';
 import { FilterPipe } from '../../utils/filter.pipe';
 import { UiBulkActionComponent } from '../bulk-action-dropdown/bulk-action-dropdown.component';
 import { Ng2DropDownComponent } from '../ng2dropdown/ng2dropdown.component';
 import { RowActionComponent } from '../row-action-dropdown/row-action-dropdown.component';
+import { Ng2DatePickerModule } from './../ng2datepicker/ng2-datepicker.module';
 import { NG2_SMART_TABLE_DIRECTIVES } from './ng2-smart-table.directives';
 import { HeaderActions } from './ng2-smart-table/components/actions/header-actions.component';
 import { RowAction } from './ng2-smart-table/components/actions/row-action.component';
@@ -18,7 +21,6 @@ import { TableSettings } from './ng2-smart-table/components/tableSettings/table-
 import { TitleComponent } from './ng2-smart-table/components/title/title.component';
 import { Ng2SmartTableComponent } from './ng2-smart-table/ng2-smart-table.component';
 import { QuickViewModule } from './quick-view/quick-view.module';
-import { SmartTableSearchService } from './services/smart-table-search';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -42,7 +44,8 @@ import { TooltipModule } from 'ng2-tooltip';
         TemplateModalModule,
         PopoverModule,
         DynamicComponentModule,
-        QuickViewModule
+        QuickViewModule,
+        Ng2DatePickerModule
 
     ],
     declarations: [
@@ -68,7 +71,8 @@ import { TooltipModule } from 'ng2-tooltip';
         SearchDescriptionComponent,
         ...NG2_SMART_TABLE_DIRECTIVES
     ],
-    providers: [Window, SmartTableSearchService]
+    providers:[SmartTableModalEventsService]
+    
 })
 export class Ng2SmartTableModule {
 }

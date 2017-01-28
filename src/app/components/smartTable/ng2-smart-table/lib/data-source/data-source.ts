@@ -7,6 +7,9 @@ export abstract class DataSource {
   protected onUpdatedSource = new Subject<any>();
   protected onRemovedSource = new Subject<any>();
   protected onUpdatedColumnsSource = new Subject<any>();
+  protected onPagerUpdate = new Subject<any>();
+  isRestSort:boolean;
+  isRestPaging:boolean;
 
   abstract getAll(): Promise<any>;
   abstract getElements(): Promise<any>;
@@ -26,6 +29,14 @@ export abstract class DataSource {
   load(data: Array<any>): Promise<any> {
     this.emitOnChanged('load');
     return Promise.resolve();
+  }
+
+  onPagerDataChange(): Observable<any> {
+    return this.onPagerUpdate.asObservable();
+  }
+
+  getPagerDataChangeSource(): Subject<any> {
+    return this.onPagerUpdate;
   }
 
   onChanged(): Observable<any> {
@@ -84,7 +95,7 @@ export abstract class DataSource {
   }
 
   setSort(conf: Array<any>, doEmit?: boolean): void {
-    if (doEmit) {
+    if (doEmit && !this.isRestSort) {
       this.emitOnChanged('sort');
     }
   }
@@ -126,15 +137,12 @@ export abstract class DataSource {
   }
 
   protected emitOnChanged(action: string): void {
-    this.getElements().then((elements) => {
-  
-      this.onChangedSource.next({
-        action: action,
-        elements: elements,
-        paging: this.getPaging(),
-        filter: this.getFilter(),
-        sort: this.getSort()
-      })
-    });
+    this.getElements().then((elements) => this.onChangedSource.next({
+      action: action,
+      elements: elements,
+      paging: this.getPaging(),
+      filter: this.getFilter(),
+      sort: this.getSort()
+    }));
   }
 }

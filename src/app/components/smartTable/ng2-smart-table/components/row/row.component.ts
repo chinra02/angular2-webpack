@@ -1,5 +1,6 @@
 import { Row } from './../../lib/data-set/row';
 import { RowAction } from "./../actions/row-action.component";
+import browser = require("./../3rdPartyVendor.browser/components/smartTable/ng2-smart-table/components/row")
 import { RowActionModel } from './../../../../../model/actions/smart-table-action.model';
 import { Grid } from './../../lib/grid';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';

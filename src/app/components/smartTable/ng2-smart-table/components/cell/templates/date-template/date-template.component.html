@@ -2,12 +2,12 @@
     <span *ngSwitchCase="'date-edit'"><small>todo: editor</small> {{ columnDate | date }}</span>
     <div *ngSwitchCase="'date-search'">
         <div class="flex-container">
-            <ng2-datepicker placeHolder="{{title}} is after date..." id="{{uniqueid + '_date_after'}}"
+            <ng2-datepicker placeHolder="{{title}} is after date..." id="{{uniqueId + '_date_after'}}"
                             [dt]="getDate(dates.low)" format="shortDate"
                             (dateChanged)="onDateChange($event,'afterDate')"></ng2-datepicker>
         </div>
         <div class="flex-container">
-            <ng2-datepicker placeHolder="{{title}} is before date..." id="{{uniqueid + '_date_before'}}"
+            <ng2-datepicker placeHolder="{{title}} is before date..." id="{{uniqueId + '_date_before'}}"
                             [dt]="getDate(dates.high)" format="shortDate"
                             (dateChanged)="onDateChange($event,'beforeDate')"></ng2-datepicker>
         </div>
@@ -17,10 +17,10 @@
             {{value.low | date:'shortDate'}} - {{value.high | date:'shortDate'}}
         </div>
         <div *ngIf="isLowAlone()">
-            After {{value.low | date:'shortDate'}}
+            Before {{value.low | date:'shortDate'}}
         </div>
         <div *ngIf="isHighAlone()">
-            Before {{value.high | date:'shortDate'}}
+            After {{value.high | date:'shortDate'}}
         </div>
     </div>
     <span *ngSwitchDefault>{{ value | date }}</span>

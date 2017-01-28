@@ -3,6 +3,7 @@ export class NameTemplateModel {
     private first: string;
     private last: string;
     private middle: string;
+    public  param: string;
 
     public get $first(): string {
         return this.first;

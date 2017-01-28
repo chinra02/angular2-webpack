@@ -9,6 +9,7 @@ export class SmartTableActionService {
     private actionValidForAllSource: Subject<any> = new Subject<any>();
     private actionValidForAllRespSource: Subject<any> = new Subject<any>();
 
+
     private actionConfirmationMessageSource: Subject<any> = new Subject<any>();
     private actionConfirmationMessageRespSource: Subject<any> = new Subject<any>();
     private actionConfirmationSource: Subject<any> = new Subject<any>();
@@ -50,6 +51,10 @@ export class SmartTableActionService {
 
     onRowSelection(): Observable<any> {
         return this.rowSelectionSource.asObservable();
+    }
+
+    clearRowSelections(): void {
+        this.rowSelectionSource.next(new Array());
     }
 
     getPerformedBulkActionSource(): Subject<any> {
@@ -107,6 +112,7 @@ export class SmartTableActionService {
     onActionValidForAll() {
         return this.actionValidForAllSource.asObservable();
     }
+
 
 
 }

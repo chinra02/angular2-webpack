@@ -29,11 +29,10 @@ export class Range {
         this.$high = highValue;
         this.$low = lowValue;
     }
-
-
     private low: any;
     private high: any;
-
+    public param:string;
+ 
     public get $low(): any {
         return this.low;
     }

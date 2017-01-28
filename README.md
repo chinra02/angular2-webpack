@@ -1,1 +1,2 @@
-# angular2-webpack
+npm install
+npm start

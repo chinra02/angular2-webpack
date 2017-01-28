@@ -1,5 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
-import { EventEmitter } from '@angular/forms/src/facade/async';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 /**
  * This is a basic select that can take a custom key/value pair.
@@ -19,22 +18,22 @@ import { EventEmitter } from '@angular/forms/src/facade/async';
     selector: 'ng2-select',
     template: `
 <select [(ngModel)]="selectedOption" (ngModelChange)="onSelectChange($event)">
-    <option value="" *ngIf="message && message.length > 0">{{message}}</option>
-    <option *ngFor="let option of options" [ngValue]="value ? option[value] : option">{{option[key]}}</option>
+    <option   [value]="message.id" *ngIf="message!=null && message!=undefined">{{message.name}}</option>
+    <option  *ngFor="let option of options" [value]="option.id">{{option[key]}}</option>
 </select>
 `
 })
 export class Ng2Select {
     @Input() options: Array<any>;
-    @Input() message: string;
+    @Input() message: { id: string, name: string };
     @Input() key: string = "key";
     @Input() value: string;
+    @Input() selectedOption: any;
     @Output() selectChanged: EventEmitter<any> = new EventEmitter<any>();
 
-    selectedOption: Object;
-
     onSelectChange(event) {
-        this.selectChanged.emit(event);
+        let returnValue: any = this.options.find(option => option.id == event);
+        this.selectChanged.emit(returnValue);
     }
 
 }

@@ -12,6 +12,8 @@ export class CellTemplate implements OnChanges {
     @Input() type: string;
     @Input() column: Column;
     templateType: string;
+    uniqueId: string;
+    attr: string;
 
     @Output() searched: EventEmitter<any> = new EventEmitter<any>();
 
@@ -21,13 +23,20 @@ export class CellTemplate implements OnChanges {
 
     ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
         if (changes['type'] && this.type) {
-            if (this.type.indexOf('-') > -1) {
-                this.templateType = this.type.substring(0, this.type.indexOf('-'));
-            }
-            else {
-                this.templateType = this.type;
-            }
+            this.updateTemplateType();
+        }
+        if (changes['column']) {
+            this.uniqueId = this.column.uniqueId;
+            this.attr = this.column.attr;
+        }
+    }
 
+    private updateTemplateType() {
+        if (this.type.indexOf('-') > -1) {
+            this.templateType = this.type.substring(0, this.type.indexOf('-'));
+        }
+        else {
+            this.templateType = this.type;
         }
     }
 

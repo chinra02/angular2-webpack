@@ -1,3 +1,4 @@
+import { FilterParamsUtil } from './../../../../../../../utils/filter-params-utils';
 import { Constants } from './../../../../../../../utils/constants';
 import { Subject } from 'rxjs/Rx';
 import { NgSwitchDefault } from '@angular/common';
@@ -12,6 +13,7 @@ export class NumericTemplate {
     @Input() title: string;
     @Input() value: string;
     @Input() uniqueId;
+    @Input() attr;
 
     search: any;
 
@@ -20,11 +22,15 @@ export class NumericTemplate {
     debouncer: Subject<any> = new Subject<any>();
 
     constructor() {
-        this.debouncer.debounceTime(Constants.SEARCH_DELAY_125).subscribe((searchedValue) => this.searched.emit(searchedValue));
+        this.debouncer.debounceTime(Constants.SEARCH_DELAY_125).subscribe((searchParams) => this.searched.emit(searchParams));
     }
 
     onSearch(searchedValue) {
-        this.debouncer.next(new Object(searchedValue));
+        let searchParams: any = { key: this.attr, value: searchedValue, param: '' };
+        if (searchedValue)
+            searchParams.param = FilterParamsUtil.prepareEqualParam(searchParams.key, searchedValue);
+
+        this.debouncer.next(new Object(searchParams));
     }
 
 

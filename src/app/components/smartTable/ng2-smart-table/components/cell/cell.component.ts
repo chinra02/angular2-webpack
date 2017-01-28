@@ -23,44 +23,43 @@ import {
 })
 export class CellComponent implements OnChanges {
 
-    @Input() cell: Cell;
-    @Input() inputClass: string = '';
-    @Input() mode: string = 'inline';
-    @Input() type: string;
-    cellType: string = 'text';
-    value: any;
-    templateHtml: string;
-    context: any = {};
+    @Input() cell:Cell;
+    @Input() inputClass:string = '';
+    @Input() mode:string = 'inline';
+    @Input() type:string;
+    cellType:string = 'text';
+    value:any;
+    templateHtml:string;
+    context:any = {};
 
-    constructor(private changeDetectRef: ChangeDetectorRef) {
+    constructor(private changeDetectRef:ChangeDetectorRef) {
     }
 
-    @Output() public edited: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public edited:EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
+    ngOnChanges(changes:{ [propertyName: string]: SimpleChange }):void {
 
         if (changes['cell']) {
             this.value = this.cell.getValue();
             this.determineCellType();
             if (ObjectUtils.isNotNullAndUndefined(this.cell.type))
                 this.type = this.cell.type + '-view';
-            this.changeDetectRef.markForCheck();
 
         }
-
+        this.changeDetectRef.markForCheck();
     }
 
 
-    onStopEditing(): boolean {
+    onStopEditing():boolean {
         return false;
     }
 
-    onEdited(event: any): boolean {
+    onEdited(event:any):boolean {
         this.edited.emit(event);
         return false;
     }
 
-    onClick(event: any): void {
+    onClick(event:any):void {
         event.stopPropagation();
     }
 
@@ -72,7 +71,7 @@ export class CellComponent implements OnChanges {
         else if (ObjectUtils.isNotNullAndUndefined(viewTemplateUrl)) {
             this.cellType = 'viewTemplate';
             this.templateHtml = this.cell.getViewTemplate();
-            this.context = { contextValue: this.value };
+            this.context = {contextValue: this.value};
         }
         else if (ObjectUtils.isNotNullAndUndefined(this.cell.type)) {
             this.cellType = 'customType';

@@ -1,15 +1,17 @@
+import { ObjectUtils } from './../../../../../utils/object-utils';
+import { PagerModel } from '../../lib/pager.model';
+import { ExceptionInfo } from '_debugger';
 import { RowAction } from "./../actions/row-action.component";
 import { DataSource } from '../../lib/data-source/data-source';
-import { OnChanges, SimpleChange, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'ng2-smart-table-pager',
     moduleId: module.id,
-    templateUrl: './pager.component.html',
-    changeDetection:ChangeDetectionStrategy.OnPush
+    templateUrl: './pager.component.html'
 })
-export class PagerComponent implements OnInit {
+export class PagerComponent implements OnChanges {
 
     @Input() perPage: number;
     @Input() source: DataSource;
@@ -18,47 +20,57 @@ export class PagerComponent implements OnInit {
     protected pages: Array<any>;
     protected page: number;
     protected count: number = 0;
+    protected pagerData: any;
 
-    constructor(private changeDetector:ChangeDetectorRef){}
+    ngOnChanges(changes: { [propertyName: string]: SimpleChange }): void {
+        if (this.source && changes['source']) {
+            this.source.onChanged().subscribe((changes) => {
 
-    /*  ngOnChanges(changes:{ [propertyName: string]: SimpleChange }):void {
-          if (this.source && changes['source']) {
-              this.source.onChanged().subscribe((changes) => {
-                  this.page = this.source.getPaging().page;
-                  this.count = this.source.count();
-                  this.perPage = this.source.getPaging().perPage;
-  
-                  if (this.isPageOutOfBounce()) {
-                      this.source.setPage(--this.page);
-                  }
-  
-                  this.processPageChange(changes);
-                  this.initPages();
-              });
-          }
-  
-      } */
+                if (ObjectUtils.isNullOrUndefined(this.pagerData)) {
+                    this.page = this.source.getPaging().page;
+                    this.count = this.source.count();
+                    this.perPage = this.source.getPaging().perPage;
 
-    ngOnInit(): void {
-        this.source.onChanged().subscribe((changes) => {
-            if (changes['elements'] && changes['elements'].length > 0) {
-                console.log(changes)
-                this.page = this.source.getPaging().page;
-                this.count = this.source.count();
-                this.perPage = this.source.getPaging().perPage;
+                    if (this.isPageOutOfBounce()) {
+                        this.source.setPage(--this.page);
+                    }
+
+                    this.processPageChange(changes);
+                    this.initPages();
+                }
+
+            });
+
+            this.source.onPagerDataChange().subscribe((pagerData: any) => {
+                    this.pagerData = pagerData;
+                    this.page = pagerData.start / pagerData.limit <= 0 ? 1 : (pagerData.start / pagerData.limit + 1);
+                    this.count = pagerData.total;
+                    this.perPage = pagerData.limit;
 
                 if (this.isPageOutOfBounce()) {
                     this.source.setPage(--this.page);
                 }
-
-                this.processPageChange(changes);
                 this.initPages();
-                this.changeDetector.markForCheck();
-            }
-
-        });
+            });
+        }
 
     }
+
+    /* ngOnInit(): void {
+     this.source.onChanged().subscribe((changes) => {
+     this.page = this.source.getPaging().page;
+     this.count = this.source.count();
+     this.perPage = this.source.getPaging().perPage;
+
+     if (this.isPageOutOfBounce()) {
+     this.source.setPage(--this.page);
+     }
+
+     this.processPageChange(changes);
+     this.initPages();
+     });
+
+     } */
 
     /**
      * We change the page here depending on the action performed against data source
@@ -77,11 +89,12 @@ export class PagerComponent implements OnInit {
     }
 
     shouldShow(): boolean {
-        return this.source && this.source.count() > this.perPage;
+        return (this.source && this.source.count() > this.perPage || this.count > this.perPage);
     }
 
     paginate(page: number): boolean {
-        this.source.setPage(page);
+        if (ObjectUtils.isNullOrUndefined(this.pagerData))
+            this.source.setPage(page);
         this.page = page;
         this.paginated.emit(this);
         return false;
@@ -108,9 +121,12 @@ export class PagerComponent implements OnInit {
         let showPagesCount = 4;
         showPagesCount = pagesCount < showPagesCount ? pagesCount : showPagesCount;
         this.pages = [];
+        this.processPages(showPagesCount, pagesCount);
 
+    }
+
+    private processPages(showPagesCount: number, pagesCount: number) {
         if (this.shouldShow()) {
-
             let middleOne = Math.ceil(showPagesCount / 2);
             middleOne = this.page >= middleOne ? this.page : middleOne;
 
@@ -123,5 +139,7 @@ export class PagerComponent implements OnInit {
                 this.pages.push(i);
             }
         }
+
     }
+
 }

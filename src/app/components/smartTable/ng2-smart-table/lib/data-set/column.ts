@@ -57,10 +57,10 @@ export class Column {
         this.templateModel.$searchDescriptionTemplateHtml = this.settings['searchDescriptionTemplateHtml'];
 
         this.isFilterable = typeof this.settings['filter'] === 'undefined' ? true : !!this.settings['filter'];
-        this.defaultSortDirection = ['st-multi-sort-ascent', 'st-multi-sort-descent'].indexOf(this.settings['sortDirection']) !== -1 ? this.settings['sortDirection'] : '';
+        this.defaultSortDirection = ['asc', 'dsc'].indexOf(this.settings['sortDirection']) !== -1 ? this.settings['sortDirection'] : '';
         this.isSortable = (this.settings['sort'] === undefined || this.settings['sort'] === null) ? true : !!this.settings['sort'];
         this.isEditable = typeof this.settings['editable'] === 'undefined' ? true : !!this.settings['editable'];
-        this.sortDirection = this.settings['sort'] === 'st-multi-sort-descent' ? 'st-multi-sort-descent' : 'st-multi-sort-ascent';
+        this.sortDirection = this.settings['sort'] === 'dsc' ? 'st-multi-sort-descent' : 'asc';
 
         this.compareFunction = this.settings['compareFunction'];
         this.valuePrepareFunction = this.settings['valuePrepareFunction'];

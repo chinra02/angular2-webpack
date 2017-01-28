@@ -5,7 +5,7 @@ import { RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
-import {ConfigurationService} from "../configuration/configuration.service";
+import { ConfigurationService } from "../configuration/configuration.service";
 
 let _ = require('underscore');
 
@@ -19,8 +19,16 @@ export class JwtRestService {
         this.jwtAuthConfiguration = jwtConfig;
     }
 
+    get(url, params = null, ): Observable<any> {
+        return this.invoke(url, params);
+    }
 
-    invoke = function invoke(url, params=null): Observable<any> {
+    post(url, params = null, ): Observable<any> {
+        return this.invoke(url, params, 'POST');
+    }
+
+
+    invoke = function invoke(url, params = null, type: string = 'GET'): Observable<any> {
         let adjudicationRestSource: Subject<any> = new Subject<any>();
         let adjudicationRest$: Observable<any> = adjudicationRestSource.asObservable();
 
@@ -31,18 +39,26 @@ export class JwtRestService {
             (authHttp: AuthHttp) => {
                 let uri = this.config.baseRestUrl + url;
                 let urlParams: URLSearchParams = new URLSearchParams();
-                let options:RequestOptionsArgs = new RequestOptions({search: urlParams});
+                let options: RequestOptionsArgs = new RequestOptions({ search: urlParams });
                 if (params) {
                     _.mapObject(params, function (value, key) {
                         urlParams.set(key, value);
                     })
 
                 }
+                if (type === 'GET') {
+                    authHttp.request(uri, options).subscribe(resp => {
+                        adjudicationRestSource.next(resp);
 
-                authHttp.request(uri, options).subscribe(resp => {
-                    adjudicationRestSource.next(resp.json());
-                    adjudicationRestSource.complete();
-                })
+                    });
+                }
+                else {
+                    authHttp.post(uri, params).subscribe(resp => {
+                        adjudicationRestSource.next(resp);
+
+                    });
+                }
+
 
             },
             (error) => {

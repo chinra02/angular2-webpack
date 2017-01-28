@@ -1,3 +1,4 @@
+import { DatepickerConfig } from 'ng2-bootstrap/datepicker';
 import { DatePickerComponent } from './ng2-datepicker.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,8 @@ import {DatepickerModule} from "ng2-bootstrap/datepicker/datepicker.module";
     ],
     exports: [
         DatePickerComponent
-    ]
+    ],
+    providers:[DatepickerConfig]
 })
 export class Ng2DatePickerModule {
 

@@ -13,4 +13,6 @@ export class MessagesTemplate{
     @Input() messages:Array<any>;
     @Input() title:string;
     @Input() value;
+    @Input() uniqueId;
+    @Input() attr;
 }

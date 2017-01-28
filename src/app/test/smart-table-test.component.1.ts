@@ -35,8 +35,8 @@ import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 })
 export class SmartTableTest1 extends SmartTableComponent implements OnInit {
 
-    constructor(injector:Injector,protected actionService:SmartTableActionService,protected localstorageService:LocalStorageService) {
-        super(injector,actionService,localstorageService);
+    constructor(injector:Injector, changeDetectRef:ChangeDetectorRef, protected actionService:SmartTableActionService,protected localstorageService:LocalStorageService) {
+        super(injector, changeDetectRef,actionService,localstorageService);
 
     }
 
